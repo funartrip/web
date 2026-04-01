@@ -150,7 +150,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     } finally {
       setIsSubmitting(false)
     }
-
+  }
   
   return (
     <main className="relative min-h-screen font-sans selection:bg-[#8C3B3B] selection:text-[#FDFBF5] flex flex-col">
