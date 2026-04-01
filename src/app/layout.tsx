@@ -46,26 +46,24 @@ export default function RootLayout({
 
         {/* --- 🍋 檸檬塔 (Tarteaucitron) 開始 --- */}
         
-        {/* 1. 載入主程式 */}
         <Script 
-          src="https://cdn.jsdelivr.net/gh/amauri291/tarteaucitron.js@v1.17.0/tarteaucitron.js" 
-          strategy="afterInteractive" 
+          src="/tarteaucitron/tarteaucitron.js" 
+          strategy="beforeInteractive" 
         />
 
-        {/* 2. 初始化設定 */}
-        <Script id="tarteaucitron-init" strategy="afterInteractive">
+        {/* 2. 初始化 */}
+        <Script id="tarteaucitron-init">
           {`
+            // 強制抓取本地的資源路徑
+            var tarteaucitronCustomPath = '/tarteaucitron/'; 
+
             tarteaucitron.init({
               "privacyUrl": "/legal", 
               "hashtag": "#tarteaucitron", 
               "cookieName": "funartrip_cookies",
               "orientation": "bottom", 
-              "groupServices": false, 
               "showAlertSmall": false, 
               "cookieslist": false, 
-              "closePopup": false,
-              "showIcon": true,
-              "iconPosition": "BottomRight",
               "adblocker": false,
               "DenyAllCta" : true,
               "AcceptAllCta" : true,
@@ -78,7 +76,6 @@ export default function RootLayout({
             (tarteaucitron.job = tarteaucitron.job || []).push('gtag');
           `}
         </Script>
-        {/* --- 🍋 檸檬塔結束 --- */}
       </body>
     </html>
   );
