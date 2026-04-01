@@ -161,7 +161,7 @@ const [selectedProject, setSelectedProject] = useState<any>(null);
         
         {/* 層級二：頂部 Navbar */}
         <div className="absolute top-0 inset-x-0 z-50">
-          <Navbar lang={lang} />
+          <Navbar />
         </div>
 
         {/* 層級三：Hero 文字 (斜切並浮現) */}
