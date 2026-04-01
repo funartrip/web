@@ -29,9 +29,7 @@ function MentionsContent() {
       {/* 🌟 限制文章最大寬度並置中 */}
       <div className="max-w-3xl mx-auto">
         
-        {/* ========================================= */}
-        /* 1. 頁首區塊：返回按鈕與主標題 */
-        {/* ========================================= */}
+        
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mb-20 border-b border-[#2C3522]/10 pb-12">
           <Link href={`/?lang=${lang}`} className="text-[#8C3B3B] font-bold text-xs tracking-widest uppercase mb-8 inline-block hover:opacity-70 transition-opacity">
             ← Back
@@ -45,10 +43,7 @@ function MentionsContent() {
           </p>
         </motion.div>
 
-        {/* ========================================= */}
-        /* 2. 內文區塊：套用專屬的 article-content 魔法 */
-        {/* ========================================= */}
-        {/* 🌟 將 article-content 加在這裡！ */}
+        
         <article className="article-content">
           
           {/* --- A. 這是你手動打在程式碼裡的條文 --- */}
