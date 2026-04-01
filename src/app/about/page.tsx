@@ -34,12 +34,12 @@ function AboutContent() {
     whileInView: { opacity: 1, scale: 1, y: 0 },
     viewport: { once: false, amount: 0.2 }, // ✅ 每次滑到都會有反應
     transition: { 
-      type: "spring", 
+      type: "spring"as const, 
       stiffness: 50, 
       damping: 20,
       duration: 1.2 
     }
-  };
+  }as const;
 
   // 🌟 故事區組件設定
   const storyComponents = {
