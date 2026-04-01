@@ -1,12 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'  // 🌟 將 useState 和 Suspense 合併
 import { motion } from 'framer-motion'
 import Navbar from '@/components/Navbar'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation' // 🌟 只留一行
 import Image from 'next/image'
 
-export default function ContactPage() {
+
+function ContactContent() {
   const searchParams = useSearchParams()
   const lang = (searchParams.get('lang') || 'zh_tw').toLowerCase().replace('-', '_')
 
@@ -291,5 +292,13 @@ const handleSubmit = async (e: React.FormEvent) => {
       </section>
 
     </main>
+  )
+}
+export default function ContactPage() {
+  return (
+    // 使用 Suspense 保護罩，在抓取網址時先顯示 Loading
+    <Suspense fallback={<div className="min-h-screen bg-[#FDFBF5] flex items-center justify-center text-[#202808] font-mono text-xs tracking-widest uppercase">Loading Contact...</div>}>
+      <ContactContent />
+    </Suspense>
   )
 }
