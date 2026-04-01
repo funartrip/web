@@ -55,10 +55,10 @@ export default function RootLayout({
         <Script id="tarteaucitron-init">
           {`
             // 強制抓取本地的資源路徑
-            var tarteaucitronCustomPath = '/tarteaucitron/'; 
+            window.tarteaucitronForceLanguage = 'en';
 
             tarteaucitron.init({
-              "privacyUrl": "/legal", 
+              "privacyUrl": "/legal/mentions-legales?lang=" + currentLang,
               "hashtag": "#tarteaucitron", 
               "cookieName": "funartrip_cookies",
               "orientation": "bottom", 
@@ -68,8 +68,9 @@ export default function RootLayout({
               "DenyAllCta" : true,
               "AcceptAllCta" : true,
               "highPrivacy": true,
-              "handleBrowserLang": true,
-              "placeholder": true
+              "handleBrowserLang": false,
+              "placeholder": true,
+              "mandatory": true
             });
 
             tarteaucitron.user.gtagUa = 'G-MG8CT41JTT';

@@ -1353,73 +1353,94 @@ body #tarteaucitronRoot.tarteaucitronSize-popup div#tarteaucitronAlertBig {botto
 #tarteaucitronRoot.tarteaucitronSize-popup span#tarteaucitronDisclaimerAlert {margin: 10px 0 30px;display: block;text-align: center;font-size: 21px;}
 .tarteaucitronSize-popup div#tarteaucitronAlertBig button:not(#tarteaucitronCloseCross) {margin: 0 auto 10px!important;display: block!important;width: calc(100% - 60px);box-sizing: border-box;}
 
-/* --- 楓梵 Fun ArTrip 客製化樣式 (梵谷花園配色版) --- */
+/* --- 梵谷蜜桃色：左下角精緻卡片版 --- */
 
-/* 1. 修改底部大橫幅背景 - 使用 Spanish Bistre 綠 */
-#tarteaucitronAlertBig {
-    background-color: #767B39 !important;
-    border-top: 3px solid #FDFBF5 !important; /* 保持奶油白頂邊，增加層次 */
-    padding: 25px !important;
-    font-family: 'serif', 'Playfair Display', sans-serif !important;
-    border-radius: 20px 20px 0 0 !important; /* 加一點圓角，更顯柔和 */
-    box-shadow: 0 -10px 30px rgba(0,0,0,0.2) !important;
+/* 1. 主容器：從橫條變卡片 */
+#tarteaucitronAlertBig, #tarteaucitronRoot #tarteaucitronAlertBig {
+    position: fixed !important;
+    bottom: 24px !important;
+    left: 24px !important;
+    right: auto !important; /* 取消右側對齊 */
+    width: 350px !important; /* 設定固定寬度 */
+    max-width: 90vw !important;
+    background-color: #767B39 !important; /* Spanish Bistre 綠 */
+    border-radius: 24px !important; /* 圓角更有設計感 */
+    padding: 32px !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3) !important;
+    z-index: 99999 !important;
+    flex-direction: column !important; /* 讓內容垂直排列 */
+    display: flex !important;
 }
 
-/* 2. 修改文字顏色 - 使用奶油白，重要強調用 Pomegranate 紅 */
+/* 2. 移除原本的文字圖示，優化文字排版 */
 #tarteaucitronDisclaimerAlert {
-    color: #FDFBF5 !important; /* 奶油白文字 */
+    text-align: left !important;
+    margin: 0 0 24px 0 !important;
+    color: #FDFBF5 !important;
+    font-family: 'serif', "Playfair Display", serif !important;
     font-size: 14px !important;
     line-height: 1.6 !important;
 }
 
-/* 3. 修改標題文字顏色 - 使用 Glazed Apricot 黃 */
+/* 3. 標題：使用 Glazed Apricot 黃 */
 #tarteaucitronDisclaimerAlert b {
-    color: #EAA624 !important; /* 黃色標題 */
-    font-size: 16px !important;
+    display: block !important;
+    font-size: 20px !important;
+    margin-bottom: 8px !important;
+    color: #EAA624 !important;
 }
 
-/* 4. 修改「接受全部」按鈕 (Accepter tout) - 使用 Van Gogh Blue 藍 */
-#tarteaucitronPersonalize {
-    background-color: #AADCF2 !important; /* 藍色背景 */
-    color: #767B39 !important; /* 使用背景綠色作為文字，增加協調感 */
-    border-radius: 50px !important;
-    padding: 12px 28px !important;
+/* 4. 按鈕群組排版：垂直疊加更像卡片 */
+#tarteaucitronRoot .tarteaucitronButtons {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+}
+
+/* 5. 「接受」按鈕：Van Gogh Blue 藍 */
+#tarteaucitronPersonalize, #tarteaucitronRoot #tarteaucitronPersonalize {
+    background-color: #AADCF2 !important;
+    color: #223843 !important;
+    border-radius: 12px !important;
+    padding: 12px !important;
+    width: 100% !important;
+    text-align: center !important;
     font-weight: bold !important;
     text-transform: uppercase !important;
     letter-spacing: 1px !important;
     border: none !important;
-    transition: all 0.3s ease !important;
-    font-size: 12px !important;
+    margin: 0 !important;
 }
 
-#tarteaucitronPersonalize:hover {
-    background-color: #FDFBF5 !important; /* Hover 時變奶油白 */
+/* 6. 「拒絕」按鈕：Light Melon 粉 */
+#tarteaucitronCloseAlert, #tarteaucitronRoot #tarteaucitronCloseAlert {
+    background-color: #F7BCB0 !important;
     color: #767B39 !important;
-    transform: translateY(-2px);
-}
-
-/* 5. 修改「拒絕全部」按鈕 (Tout refuser) - 使用 Light Melon 粉 */
-#tarteaucitronCloseAlert {
-    background-color: #F7BCB0 !important; /* 粉色背景 */
-    color: #767B39 !important; /* 使用背景綠色作為文字 */
-    border-radius: 50px !important;
-    margin-left: 10px !important;
-    transition: all 0.3s ease !important;
-    border: none !important;
-    padding: 12px 28px !important;
+    border-radius: 12px !important;
+    padding: 12px !important;
+    width: 100% !important;
+    text-align: center !important;
     font-weight: bold !important;
     text-transform: uppercase !important;
     letter-spacing: 1px !important;
+    border: none !important;
+    margin: 0 !important;
+}
+
+/* 7. 保密政策連結：設定為黃色並正確間距 */
+#tarteaucitronPrivacyUrl {
+    color: #EAA624 !important;
+    display: block !important;
+    text-align: center !important;
+    margin-top: 15px !important;
     font-size: 12px !important;
+    opacity: 0.8 !important;
+    text-decoration: underline !important;
 }
 
-#tarteaucitronCloseAlert:hover {
-    background-color: #FDFBF5 !important; /* Hover 時變奶油白 */
-    color: #767B39 !important;
-    transform: translateY(-2px);
-}
-
-/* 6. 修改文字中的強調點 (如果檸檬塔有用到) - 使用 Pomegranate 紅 */
-#tarteaucitronDisclaimerAlert .tarteaucitronDot {
-    color: #C85555 !important;
+/* 8. 隱藏原本關閉的小按鈕，強迫使用者選擇 */
+#tarteaucitronCloseCross {
+    display: none !important;
 }
