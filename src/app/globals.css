@@ -66,6 +66,82 @@
   .prose a:hover {
     background-color: #FDF6D9;
   }
+  
+  /* 📖 長篇文章與條款專用排版容器 */
+  /* ========================================= */
+  .article-content {
+    /* 基礎內文設定：寬鬆的行距 */
+    line-height: 1.8;
+    color: #334155; 
+  }
+
+  /* 標題 1 (大標題) */
+  .article-content h1 {
+    font-family: var(--font-playfair);
+    font-size: 2.25rem; /* 大約 36px */
+    color: var(--color-brand-gold, #EAA624); /* 品牌金 */
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+
+  /* 標題 2 (章節標題) */
+  .article-content h2 {
+    font-family: var(--font-playfair);
+    font-size: 1.5rem; /* 大約 24px */
+    color: var(--color-brand-green, #2C3522); /* 品牌綠 */
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    /* 加一條淡淡的底線，讓條款看起來更專業 */
+    border-bottom: 1px solid rgba(44, 53, 34, 0.1); 
+    padding-bottom: 0.5rem;
+  }
+
+  /* 標題 3 (小節標題) */
+  .article-content h3 {
+    font-size: 1.25rem; /* 大約 20px */
+    color: #3A432A;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+  }
+
+  /* 段落間距 */
+  .article-content p {
+    margin-bottom: 1.5rem;
+  }
+
+  /* 找回無序清單 (黑點點) */
+  .article-content ul {
+    list-style-type: disc;
+    padding-left: 1.5rem; /* 往右縮排 */
+    margin-bottom: 1.5rem;
+  }
+
+  /* 找回有序清單 (1. 2. 3.) */
+  .article-content ol {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* 清單項目的間距 */
+  .article-content li {
+    margin-bottom: 0.5rem;
+    padding-left: 0.25rem;
+  }
+
+  /* 文章內的超連結 */
+  .article-content a {
+    color: var(--color-brand-gold, #EAA624);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: all 0.2s ease-in-out;
+  }
+  .article-content a:hover {
+    color: var(--color-brand-green, #2C3522);
+  }
 }
 
 /* ========================================= */
