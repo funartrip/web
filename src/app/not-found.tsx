@@ -44,7 +44,7 @@ function NotFoundContent() {
   return (
     <main className="min-h-screen bg-[#223843] flex flex-col font-sans selection:bg-[#D87348] selection:text-[#F2E3C6] overflow-hidden">
       {/* 🌟 Navbar 自動套用當前語系 */}
-      <Navbar lang={lang} />
+      <Navbar />
 
       {/* 🌟 404 視覺主體 */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 text-center relative z-10 pt-20">

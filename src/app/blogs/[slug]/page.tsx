@@ -147,7 +147,7 @@ export default function BlogPostPage() {
   
   return (
     <main className="min-h-screen bg-[#223843] font-sans selection:bg-[#D87348] selection:text-[#F2E3C6] pb-32">
-      <Navbar lang={lang} />
+      <Navbar/>
 
       {/* 🌿 頂部封面區 (Hero) */}
       <section className="relative w-full h-[60vh] min-h-[400px] overflow-hidden">

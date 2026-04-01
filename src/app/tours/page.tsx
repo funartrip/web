@@ -97,7 +97,7 @@ export default function ToursLobbyPage() {
         <Image src="/bg-texture.jpg" alt="Texture" fill className="object-cover opacity-[0.05] pointer-events-none mix-blend-multiply" priority />
       </div>
 
-      <Navbar lang={lang} />
+      <Navbar />
 
       {/* 🌟 1. 電影感頁首區 (Hero Section) */}
       <section className="relative h-[80vh] min-h-[600px] flex flex-col justify-center overflow-hidden">

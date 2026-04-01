@@ -166,7 +166,7 @@ const handleSubmit = async (e: React.FormEvent) => {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#FDFBF5]" />
       </div>
 
-      <Navbar lang={lang} />
+      <Navbar />
 
       {/* 🌟 表單主內容區塊 (flex-1 讓它佔滿剩餘空間，確保 Footer 自然出現在下方) */}
       <section className="relative z-10 flex-1 pt-32 pb-32 px-6 flex items-center justify-center">
