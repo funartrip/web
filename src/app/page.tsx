@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import Navbar from '@/components/Navbar'
 import { useSearchParams } from 'next/navigation'
@@ -16,7 +16,7 @@ const fadeUp = {
   transition: { type: "spring", stiffness: 40, damping: 20, duration: 1.5 }
 }as const;
 
-export default function HomePage() {
+function HomeContent() {
   const searchParams = useSearchParams()
   const lang = (searchParams.get('lang') || 'zh_tw').toLowerCase().replace('-', '_')
 
@@ -397,5 +397,12 @@ export default function HomePage() {
       </section>
 
     </main>
+  )
+}
+export default function HomePage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#FDFBF5] flex items-center justify-center text-[#202808] tracking-widest uppercase font-mono text-xs animate-pulse">Loading ArTrip...</div>}>
+      <HomeContent />
+    </Suspense>
   )
 }

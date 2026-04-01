@@ -5,7 +5,7 @@ import { PortableText } from '@portabletext/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion' // 🌟 確保引入 AnimatePresence
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useParams, useSearchParams } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 
@@ -83,7 +83,7 @@ const portableTextComponents = {
   },
 }
 
-export default function BlogPostPage() {
+function BlogPostContent() {
   const params = useParams()
   const searchParams = useSearchParams()
   const slug = params?.slug
@@ -373,4 +373,12 @@ export default function BlogPostPage() {
       </AnimatePresence>
     </main>
   );
+}
+
+export default function BlogPostPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#FDFBF5] flex items-center justify-center text-[#202808] tracking-widest uppercase font-mono text-xs">Loading...</div>}>
+      <BlogPostContent />
+    </Suspense>
+  )
 }

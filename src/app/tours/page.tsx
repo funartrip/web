@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from '@/components/Navbar'
 import { useSearchParams } from 'next/navigation'
@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { client, urlFor } from '@/sanity/lib/client'
 import { PortableText } from '@portabletext/react'
 
-export default function ToursLobbyPage() {
+function ToursLobbyContent() {
   const searchParams = useSearchParams()
   const lang = (searchParams.get('lang') || 'zh_tw').toLowerCase().replace('-', '_')
 
@@ -293,5 +293,12 @@ export default function ToursLobbyPage() {
 
 
     </main>
+  )
+}
+export default function ToursLobbyPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#FDFBF5] flex items-center justify-center text-[#202808] tracking-widest uppercase font-mono text-xs">Loading...</div>}>
+      <ToursLobbyContent />
+    </Suspense>
   )
 }

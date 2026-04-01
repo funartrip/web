@@ -4,7 +4,7 @@ import { client } from '@/sanity/lib/client'
 import Image from 'next/image'
 import { notFound, useParams, useSearchParams } from 'next/navigation' // 🌟 加入 notFound
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState, useEffect, use } from 'react'
+import { useState, useEffect, use, Suspense} from 'react'
 import { PortableText } from '@portabletext/react'
 import Navbar from '@/components/Navbar'
 import Link from 'next/link'
@@ -48,7 +48,7 @@ const portfolioComponents = {
   },
 }
 
-export default function PortfolioDetailPage({ params: paramsPromise }: any) {
+function PortfolioDetailContent({ params: paramsPromise }: any) {
   const params: any = use(paramsPromise)
   const searchParams = useSearchParams()
   const lang = (searchParams.get('lang') || 'zh_tw').toLowerCase().replace('-', '_')
@@ -496,5 +496,12 @@ export default function PortfolioDetailPage({ params: paramsPromise }: any) {
       
             
     </main>
+  )
+}
+export default function PortfolioDetailPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#FDFBF5] flex items-center justify-center text-[#202808] tracking-widest uppercase font-mono text-xs">Loading...</div>}>
+      <PortfolioDetailContent />
+    </Suspense>
   )
 }

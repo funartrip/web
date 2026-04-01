@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { notFound, useParams, useSearchParams } from 'next/navigation'
 // (記得加在原本的 next/navigation 引入裡)
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState, useEffect, use, useRef } from 'react'
+import { useState, useEffect, use, useRef, Suspense } from 'react'
 
 // --- 🌟 旗艦動畫與組件 ---
 
@@ -28,7 +28,7 @@ const CustomDivider = () => (
   </motion.div>
 );
 
-export default function TourDetailPage({
+function TourDetailContent({
   params,
   searchParams,
 }: {
@@ -560,4 +560,19 @@ export default function TourDetailPage({
 
     </main>
   );
+}
+// 🌟 1. 讓老闆 (Page) 接住 Next.js 給的 params 和 searchParams
+export default function TourDetailPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ lang?: string }>;
+}) {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#FDFBF5] flex items-center justify-center text-[#202808] tracking-widest uppercase font-mono text-xs">Loading...</div>}>
+      {/* 🌟 2. 把接到的參數傳遞給員工 (Content) */}
+      <TourDetailContent params={params} searchParams={searchParams} />
+    </Suspense>
+  )
 }

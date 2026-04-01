@@ -1,9 +1,9 @@
 'use client'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, usePathname } from 'next/navigation'
 
-export default function Navbar() {
+function NavbarContent() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isLangOpen, setIsLangOpen] = useState(false)
@@ -197,5 +197,14 @@ export default function Navbar() {
         </div>
       )}
     </>
+  )
+}
+// 🌟 把它加在檔案的最下方
+export default function Navbar() {
+  return (
+    // Navbar 的保護罩 fallback 只要一個簡單的透明區塊即可，才不會讓畫面上方突然閃爍
+    <Suspense fallback={<div className="h-20 bg-transparent w-full fixed top-0 z-50"></div>}>
+      <NavbarContent />
+    </Suspense>
   )
 }
