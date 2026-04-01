@@ -44,7 +44,7 @@ export const priceOption = {
               title: 'groupSize.zh_tw',
               subtitle: 'price'
             },
-            prepare({ title, subtitle }) {
+            prepare({ title, subtitle }: any) {
               return {
                 title: title || '未填寫人數',
                 subtitle: subtitle ? `€${subtitle}` : '未填寫價格'
