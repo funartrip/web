@@ -39,44 +39,11 @@ export default function RootLayout({
   return (
     <html lang="zh-TW" className="scroll-smooth">
       <body className="antialiased bg-[#FDFBF5]">
-        {/* 用 ClientLayout 把網站內容包起來，確保動畫流暢 */}
         <ClientLayout>
           {children}
+          {/* 🌟 把我們寫好的 Cookie 橫幅放在這裡 */}
+          <CookieBanner />
         </ClientLayout>
-
-        {/* --- 🍋 檸檬塔 (Tarteaucitron) 開始 --- */}
-        
-        <Script 
-          src="/tarteaucitron/tarteaucitron.js" 
-          strategy="beforeInteractive" 
-        />
-
-        {/* 2. 初始化 */}
-        <Script id="tarteaucitron-init">
-          {`
-            // 強制抓取本地的資源路徑
-            window.tarteaucitronForceLanguage = 'en';
-
-            tarteaucitron.init({
-              "privacyUrl": "/legal/mentions-legales?lang=" + currentLang,
-              "hashtag": "#tarteaucitron", 
-              "cookieName": "funartrip_cookies",
-              "orientation": "bottom", 
-              "showAlertSmall": false, 
-              "cookieslist": false, 
-              "adblocker": false,
-              "DenyAllCta" : true,
-              "AcceptAllCta" : true,
-              "highPrivacy": true,
-              "handleBrowserLang": false,
-              "placeholder": true,
-              "mandatory": true
-            });
-
-            tarteaucitron.user.gtagUa = 'G-MG8CT41JTT';
-            (tarteaucitron.job = tarteaucitron.job || []).push('gtag');
-          `}
-        </Script>
       </body>
     </html>
   );

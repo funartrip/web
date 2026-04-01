@@ -1,36 +1,37 @@
 /* 🌟 VIP 區：所有的 @import 必須在檔案最上方！ */
-
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=LXGW+WenKai+TC:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
 @import "tailwindcss";
-/* 🌟 定義 Tailwind v4 專屬字體變數 */
-/* 🌟 定義 Tailwind v4 專屬字體變數 */
+
+/* 🌟 定義 Tailwind v4 專屬變數 */
 @theme {
-  /* 這是全站的預設中文字體 (文楷) */
+  /* 全站預設中文字體 (文楷) */
   --font-sans: "LXGW WenKai TC", ui-sans-serif, system-ui, sans-serif;
   
-  /* 為了相容你其他頁面的寫法，我們定義 font-playfair 和 font-cursive */
-  --font-playfair: "Playfair Display", "LXGW WenKai TC", ui-serif, Georgia, serif;
-  --font-cursive: "Caveat", cursive;
-  
-  /* 標準的 serif 也順便定義，以防萬一 */
+  /* 襯線體與標題用 (Playfair) */
   --font-serif: "Playfair Display", "LXGW WenKai TC", ui-serif, Georgia, serif;
+  --font-playfair: "Playfair Display", "LXGW WenKai TC", ui-serif, Georgia, serif;
+  
+  /* 手寫體 (Caveat) */
+  --font-cursive: "Caveat", cursive;
+
+  /* 你的品牌色也可以定義在這裡，方便以後使用 */
+  --color-brand-green: #2C3522;
+  --color-brand-gold: #EAA624;
+  --color-brand-cream: #FDFBF5;
 }
 
 /* ========================================= */
-/* 1. 基礎層 (Base)：覆蓋預設的 HTML 標籤 */
+/* 1. 基礎層 (Base) */
 /* ========================================= */
 @layer base {
   body {
-    /* 字體與底色 */
     font-family: var(--font-sans);
-    background-color: #FDFBF5; 
-    color: #2C3522; 
+    background-color: var(--color-brand-cream); 
+    color: var(--color-brand-green); 
     
-    /* 字體平滑處理 (讓 Mac/iOS 看起來更細緻) */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     
-    /* 無障礙閱讀核心設定 */
     letter-spacing: 0.03em; 
     word-spacing: 0.08em;   
     line-height: 1.5;  
@@ -38,42 +39,27 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-playfair); /* 標題通常建議用 Playfair */
     letter-spacing: 0.015em;
     line-height: 1.3;
     font-weight: 700;
-    color: #2C3522;
-  }
-
-  p {
-    margin-bottom: 0.5rem;
   }
 }
 
 /* ========================================= */
-/* 2. 元件層 (Components)：自訂的複合樣式 (如文章排版) */
+/* 2. 元件層 (Components) */
 /* ========================================= */
 @layer components {
-  .prose {
-    color: #334155; 
-  }
-
   .prose p {
     letter-spacing: 0.03em;
     word-spacing: 0.08em;
     line-height: 1.8; 
   }
 
-  .prose strong {
-    font-weight: 800;
-    color: #3A432A;
-  }
-
   .prose a {
     color: #5C6B47;
-    text-decoration-line: underline;
+    text-decoration: underline;
     text-underline-offset: 4px;
-    text-decoration-color: #D4C376;
-    text-decoration-thickness: 2px;
     transition: all 0.2s ease-in-out;
   }
 
@@ -83,30 +69,24 @@
 }
 
 /* ========================================= */
-/* 3. 工具層 (Utilities)：單一功能的小工具類別 */
+/* 3. 工具層 (Utilities) */
 /* ========================================= */
 @layer utilities {
-  /* 隱藏捲軸但保留滑動功能 */
-  .hide-scrollbar::-webkit-scrollbar,
-  .scrollbar-hide::-webkit-scrollbar {
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }
-  
-  .hide-scrollbar,
-  .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
 
-  /* 自訂優雅的紅色細捲軸 */
   .custom-scrollbar::-webkit-scrollbar {
     width: 4px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb {
     background: rgba(140, 59, 59, 0.2); 
     border-radius: 10px;
   }
 }
+
+/* --- 🍋 如果你有要把檸檬塔 CSS 寫在這裡，也可以放在最下面 --- */
