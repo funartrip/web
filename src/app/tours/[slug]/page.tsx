@@ -15,7 +15,7 @@ const scrollScaleReveal = {
   whileInView: { opacity: 1, scale: 1, y: 0 },
   viewport: { once: false, amount: 0.1 },
   transition: { type: "spring", stiffness: 50, damping: 25, duration: 1.2 }
-};
+}as const;
 
 const CustomDivider = () => (
   <motion.div 

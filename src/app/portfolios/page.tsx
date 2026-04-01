@@ -107,7 +107,7 @@ const localText: any = {
       damping: 20,
       duration: 1.2 
     }
-  };
+  }as const;
   const cardEntrance = {
   hidden: { opacity: 0, y: 40 },
   visible: (i: number) => ({
