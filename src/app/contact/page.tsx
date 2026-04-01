@@ -11,6 +11,7 @@ function ContactContent() {
   const searchParams = useSearchParams()
   const lang = (searchParams.get('lang') || 'zh_tw').toLowerCase().replace('-', '_')
 
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -128,11 +129,12 @@ const handleSubmit = async (e: React.FormEvent) => {
     setIsSubmitting(true)
 
     try {
-      // 呼叫我們剛剛建立的信鴿發射台 API
+      // 🌟 1. 確保這裡的網址跟你資料夾名稱一致 (假設我們統一用 /api/contact)
       const response = await fetch('/api/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        // 🌟 2. 魔法在這裡：把 formData 展開，並把 lang 塞進去一起送出！
+        body: JSON.stringify({ ...formData, lang }),
       })
 
       if (response.ok) {
@@ -148,7 +150,6 @@ const handleSubmit = async (e: React.FormEvent) => {
     } finally {
       setIsSubmitting(false)
     }
-  }
 
   
   return (
