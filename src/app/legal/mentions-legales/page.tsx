@@ -46,25 +46,9 @@ function MentionsContent() {
         
         <article className="article-content">
           
-          {/* --- A. 這是你手動打在程式碼裡的條文 --- */}
-          <h1>Politique de confidentialité</h1>
           
-          <h2>1. Responsable de traitement</h2>
-          <p>
-            Le responsable de traitement est : Fun ArTrip 楓藝 — LEE Feng Fang. E.I. <br />
-            Contact : <a href="mailto:funartrip@gmail.com">funartrip@gmail.com</a>
-          </p>
 
-          <h2>2. Données collectées</h2>
-          <p>Lorsque vous utilisez le formulaire de contact, nous pouvons collecter :</p>
-          <ul>
-            <li>nom/prénom</li>
-            <li>adresse e-mail</li>
-            <li>contenu du message</li>
-          </ul>
-
-          {/* --- B. 這是從 Sanity 後台抓出來的條文 --- */}
-          {/* 🌟 最棒的是，Sanity 產生的 h1, h2, ul 也會自動套用 article-content 的美麗樣式！ */}
+          
           {data.content?.[lang] && <PortableText value={data.content[lang]} />}
           
         </article>
