@@ -3,12 +3,13 @@
 import { client } from '@/sanity/lib/client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion' // 🌟 引入更多動畫庫
+import { motion, AnimatePresence, Variants } from 'framer-motion'
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import { PortableText } from '@portabletext/react'
 import { portfolio } from '@/sanity/schemaTypes/portfolio'
+
 
 function PortfoliosContent() {
   const searchParams = useSearchParams()
@@ -108,18 +109,20 @@ const localText: any = {
       duration: 1.2 
     }
   }as const;
-  const cardEntrance = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i: number) => ({
-    opacity: 1, 
-    y: 0,
-    transition: {
-      delay: i * 0.1, // 完美的交錯感
-      duration: 0.8,
-      ease: [0.215, 0.61, 0.355, 1], // 經典的介面流暢曲線 (Cubic Bezier)
-    }
-  })
-}as const;
+  // 🌟 修改這裡：加入 : Variants 並移除結尾的 as const
+  const cardEntrance: Variants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: (i: number) => ({
+      opacity: 1, 
+      y: 0,
+      transition: {
+        delay: i * 0.1,
+        duration: 0.8,
+        ease: [0.215, 0.61, 0.355, 1],
+      }
+    })
+  };
+
 
 // 在 PortfoliosContent 內部頂部加入
 const [selectedProject, setSelectedProject] = useState<any>(null);
@@ -269,10 +272,17 @@ const [selectedProject, setSelectedProject] = useState<any>(null);
        
         
         {/* 結語區 (一句話結語，加大字體氣勢) */}
-        <motion.div {...gameReveal} className="text-center max-w-4xl mx-auto mt-48">
-           <p className="text-xl md:text-2xl font-serif font-bold italic text-[#4C4E36] leading-snug">
-             {t(pageData?.closingStatement)} 
-           </p>
+        {/* 結語區 (一句話結語，加大字體氣勢) */}
+        <motion.div 
+          initial={{ opacity: 0, x: -50, skewX: 10 }}
+          whileInView={{ opacity: 1, x: 0, skewX: 0 }}
+          viewport={{ once: false, amount: 0.1 }}
+          transition={{ type: "spring", stiffness: 40, damping: 15, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center max-w-4xl mx-auto mt-48"
+        >
+          <p className="text-xl md:text-2xl font-serif font-bold italic text-[#4C4E36] leading-snug">
+            {t(pageData?.closingStatement)} 
+          </p>
         </motion.div>
       </section>
          <div className="flex items-center justify-center gap-4 py-12">
@@ -432,7 +442,13 @@ const [selectedProject, setSelectedProject] = useState<any>(null);
 
       {/* 🌟 4. 結尾：按鈕也變得分量十足 */}
       <section className="py-48 text-center bg-[#FDFBF5]">
-        <motion.div {...gameReveal}>
+        {/* 🌟 4. 結尾：按鈕也變得分量十足 */}
+        <motion.div 
+          initial={{ opacity: 0, x: -50, skewX: 10 }}
+          whileInView={{ opacity: 1, x: 0, skewX: 0 }}
+          viewport={{ once: false, amount: 0.1 }}
+          transition={{ type: "spring", stiffness: 40, damping: 15, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        >
           <h3 className="font-serif text-2xl md:text-3xl text-[#2C3522] mb-10 italic">
              {localText.ctaQuestion[lang]}
           </h3>
