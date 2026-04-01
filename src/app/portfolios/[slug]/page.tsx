@@ -118,7 +118,7 @@ export default function PortfolioDetailPage({ params: paramsPromise }: any) {
 
   return (
     <main className="min-h-screen bg-[#FDFBF5] pb-32">
-      <Navbar lang={lang} />
+      <Navbar />
 
       {/* 🌟 Section 1: Hero 視覺 (維持 Tours 大氣感) */}
       <section className="relative h-[85vh] flex items-end overflow-hidden">
@@ -159,7 +159,7 @@ export default function PortfolioDetailPage({ params: paramsPromise }: any) {
           }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          transition={{ type: "spring" as const, stiffness: 300, damping: 20 }}
           // 🌟 修改點：
           // 1. bg-white -> bg-[#2C3522] (深墨綠) 或 bg-[#1A2214]
           // 2. border 改成深色邊框，增加質感
@@ -278,7 +278,7 @@ export default function PortfolioDetailPage({ params: paramsPromise }: any) {
                         rotate: i % 2 === 0 ? 2 : -2, // 輕微歪斜，更有手感
                         zIndex: 50    // 確保在最上面
                       }}
-                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      transition={{ type: "spring" as const, stiffness: 300, damping: 20 }}
                       className="relative w-full rounded-xl overflow-hidden shadow-2xl cursor-pointer border border-white/10"
                       onClick={() => setSelectedImgIndex(i)}
                       style={{ zIndex: i }} // 初始層級由上往下疊

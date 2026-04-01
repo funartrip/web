@@ -95,14 +95,14 @@ const localText: any = {
     initial: { opacity: 0, x: -50, skewX: 10 },
     whileInView: { opacity: 1, x: 0, skewX: 0 },
     viewport: { once: false, amount: 0.1 },
-    transition: { type: "spring", stiffness: 40, damping: 15, duration: 1.2, ease: [0.16, 1, 0.3, 1] }
-  };
+    transition: { type: "spring" as const, stiffness: 40, damping: 15, duration: 1.2, ease: [0.16, 1, 0.3, 1] }
+  }as const;
   const scrollScaleReveal = {
     initial: { opacity: 0, scale: 0.85, y: 30 },
     whileInView: { opacity: 1, scale: 1, y: 0 },
     viewport: { once: false, amount: 0.2 },
     transition: { 
-      type: "spring", 
+      type: "spring" as const, 
       stiffness: 50, 
       damping: 20,
       duration: 1.2 
@@ -119,7 +119,7 @@ const localText: any = {
       ease: [0.215, 0.61, 0.355, 1], // 經典的介面流暢曲線 (Cubic Bezier)
     }
   })
-};
+}as const;
 
 // 在 PortfoliosContent 內部頂部加入
 const [selectedProject, setSelectedProject] = useState<any>(null);
@@ -140,7 +140,7 @@ const [selectedProject, setSelectedProject] = useState<any>(null);
         <motion.div 
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
-          transition={{ duration: 10, ease: "linear", repeat: Infinity, repeatType: "reverse" }}
+          transition={{ duration: 10, ease: "linear" as const, repeat: Infinity, repeatType: "reverse" }}
           className="absolute inset-0 z-0"
         >
           <Image 

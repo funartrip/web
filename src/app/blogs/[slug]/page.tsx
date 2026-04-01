@@ -114,10 +114,13 @@ export default function BlogPostPage() {
   }, [slug])
 
   const getLabel = (field: any, l: string) => {
-    if (!field) return ''
-    if (typeof field === 'string') return field
-    return field[l] || field['zh_tw'] || Object.values(field).find(v => v) || ''
-  }
+  if (!field) return ''
+  if (typeof field === 'string') return field
+  
+  // 🌟 同時支援 zh_tw 與 zh-tw
+  const dashLang = l.replace('_', '-')
+  return field[l] || field[dashLang] || field['zh_tw'] || field['zh-tw'] || Object.values(field).find(v => v) || ''
+}
   // 如果找不到該語言，就自動退回顯示 zh_tw (繁體中文)
 
 
@@ -131,7 +134,7 @@ export default function BlogPostPage() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-[#223843] flex items-center justify-center">
-        <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 2, ease: "linear" }} className="w-12 h-12 border-4 border-[#D87348] border-t-transparent rounded-full" />
+        <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 2, ease: "linear" as const }} className="w-12 h-12 border-4 border-[#D87348] border-t-transparent rounded-full" />
       </div>
     )
   }
@@ -164,7 +167,7 @@ export default function BlogPostPage() {
       {/* 🌿 實體紙張閱讀區塊 */}
       <section className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-32">
         <motion.article 
-          initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }}
+          initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" as const }}
           // 實體紙張感
           className="bg-[#F2E3C6] rounded-t-3xl rounded-b-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] p-8 md:p-16"
         >

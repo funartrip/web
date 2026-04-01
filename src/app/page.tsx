@@ -14,7 +14,7 @@ const fadeUp = {
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: false, amount: 0.2 }, 
   transition: { type: "spring", stiffness: 40, damping: 20, duration: 1.5 }
-};
+}as const;
 
 export default function HomePage() {
   const searchParams = useSearchParams()
