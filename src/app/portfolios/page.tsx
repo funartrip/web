@@ -190,7 +190,13 @@ const [selectedProject, setSelectedProject] = useState<any>(null);
 
       {/* 🌟 2. 五張專業定位卡片 (重點排版：進化為神秘技能卡) */}
       <section className="py-40 px-6 max-w-screen-2xl mx-auto">
-        <motion.div {...cardEntrance} className="text-center mb-32 flex flex-col items-center">
+        <motion.div 
+          variants={cardEntrance}       // 🌟 改用 variants 屬性接收物件
+          initial="hidden"              // 🌟 明確指定初始狀態
+          whileInView="visible"         // 🌟 明確指定進入畫面時的狀態
+          viewport={{ once: true }}     // 🌟 建議加上這個，讓它只動一次
+          className="text-center mb-32 flex flex-col items-center"
+        >
           <span className="text-[#8C3B3B] font-mono text-base tracking-[0.6em] uppercase mb-4 animate-pulse">Design System</span>
           <h2 className="text-4xl md:text-6xl font-serif font-bold text-[#3D3B38] mb-8">
              {sectionTitles[lang] || sectionTitles.zh_tw}
