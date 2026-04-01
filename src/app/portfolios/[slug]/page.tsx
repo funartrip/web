@@ -498,10 +498,18 @@ function PortfolioDetailContent({ params: paramsPromise }: any) {
     </main>
   )
 }
-export default function PortfolioDetailPage() {
+// 🌟 修正版：讓老闆接住 params 和 searchParams，並交給員工
+export default function PortfolioDetailPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ lang?: string }>;
+}) {
   return (
     <Suspense fallback={<div className="min-h-screen bg-[#FDFBF5] flex items-center justify-center text-[#202808] tracking-widest uppercase font-mono text-xs">Loading...</div>}>
-      <PortfolioDetailContent />
+      {/* 🌟 確實把參數當作禮物傳下去！ */}
+      <PortfolioDetailContent params={params} searchParams={searchParams} />
     </Suspense>
   )
 }
