@@ -235,11 +235,13 @@ function HomeContent() {
               </Link>
 
               {/* 💻【電腦版專屬設計】：高級黑金質感的 3D 翻轉卡片 */}
-              <div className="hidden lg:block group perspective-1000 w-full aspect-[3/4] relative">
-                <div className="relative w-full h-full preserve-3d group-hover:rotate-y-180 transition-transform duration-1000 ease-in-out cursor-pointer shadow-xl">
+              {/* 1. 最外層包裝：加上透視深度 perspective */}
+             <div className="hidden lg:block group [perspective:1000px] w-full aspect-[3/4] relative">
+                {/* 🌟 1. 翻轉容器：加上 [transform-style:preserve-3d] 與 [transform:rotateY(180deg)] */}
+                <div className="relative w-full h-full [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] transition-transform duration-1000 ease-in-out cursor-pointer shadow-xl">
                   
-                  {/* 正面：滿版照片 */}
-                  <div className="absolute inset-0 w-full h-full backface-hidden preserve-3d bg-[#EBE8E0]">
+                  {/* 🌟 2. 正面：加上 [backface-visibility:hidden] */}
+                  <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] bg-[#EBE8E0]">
                     {tour.mainImage && (
                       <Image src={urlFor(tour.mainImage).url()} alt="Tour" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" />
                     )}
@@ -252,30 +254,31 @@ function HomeContent() {
                     )}
                   </div>
 
-                  {/* 背面：深邃高級黑金質感 */}
-                  <div className="absolute inset-0 w-full h-full bg-[#202808] rotate-y-180 backface-hidden flex flex-col justify-center items-center text-center p-8 border border-white/10 shadow-inner preserve-3d">
-                     {/* 內圈優雅金線 */}
-                     <div className="absolute inset-3 border border-[#EAA624]/20 pointer-events-none" />
-                     
-                     <span className="text-[#EAA624] text-[10px] font-mono uppercase tracking-widest block mb-4">
+                  {/* 🌟 3. 背面：加上 [transform:rotateY(180deg)] 與 [backface-visibility:hidden] */}
+                  <div className="absolute inset-0 w-full h-full bg-[#202808] [transform:rotateY(180deg)] [backface-visibility:hidden] flex flex-col justify-center items-center text-center p-8 border border-white/10 shadow-inner">
+                      {/* 內圈優雅金線 */}
+                      <div className="absolute inset-3 border border-[#EAA624]/20 pointer-events-none" />
+                      
+                      <span className="text-[#EAA624] text-[10px] font-mono uppercase tracking-widest block mb-4">
                         {getLabel(tour.serviceTypeName, lang)}
-                     </span>
-                     <h3 className="text-3xl font-playfair font-bold text-[#FDFBF5] leading-snug mb-6 line-clamp-3 px-4">
-                      {getLabel(tour.title, lang)}
-                     </h3>
-                     <p className="text-[#FDFBF5]/60 text-sm font-serif line-clamp-3 leading-relaxed mb-10 px-2">
-                      {getLabel(tour.subtitle, lang)}
-                     </p>
-                     
-                     <Link href={`/tours/${tour.slug?.current}?lang=${lang}`} className="relative group/btn overflow-hidden border border-[#EAA624] px-8 py-3">
+                      </span>
+                      <h3 className="text-3xl font-playfair font-bold text-[#FDFBF5] leading-snug mb-6 line-clamp-3 px-4">
+                        {getLabel(tour.title, lang)}
+                      </h3>
+                      <p className="text-[#FDFBF5]/60 text-sm font-serif line-clamp-3 leading-relaxed mb-10 px-2">
+                        {getLabel(tour.subtitle, lang)}
+                      </p>
+                      
+                      <Link href={`/tours/${tour.slug?.current}?lang=${lang}`} className="relative group/btn overflow-hidden border border-[#EAA624] px-8 py-3">
                         <span className="relative z-10 text-[#EAA624] group-hover/btn:text-[#202808] font-bold uppercase tracking-widest text-xs transition-colors duration-300">
                           {t.explore}
                         </span>
                         <div className="absolute inset-0 bg-[#EAA624] translate-y-full transition-transform duration-300 group-hover/btn:translate-y-0" />
-                     </Link>
+                      </Link>
                   </div>
                 </div>
               </div>
+             
 
             </motion.div>
           ))}
