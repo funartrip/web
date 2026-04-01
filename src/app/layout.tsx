@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import "./globals.css";
 // 引入我們做好的客戶端包裹器
 import ClientLayout from "@/components/ClientLayout"; 
-import Script from 'next/script'
+// 🌟 關鍵修正：引入我們剛寫好的 CookieBanner 組件
+import CookieBanner from "@/components/CookieBanner"; 
 
 // 🌟 1. 設定 SEO 元資料
 export const metadata: Metadata = {
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Fun ArTrip 楓藝 | 法國深度文化導覽',
     description: '您的下一趟文化探險，從這裡開始。由持證解說員楓梵帶您深入體驗法式藝術與歷史。',
-    url: 'https://web-psi-seven-35.vercel.app', // 🌟 之後買了網域記得回來改這裡
+    url: 'https://funartrip.com', // 🌟 順便幫你把網址換成你買好的正式網域了！
     siteName: 'Fun ArTrip 楓藝',
     images: [
       {
@@ -41,7 +42,7 @@ export default function RootLayout({
       <body className="antialiased bg-[#FDFBF5]">
         <ClientLayout>
           {children}
-          {/* 🌟 把我們寫好的 Cookie 橫幅放在這裡 */}
+          {/* 🌟 這樣它就找得到 Cookie 橫幅了 */}
           <CookieBanner />
         </ClientLayout>
       </body>
