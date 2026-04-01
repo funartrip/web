@@ -92,7 +92,7 @@ function BlogContent() {
     <main className="min-h-screen bg-[#223843] text-[#F2E3C6] font-sans selection:bg-[#D87348] selection:text-[#223843]">
       
       {/* 🌟 使用外部引入的 Navbar，不要在這裡重寫 HTML */}
-      <Navbar lang={lang} />
+      <Navbar />
 
       {/* 🌿 Hero 區塊：大圖結合復古漸層與延遲動畫 */}
       <section className="relative w-full h-[75vh] min-h-[600px] flex flex-col items-center justify-center overflow-hidden">
