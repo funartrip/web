@@ -110,3 +110,43 @@
     border-radius: 10px;
   }
 }
+
+/* 修改 Cookie 橫幅的主容器 */
+#tarteaucitronAlertBig {
+  background-color: #FDFBF5 !important; /* 奶油白背景 */
+  border-top: 5px solid #202808 !important; /* 頂部深綠邊框 */
+  font-family: 'serif', 'Playfair Display', sans-serif !important;
+  color: #202808 !important;
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.1) !important;
+  padding: 20px !important;
+}
+
+/* 修改文字與按鈕 */
+#tarteaucitronDisclaimerAlert b {
+  color: #8C3B3B !important; /* 標題用紅磚色 */
+}
+
+/* 修改「接受全部」按鈕 */
+#tarteaucitronPersonalize {
+  background-color: #202808 !important; /* 深綠色背景 */
+  color: #FDFBF5 !important;
+  border-radius: 50px !important;
+  padding: 10px 25px !important;
+  border: none !important;
+  font-weight: bold !important;
+  transition: all 0.3s !important;
+}
+
+#tarteaucitronPersonalize:hover {
+  background-color: #8C3B3B !important;
+  transform: translateY(-2px);
+}
+
+/* 修改「拒絕」按鈕 */
+#tarteaucitronCloseAlert {
+  background-color: transparent !important;
+  color: #202808 !important;
+  border: 1px solid #202808 !important;
+  border-radius: 50px !important;
+  margin-left: 10px !important;
+}

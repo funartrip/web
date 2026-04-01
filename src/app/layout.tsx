@@ -1,11 +1,10 @@
-// src/app/layout.tsx
-// 🌟 這裡絕對不能寫 'use client'
-
 import type { Metadata } from 'next'
 import "./globals.css";
-// 引入我們剛做好的客戶端包裹器
+// 引入我們做好的客戶端包裹器
 import ClientLayout from "@/components/ClientLayout"; 
+import Script from 'next/script'
 
+// 🌟 1. 設定 SEO 元資料
 export const metadata: Metadata = {
   title: {
     template: '%s | Fun ArTrip 楓藝',
@@ -16,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Fun ArTrip 楓藝 | 法國深度文化導覽',
     description: '您的下一趟文化探險，從這裡開始。由持證解說員楓梵帶您深入體驗法式藝術與歷史。',
-    url: 'https://你的專屬網址.com', 
+    url: 'https://web-psi-seven-35.vercel.app', // 🌟 之後買了網域記得回來改這裡
     siteName: 'Fun ArTrip 楓藝',
     images: [
       {
@@ -31,6 +30,7 @@ export const metadata: Metadata = {
   },
 }
 
+// 🌟 2. 唯一的 RootLayout
 export default function RootLayout({
   children,
 }: {
@@ -39,10 +39,46 @@ export default function RootLayout({
   return (
     <html lang="zh-TW" className="scroll-smooth">
       <body className="antialiased bg-[#FDFBF5]">
-        {/* 用 ClientLayout 把網站內容包起來 */}
+        {/* 用 ClientLayout 把網站內容包起來，確保動畫流暢 */}
         <ClientLayout>
           {children}
         </ClientLayout>
+
+        {/* --- 🍋 檸檬塔 (Tarteaucitron) 開始 --- */}
+        
+        {/* 1. 載入主程式 */}
+        <Script 
+          src="https://cdn.jsdelivr.net/gh/amauri291/tarteaucitron.js@v1.17.0/tarteaucitron.js" 
+          strategy="afterInteractive" 
+        />
+
+        {/* 2. 初始化設定 */}
+        <Script id="tarteaucitron-init" strategy="afterInteractive">
+          {`
+            tarteaucitron.init({
+              "privacyUrl": "/legal", 
+              "hashtag": "#tarteaucitron", 
+              "cookieName": "funartrip_cookies",
+              "orientation": "bottom", 
+              "groupServices": false, 
+              "showAlertSmall": false, 
+              "cookieslist": false, 
+              "closePopup": false,
+              "showIcon": true,
+              "iconPosition": "BottomRight",
+              "adblocker": false,
+              "DenyAllCta" : true,
+              "AcceptAllCta" : true,
+              "highPrivacy": true,
+              "handleBrowserLang": true,
+              "placeholder": true
+            });
+
+            tarteaucitron.user.gtagUa = 'G-MG8CT41JTT';
+            (tarteaucitron.job = tarteaucitron.job || []).push('gtag');
+          `}
+        </Script>
+        {/* --- 🍋 檸檬塔結束 --- */}
       </body>
     </html>
   );
