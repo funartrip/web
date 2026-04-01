@@ -55,7 +55,7 @@ export async function POST(request: Request) {
       from: 'Fun ArTrip 網站通知 <contact@funartrip.com>', 
       to: ['contact@funartrip.com'], 
       subject: `[新聯絡訊息] ${category} - 來自 ${name}`,
-      reply_to: email, 
+      replyTo: email, 
       html: `
         <div style="font-family: sans-serif; color: #3D3B38; line-height: 1.6;">
           <h2 style="color: #767B39;">收到新的聯絡訊息！🕊️</h2>
