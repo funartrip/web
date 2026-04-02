@@ -5,8 +5,10 @@ import Navbar from "@/components/Navbar";
 import Link from 'next/link';
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, usePathname } from 'next/navigation';
-// 🌟 記得引入 sanity client
+// 🌟 引入 sanity client
 import { client } from '@/sanity/lib/client';
+// 🌟 引入 Icon，新增了 FaFacebookF (使用單純 F 的版本比較現代)
+import { FaInstagram, FaLinkedinIn, FaFacebookF, FaEnvelope } from 'react-icons/fa';
 
 // 🌟 Footer 內容組件
 function FooterContent() {
@@ -48,7 +50,6 @@ function FooterContent() {
   // 🌟 2. useEffect 抓取 Sanity 資料
   useEffect(() => {
     const fetchFooterTours = async () => {
-      // 抓取 isFeatured 為 true 的路線，只拿標題和 slug
       const query = `*[_type == "tour" && isFeatured == true]{
         _id,
         title,
@@ -81,10 +82,43 @@ function FooterContent() {
             <div className="text-[#8C9A76] font-bold text-[10px] tracking-[0.4em] uppercase">
               Art ╳ Culture ╳ Tour ╳ Life
             </div>
-            <div className="flex gap-8 text-lg font-bold">
-              <a href="https://www.instagram.com/fun_artrip/" target="_blank" className="hover:text-[#D4C376] transition-colors">Instagram</a>
-              <a href="#" className="hover:text-[#D4C376] transition-colors">LinkedIn</a>
-              <a href="mailto:funartrip@gmail.com" className="hover:text-[#D4C376] transition-colors">Email</a>
+            
+            {/* 🌟 修改： Icon 版本的外部連結 */}
+            <div className="flex gap-4 items-center pt-2">
+              <a 
+                href="https://www.instagram.com/funartrip/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                title="Fun ArTrip Instagram"
+                className="hover:text-[#D4C376] hover:scale-110 transition-all duration-300 p-2 -ml-2"
+              >
+                <FaInstagram className="size-[22px]" />
+              </a>
+              <a 
+                href="https://www.facebook.com/funartrip" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                title="Fun ArTrip Facebook"
+                className="hover:text-[#D4C376] hover:scale-110 transition-all duration-300 p-2"
+              >
+                <FaFacebookF className="size-[20px]" /> {/* FB的F稍微小一點點，視覺上比較平衡 */}
+              </a>
+              <a 
+                href="https://www.linkedin.com/in/feng-fang-lee" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                title="Fun ArTrip LinkedIn"
+                className="hover:text-[#D4C376] hover:scale-110 transition-all duration-300 p-2"
+              >
+                <FaLinkedinIn className="size-[22px]" />
+              </a>
+              <a 
+                href="mailto:contact@funartrip.com" 
+                title="Contact Fun ArTrip via Email"
+                className="hover:text-[#D4C376] hover:scale-110 transition-all duration-300 p-2"
+              >
+                <FaEnvelope className="size-[22px]" />
+              </a>
             </div>
           </div>
 
@@ -102,7 +136,7 @@ function FooterContent() {
               </ul>
             </div>
 
-            {/* 🌟 3. 動態精選路線區 */}
+            {/* 動態精選路線區 */}
             <div>
               <h5 className="font-extrabold border-b-2 border-[#2C3522] inline-block mb-8 pb-1">{t.featured}</h5>
               <ul className="space-y-5 text-base font-bold text-[#5C6B47]">
@@ -116,7 +150,6 @@ function FooterContent() {
                     </Link>
                   </li>
                 ))}
-                {/* 更多按鈕 */}
                 <li className="pt-2">
                   <Link href={`/tours?lang=${lang}#tours`} className="text-xs text-[#8C3B3B] hover:opacity-70 transition-opacity">
                     {t.more} {'>>>'}
