@@ -119,7 +119,7 @@ function HomeContent() {
       heroTitlePrefix: 'Votre Prochaine Aventure',
       heroTitleSuffix: 'Commence Ici',
       heroTitleCursive: 'Culturelle',
-      heroSub: 'Animé par une Guide-Conférencière agréée, transformant l\'art et l\'histoire en histoires que vous avez vraiment vécues.',
+      heroSub: 'Animeé par une Guide-Conférencière agréée, transformant l\'art et l\'histoire en histoires que vous avez vraiment vécues.',
       featured: 'Parcours Phares',
       featuredSub: 'Une sélection de voyages sensoriels français classiques pour vous',
       aboutTitle: ['Votre Guide' , <br key="br" />, 'Feng-Fang'],
