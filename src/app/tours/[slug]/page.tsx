@@ -328,7 +328,7 @@ function TourDetailContent({
                   報價建置中...
                   </div>
                 )}
-               
+               </div>
 
 
                   <motion.p 
