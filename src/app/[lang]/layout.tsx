@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import "./globals.css";
+import "@/app/globals.css"; // 🌟 使用 @ 代表 src 目錄
 // 引入我們做好的客戶端包裹器
 import ClientLayout from "@/components/ClientLayout"; 
 // 🌟 引入我們剛寫好的 CookieBanner 組件
