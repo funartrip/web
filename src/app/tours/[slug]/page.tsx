@@ -69,7 +69,7 @@ function TourDetailContent({
         "priceTemplate": priceTemplate->{baseGroupDesc, basePrice, extraPersonFee, maxCapacity}, // ✅ 換成跟資料庫拿這四個新法寶！
         "serviceType": serviceType->name,
         "suitableAudience": suitableAudience[]->name,
-        "interest": interest[]->name
+        "interest": interest->name
       },
       "bookingTerms": *[_type == "bookingTerms"][0]
     }`;
@@ -232,6 +232,7 @@ function TourDetailContent({
           </article>
         </div> {/* ✅ 左側內容區結束 */}
 
+       
         {/* 🌟 右側：資訊欄 */}
         <div className="lg:col-span-4">
           <div className="sticky top-32 space-y-10">
@@ -250,7 +251,7 @@ function TourDetailContent({
               </div>
 
               {/* 🌟 適合對象與興趣標籤 */}
-              {(tour.suitableAudience?.length > 0 || tour.interest?.length > 0) && (
+              {(tour.suitableAudience?.length > 0 || tour.interest) && (
                 <div className="mb-10 pb-6 border-b border-[#F4F1E1] space-y-5">
                   {/* 適合對象 */}
                   {tour.suitableAudience?.length > 0 && (
@@ -268,24 +269,21 @@ function TourDetailContent({
                     </div>
                   )}
                   
-                  {/* 興趣標籤 */}
-                  {tour.interest?.length > 0 && (
+                  {/* 🌟 興趣標籤 (已修正為支援單一標籤) */}
+                  {tour.interest && (
                     <div>
                       <span className="text-base font-serif italic text-[#2C3522] mb-2 block">
                         {lang === 'fr' ? 'Thèmes' : lang === 'en' ? 'Themes' : '特別推薦'}
                       </span>
                       <div className="flex flex-wrap gap-2">
-                        {tour.interest.map((item: any, idx: number) => (
-                          <span key={idx} className="bg-transparent text-[#8C3B3B] px-3 py-1.5 rounded-full text-[15px] font-bold tracking-widest border border-[#EBE7D9] uppercase">
-                            {getLabel(item, lang)}
-                          </span>
-                        ))}
+                        <span className="bg-transparent text-[#8C3B3B] px-3 py-1.5 rounded-full text-[15px] font-bold tracking-widest border border-[#EBE7D9] uppercase">
+                          # {getLabel(tour.interest, lang)}
+                        </span>
                       </div>
                     </div>
                   )}
                 </div>
               )}
-              {/* 🌟 插入點結束 */}
 
               <div className="space-y-6 mb-12 text-[#1A1A1A]">
                  <div className="flex items-center justify-between py-2">
@@ -294,10 +292,7 @@ function TourDetailContent({
                 </div>
                 <h3 className="text-xl font-bold text-[#2C3522] mb-4">{t.quote}</h3>
                
-
-                {/* 🌟 渲染全新定價模式 (基礎價 + 加人費) */}
-                  {/* 🌟 渲染全新定價模式 */}
-                  {/* 🌟 渲染全新定價模式 */}
+                {/* 🌟 渲染全新定價模式 */}
                 {tour.priceTemplate?.basePrice ? (
                   <div className="flex flex-col gap-2">
                     {/* 基礎價 */}
@@ -328,14 +323,14 @@ function TourDetailContent({
                   報價建置中...
                   </div>
                 )}
-               </div>
+              </div>
 
-
-                  <motion.p 
-                    {...scrollScaleReveal}
-                     className="mt-8 text-center text-base md:text-base italic text-[#4C4E36]/70 font-serif tracking-wide" >
-                    —— {t.overTen} ——
-                  </motion.p>
+              {/* 🌟 修正間距：加入 mb-8 撐開與按鈕的距離 */}
+              <motion.p 
+                {...scrollScaleReveal}
+                 className="mt-8 mb-8 text-center text-base md:text-base italic text-[#4C4E36]/70 font-serif tracking-wide" >
+                —— {t.overTen} ——
+              </motion.p>
 
               <a href="mailto:contact@funartrip.com" className="group relative block w-full text-center py-5 overflow-hidden rounded-full border border-[#1A1A1A] text-[#1A1A1A] transition-all duration-700">
                 <span className="relative z-10 font-bold tracking-[0.4em] text-[20px] uppercase group-hover:text-white">{t.reserve}</span>
@@ -353,9 +348,9 @@ function TourDetailContent({
               </motion.div>
             )}
           </div>
-        </div> {/* ✅ 右側側邊欄結束 */}
-      </div> {/* ✅ 整個上半部 Grid 結束 */}
-
+        </div>
+      </div> {/* ✅ 右側側邊欄結束 */}
+        
       {/* 🌟 滿版底層區塊：Gallery 相簿 & Booking Terms 預約須知 */}
       <div className="max-w-7xl mx-auto px-6 pb-24">
         
