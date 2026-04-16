@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion' // 🌟 確保引入 AnimatePresence
 import { useState, useEffect, Suspense } from 'react'
-import { useParams, useSearchParams } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 
 // 獲取單篇文章與分類的 GROQ Query
@@ -85,9 +85,9 @@ const portableTextComponents = {
 
 function BlogPostContent() {
   const params = useParams()
-  const searchParams = useSearchParams()
+  
   const slug = params?.slug
-  const lang = (searchParams.get('lang') || 'zh_tw').toLowerCase().replace('-', '_')
+  const lang = ((params?.lang as string) || 'zh_tw').toLowerCase().replace('-', '_')
 
   const [post, setPost] = useState<any>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -143,7 +143,7 @@ function BlogPostContent() {
     return (
       <div className="min-h-screen bg-[#223843] flex flex-col items-center justify-center text-[#F2E3C6]">
         <h1 className="text-2xl font-serif mb-4">找不到這份檔案...</h1>
-        <Link href={`/blogs?lang=${lang}`} className="text-[#D87348] hover:underline">{dict.back}</Link>
+        <Link href={`/${lang}/blogs`} className="text-[#D87348] hover:underline">{dict.back}</Link>
       </div>
     )
   }
@@ -259,7 +259,7 @@ function BlogPostContent() {
 
       {/* 🌿 返回按鈕 */}
       <div className="max-w-4xl mx-auto px-6 mt-24 flex justify-center">
-        <Link href={`/blogs?lang=${lang}`}>
+        <Link href={`/${lang}/blogs`}>
           <motion.button 
             whileHover={{ y: -5 }} whileTap={{ scale: 0.95 }}
             className="px-8 py-4 bg-[#AADCF2] text-[#223843] rounded-full font-serif font-bold tracking-widest shadow-[0_10px_20px_rgba(0,0,0,0.2),_inset_0_2px_5px_rgba(255,255,255,0.8)] hover:shadow-[0_15px_25px_rgba(216,115,72,0.3)] transition-all flex items-center gap-3"

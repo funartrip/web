@@ -3,13 +3,14 @@
 import { useState, Suspense } from 'react'  // 🌟 將 useState 和 Suspense 合併
 import { motion } from 'framer-motion'
 import Navbar from '@/components/Navbar'
-import { useSearchParams } from 'next/navigation' // 🌟 只留一行
+import { useParams } from 'next/navigation' // 🌟 只留一行
 import Image from 'next/image'
 
 
 function ContactContent() {
-  const searchParams = useSearchParams()
-  const lang = (searchParams.get('lang') || 'zh_tw').toLowerCase().replace('-', '_')
+  const params = useParams()
+  // 🌟 2. 核心升級：直接從動態路徑中取得 lang
+  const lang = ((params?.lang as string) || 'zh_tw').toLowerCase().replace('-', '_')
 
 
   const [formData, setFormData] = useState({

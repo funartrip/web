@@ -5,15 +5,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence, Variants } from 'framer-motion'
 import { useState, useEffect, Suspense } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import { PortableText } from '@portabletext/react'
 import { portfolio } from '@/sanity/schemaTypes/portfolio'
 
 
 function PortfoliosContent() {
-  const searchParams = useSearchParams()
-  const lang = (searchParams.get('lang') || 'zh_tw').toLowerCase().replace('-', '_')
+  const params = useParams()
+  const lang = ((params?.lang as string) || 'zh_tw').toLowerCase().replace('-', '_')
 
   const [pageData, setPageData] = useState<any>(null)
   const [projects, setProjects] = useState<any[]>([])
@@ -424,7 +424,7 @@ const [selectedProject, setSelectedProject] = useState<any>(null);
                   {/* 底部按鈕 - 🌟 修正：手機版建議加上 mb-4 避免貼底 */}
                   <div className="mt-12 pt-8 border-t border-[#4C4E36]/10 mb-4 md:mb-0">
                     <Link 
-                      href={`/portfolios/${selectedProject.slug}?lang=${lang}`}
+                      href={`/${lang}/portfolios/${selectedProject.slug}`}
                       className="flex items-center justify-center w-full py-5 bg-[#3D3B38] text-white rounded-full font-bold tracking-[0.3em] uppercase text-sm hover:bg-[#8C3B3B] transition-all"
                     >
                       {localText.fullExperience[lang]}
@@ -453,7 +453,7 @@ const [selectedProject, setSelectedProject] = useState<any>(null);
              {localText.ctaQuestion[lang]}
           </h3>
           <Link 
-            href={`/contact?lang=${lang}`}
+            href={`/${lang}/contact`}
             className="group relative inline-block px-24 py-8 overflow-hidden rounded-full border border-[#3D3B38] text-[#3D3B38] shadow-lg transition-all duration-500 hover:shadow-2xl hover:border-[#8C3B3B]"
           >
             <span className="relative z-10 font-bold tracking-[0.3em] text-base uppercase transition-colors duration-500 group-hover:text-white">

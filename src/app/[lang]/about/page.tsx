@@ -6,11 +6,13 @@ import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
 import { motion } from 'framer-motion'
 import { useState, useEffect, Suspense } from 'react'
-import { useSearchParams } from 'next/navigation'
+// 🌟 1. 核心升級：移除 useSearchParams，改用 useParams
+import { useParams } from 'next/navigation'
 
 function AboutContent() {
-  const searchParams = useSearchParams()
-  const lang = (searchParams.get('lang') || 'zh_tw').toLowerCase().replace('-', '_')
+  // 🌟 2. 核心升級：直接從動態路徑中取得 lang
+  const params = useParams()
+  const lang = ((params?.lang as string) || 'zh_tw').toLowerCase().replace('-', '_')
 
   const [data, setData] = useState<any>(null)
   
@@ -28,11 +30,10 @@ function AboutContent() {
   }
   const t = dict[lang] || dict.zh_tw;
 
-  // 🌟 核心動畫：捲動到位置時「由小變大」並「淡入」
   const scrollScaleReveal = {
     initial: { opacity: 0, scale: 0.85, y: 30 },
     whileInView: { opacity: 1, scale: 1, y: 0 },
-    viewport: { once: false, amount: 0.2 }, // ✅ 每次滑到都會有反應
+    viewport: { once: false, amount: 0.2 },
     transition: { 
       type: "spring"as const, 
       stiffness: 50, 
@@ -41,7 +42,6 @@ function AboutContent() {
     }
   }as const;
 
-  // 🌟 故事區組件設定
   const storyComponents = {
     block: {
       normal: ({ children }: any) => (
@@ -63,7 +63,6 @@ function AboutContent() {
     },
   }
 
-  // 🌟 學經歷區組件 (無框版)
   const expComponents = {
     block: {
       blockquote: ({ children }: any) => (
@@ -106,7 +105,6 @@ function AboutContent() {
     }
   }
 
-  // 🌟 處理資料邏輯：分離純文字與語錄
   const allBio = data.bio?.[lang] || [];
   const proseBlocks = allBio.filter((b: any) => b.style !== 'blockquote');
   const quoteBlocks = allBio.filter((b: any) => b.style === 'blockquote');
@@ -114,7 +112,6 @@ function AboutContent() {
   return (
     <main className="min-h-screen bg-[#EBE8E0] overflow-x-hidden selection:bg-[#4C4E36]/20">
       
-      {/* 🌟 1. 頁首區 */}
       <section className="relative h-[90vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           {data.profileImage && (
@@ -126,34 +123,23 @@ function AboutContent() {
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.5 }}>
-            
-            {/* 🌟 關鍵修正：加上這個帶有 flex 的 div 容器 */}
             <div className="flex items-center gap-4 mb-6">
-              {/* 1. 金色的線 */}
               <div className="w-10 h-[2px] bg-[#D4C376] shrink-0" /> 
-              
-              {/* 2. 文字 (注意：我拿掉了原有的 mb-6 和 block，改由外層容器統一控制) */}
               <span className="text-white/80 text-[18px] font-bold uppercase tracking-[0.5em] whitespace-nowrap">
                 {t.guide}
               </span>
             </div>
-
-            {/* 下方的標題與副標題保持不變 */}
             <h1 className="text-6xl md:text-8xl font-extrabold text-white tracking-tighter mb-8 leading-normal font-serif">
               {data.title?.[lang]}
             </h1>
             <p className="text-white/90 text-lg md:text-2xl italic max-w-sm">
               {data.subtitle?.[lang]}
             </p>
-
           </motion.div>
         </div>
       </section>
 
-      {/* 🌟 2. 故事與圖片穿插區 */}
       <section className="py-32 px-6 max-w-7xl mx-auto">
-        
-        {/* 段落 1: 左圖右文 (抓取純文字的前 4 段) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center mb-40">
           <motion.div 
             {...scrollScaleReveal}
@@ -186,14 +172,12 @@ function AboutContent() {
           </div>
         </div>
 
-        {/* 🌟 滿版大引言：獨立出現 */}
         {quoteBlocks.length > 0 && (
           <div className="mb-40">
              <PortableText value={[quoteBlocks[0]]} components={storyComponents} />
           </div>
         )}
 
-        {/* 段落 2: 左文右圖 (抓取第 4 段之後的所有純文字) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center mb-40">
           <div className="lg:col-span-7 order-2 lg:order-1">
             <PortableText value={proseBlocks.slice(4,7)} components={storyComponents} />
@@ -227,7 +211,6 @@ function AboutContent() {
         </div>
       </section>
 
-      {/* 🌟 3. 經歷學歷區 (徹底無框化 + 捲動放大動畫) */}
       <section className="py-40 px-6 bg-white border-t border-[#D5D2C8]">
         <div className="max-w-3xl mx-auto">
           
@@ -246,8 +229,9 @@ function AboutContent() {
           </div>
           
           <div className="mt-40 text-center">
+            {/* 🌟 3. 核心升級：更新 Link 的 href 寫法 */}
             <Link 
-              href={`/contact?lang=${lang}`}
+              href={`/${lang}/contact`}
               className="group relative inline-block px-16 py-6 overflow-hidden rounded-full border border-[#3D3B38] text-[#3D3B38] transition-all duration-500"
             >
               <span className="relative z-10 font-bold tracking-widest text-base uppercase transition-colors group-hover:text-white">{t.contact}</span>

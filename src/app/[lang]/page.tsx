@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, useEffect, Suspense } from 'react'
+import { useState, useEffect, Suspense, use } from 'react'
 import { motion } from 'framer-motion'
 import Navbar from '@/components/Navbar'
-import { useSearchParams } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { client, urlFor } from '@/sanity/lib/client'
@@ -16,9 +16,9 @@ const fadeUp = {
   transition: { type: "spring", stiffness: 40, damping: 20, duration: 1.5 }
 }as const;
 
-function HomeContent() {
-  const searchParams = useSearchParams()
-  const lang = (searchParams.get('lang') || 'zh_tw').toLowerCase().replace('-', '_')
+function HomeContent({ params }: { params: Promise<{ lang: string }> }) {
+  const resolvedParams = use(params) // 拆開它
+  const lang = (resolvedParams?.lang || 'zh_tw').toLowerCase().replace('-', '_')
 
   const [featuredTours, setFeaturedTours] = useState<any[]>([])
   const [latestPortfolios, setLatestPortfolios] = useState<any[]>([])
@@ -195,7 +195,7 @@ function HomeContent() {
             </h2>
             <p className="text-[#6A784D] text-lg font-serif italic mt-4">{t.featuredSub}</p>
           </div>
-          <Link href={`/tours?lang=${lang}`} className="text-[#C85555] font-bold uppercase tracking-widest text-sm hover:text-[#202808] transition-colors whitespace-nowrap">
+          <Link href={`/${lang}/tours`} className="text-[#C85555] font-bold uppercase tracking-widest text-sm hover:text-[#202808] transition-colors whitespace-nowrap">
             {t.viewAllTours} →
           </Link>
         </motion.div>
@@ -205,7 +205,7 @@ function HomeContent() {
             <motion.div key={tour._id || idx} {...fadeUp} transition={{ ...fadeUp.transition, delay: idx * 0.15 }} className="w-full">
               
               {/* 📱【手機版專屬設計】：直覺的靜態卡片，不翻轉、無懸停特效 */}
-              <Link href={`/tours/${tour.slug?.current}?lang=${lang}`} className="block lg:hidden w-full bg-white rounded-2xl shadow-sm border border-[#202808]/5 overflow-hidden">
+              <Link href={`/${lang}/tours/${tour.slug?.current}`} className="block lg:hidden w-full bg-white rounded-2xl shadow-sm border border-[#202808]/5 overflow-hidden">
                 <div className="relative aspect-[4/3] w-full">
                   {tour.mainImage ? (
                     <Image src={urlFor(tour.mainImage).url()} alt="Tour" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" />
@@ -269,7 +269,7 @@ function HomeContent() {
                         {getLabel(tour.subtitle, lang)}
                       </p>
                       
-                      <Link href={`/tours/${tour.slug?.current}?lang=${lang}`} className="relative group/btn overflow-hidden border border-[#EAA624] px-8 py-3">
+                      <Link href={`/${lang}/tours/${tour.slug?.current}`} className="relative group/btn overflow-hidden border border-[#EAA624] px-8 py-3">
                         <span className="relative z-10 text-[#EAA624] group-hover/btn:text-[#202808] font-bold uppercase tracking-widest text-xs transition-colors duration-300">
                           {t.explore}
                         </span>
@@ -310,7 +310,7 @@ function HomeContent() {
               <p className="text-[#6A784D] font-serif text-lg leading-relaxed mb-10">
                 {t.aboutDesc}
               </p>
-              <Link href={`/about?lang=${lang}`} className="inline-flex items-center gap-4 text-sm font-bold text-[#202808] tracking-widest uppercase group">
+              <Link href={`/${lang}/about`} className="inline-flex items-center gap-4 text-sm font-bold text-[#202808] tracking-widest uppercase group">
                 <span className="pb-1 border-b border-[#202808] group-hover:text-[#C85555] group-hover:border-[#C85555] transition-colors">
                   {t.learnMore}
                 </span>
@@ -341,7 +341,7 @@ function HomeContent() {
             </h2>
             <p className="text-[#6A784D] text-lg font-serif italic mt-4">{t.projectSub}</p>
           </div>
-          <Link href={`/portfolios?lang=${lang}`} className="text-[#C85555] font-bold uppercase tracking-widest text-sm hover:text-[#202808] transition-colors whitespace-nowrap">
+          <Link href={`/${lang}/portfolios`} className="text-[#C85555] font-bold uppercase tracking-widest text-sm hover:text-[#202808] transition-colors whitespace-nowrap">
             {t.viewAllProjects} →
           </Link>
         </motion.div>
@@ -354,7 +354,7 @@ function HomeContent() {
               transition={{ ...fadeUp.transition, delay: idx * 0.2 }}
               className={`group block ${idx === 1 ? 'md:-mt-16' : 'md:mt-8'}`}
             >
-              <Link href={`/portfolios/${project.slug?.current}?lang=${lang}`} className="block">
+              <Link href={`/${lang}/portfolios/${project.slug?.current}`}className="block">
                 <div className="p-4 md:p-5 border border-[#33432B]/10 bg-[#FDFBF5] lg:hover:border-[#202808] transition-all duration-500 group shadow-sm lg:hover:shadow-2xl lg:hover:scale-[1.02]">
                   <div className="relative aspect-[3/4] w-full overflow-hidden mb-5">
                     {project.projectCover ? (
@@ -388,7 +388,7 @@ function HomeContent() {
             {lang === 'fr' ? 'Prêt pour l’aventure ?' : lang === 'en' ? 'Ready for the journey?' : '準備好開始這趟旅程了嗎？'}
           </h2>
 
-          <Link href={`/contact?lang=${lang}`} className="group relative inline-block overflow-hidden rounded-full border border-[#202808] text-[#202808] transition-all duration-700 shadow-sm hover:shadow-xl hover:border-[#C85555]">
+          <Link href={`/${lang}/contact`} className="group relative inline-block overflow-hidden rounded-full border border-[#202808] text-[#202808] transition-all duration-700 shadow-sm hover:shadow-xl hover:border-[#C85555]">
             <div className="px-16 py-5 relative z-10 flex items-center justify-center">
               <span className="font-bold tracking-[0.4em] text-[16px] uppercase group-hover:text-white transition-colors duration-500">
                 {t.connect}
@@ -402,10 +402,11 @@ function HomeContent() {
     </main>
   )
 }
-export default function HomePage() {
+export default function HomePage({ params }: { params: Promise<{ lang: string }> }) {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#FDFBF5] flex items-center justify-center text-[#202808] tracking-widest uppercase font-mono text-xs animate-pulse">Loading ArTrip...</div>}>
-      <HomeContent />
+    <Suspense fallback={<div className="h-screen bg-[#FDFBF5] flex items-center justify-center text-[#202808] tracking-widest uppercase font-mono text-xs">Loading ArTrip...</div>}>
+      {/* 🌟 將 params 確實傳遞下去 */}
+      <HomeContent params={params} />
     </Suspense>
   )
 }

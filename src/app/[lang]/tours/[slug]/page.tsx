@@ -3,7 +3,7 @@
 import { client, urlFor } from '@/sanity/lib/client'
 import { PortableText } from '@portabletext/react'
 import Image from 'next/image'
-import { notFound, useParams, useSearchParams } from 'next/navigation'
+import { notFound, useParams } from 'next/navigation'
 // (記得加在原本的 next/navigation 引入裡)
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect, use, useRef, Suspense } from 'react'
@@ -29,15 +29,15 @@ const CustomDivider = () => (
 );
 
 function TourDetailContent({
+ 
   params,
-  searchParams,
 }: {
-  params: Promise<{ slug: string }>;
-  searchParams: Promise<{ lang?: string }>;
+  params: Promise<{ slug: string, lang: string }>;
 }) {
+  
   const resolvedParams = use(params);
-  const resolvedSearch = use(searchParams);
-  const lang = (resolvedSearch.lang || 'zh_tw').toLowerCase().replace('-', '_');
+  // 🌟 2. 核心升級：直接從 resolvedParams 取得 lang
+  const lang = ((resolvedParams?.lang as string) || 'zh_tw').toLowerCase().replace('-', '_');
 
   const [tour, setTour] = useState<any>(null);
   const [bookingTerms, setBookingTerms] = useState<any>(null);
@@ -332,7 +332,7 @@ function TourDetailContent({
                 —— {t.overTen} ——
               </motion.p>
 
-              <a href="mailto:contact@funartrip.com" className="group relative block w-full text-center py-5 overflow-hidden rounded-full border border-[#1A1A1A] text-[#1A1A1A] transition-all duration-700">
+              <a href={`/${lang}/contact`}className="group relative block w-full text-center py-5 overflow-hidden rounded-full border border-[#1A1A1A] text-[#1A1A1A] transition-all duration-700">
                 <span className="relative z-10 font-bold tracking-[0.4em] text-[20px] uppercase group-hover:text-white">{t.reserve}</span>
                 <div className="absolute inset-0 z-0 bg-[#1A1A1A] translate-y-full transition-transform duration-500 ease-[0.16, 1, 0.3, 1] group-hover:translate-y-0" />
               </a>
@@ -579,15 +579,14 @@ function TourDetailContent({
 // 🌟 1. 讓老闆 (Page) 接住 Next.js 給的 params 和 searchParams
 export default function TourDetailPage({
   params,
-  searchParams,
+  
 }: {
-  params: Promise<{ slug: string }>;
-  searchParams: Promise<{ lang?: string }>;
+  params: Promise<{ slug: string, lang: string }>;
 }) {
   return (
     <Suspense fallback={<div className="min-h-screen bg-[#FDFBF5] flex items-center justify-center text-[#202808] tracking-widest uppercase font-mono text-xs">Loading...</div>}>
       {/* 🌟 2. 把接到的參數傳遞給員工 (Content) */}
-      <TourDetailContent params={params} searchParams={searchParams} />
+      <TourDetailContent params={params}  />
     </Suspense>
   )
 }

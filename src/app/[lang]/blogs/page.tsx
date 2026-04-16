@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect, Suspense } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useParams } from 'next/navigation'
 // 🌟 正確引入外部 Navbar 組件
 import Navbar from '@/components/Navbar'
 
@@ -38,8 +38,8 @@ const blogComponents = {
 }
 
 function BlogContent() {
-  const searchParams = useSearchParams()
-  const lang = (searchParams.get('lang') || 'zh_tw').toLowerCase().replace('-', '_')
+  const params = useParams()
+  const lang = ((params?.lang as string) || 'zh_tw').toLowerCase().replace('-', '_')
   
   const [data, setData] = useState<{ lobby: any; posts: any[]; category: any[] } | null>(null)
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
@@ -211,7 +211,7 @@ function BlogContent() {
                     whileHover={{ y: -12 }} 
                     className="group relative flex flex-col bg-[#AADCF2] rounded-2xl overflow-hidden shadow-[0_15px_30px_rgba(0,0,0,0.3),_inset_0_4px_6px_rgba(255,255,255,0.7)] hover:shadow-[0_25px_40px_rgba(216,115,72,0.25),_inset_0_4px_10px_rgba(255,255,255,0.9)] transition-shadow duration-300"
                   >
-                    <Link href={`/blogs/${post.slug}?lang=${lang}`} className="flex flex-col h-full">
+                    <Link href={`/${lang}/blogs/${post.slug}`} className="flex flex-col h-full">
                       {/* 縮圖 */}
                       <div className="relative aspect-[4/3] overflow-hidden">
                         <Image src={post.thumbnail || '/placeholder.jpg'} alt="cover" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />

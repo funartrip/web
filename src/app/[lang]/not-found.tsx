@@ -1,15 +1,20 @@
-// src/app/not-found.tsx
 'use client'
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import Navbar from '@/components/Navbar'
 import { Suspense } from 'react'
-import { useSearchParams } from 'next/navigation' // 🌟 引入用來抓取語系的 Hook
+// 🌟 1. 核心升級：改用 usePathname 來應對 404 迷航狀況
+import { usePathname } from 'next/navigation'
 
 function NotFoundContent() {
-  const searchParams = useSearchParams()
-  const lang = (searchParams.get('lang') || 'zh_tw').toLowerCase().replace('-', '_')
+  const pathname = usePathname()
+  
+  // 🌟 2. 核心升級：直接把網址切開，拿第一段 (例如 /fr/xxx 就會拿到 fr)
+  const segment = pathname?.split('/')[1]?.toLowerCase().replace('-', '_') || ''
+  
+  // 檢查這個網址是不是我們支援的語系，如果不是，就預設給繁體中文
+  const lang = ['zh_tw', 'zh_cn', 'fr', 'en'].includes(segment) ? segment : 'zh_tw'
 
   // 🌟 404 專屬多語系字典
   const t: any = {
@@ -79,8 +84,8 @@ function NotFoundContent() {
             {dict.desc}
           </p>
 
-          {/* 🌟 返回按鈕：點擊後依然保留當前的語系參數 */}
-          <Link href={`/?lang=${lang}`}>
+          {/* 🌟 3. 核心升級：連結改為新架構 (回到該語系首頁 /fr) */}
+          <Link href={`/${lang}`}>
             <motion.button 
               whileHover={{ y: -5 }} 
               whileTap={{ scale: 0.95 }}

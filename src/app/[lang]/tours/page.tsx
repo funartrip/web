@@ -3,15 +3,15 @@
 import { useState, useEffect, Suspense } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from '@/components/Navbar'
-import { useSearchParams } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { client, urlFor } from '@/sanity/lib/client'
 import { PortableText } from '@portabletext/react'
 
 function ToursLobbyContent() {
-  const searchParams = useSearchParams()
-  const lang = (searchParams.get('lang') || 'zh_tw').toLowerCase().replace('-', '_')
+  const params = useParams()
+  const lang = ((params?.lang as string) || 'zh_tw').toLowerCase().replace('-', '_')
 
 
   //頁尾動畫
@@ -199,7 +199,7 @@ function ToursLobbyContent() {
                   initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                 >
-                  <Link href={`/tours/${tour.slug?.current}?lang=${lang}`} className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-[0_20px_40px_rgba(32,40,8,0.08)] transition-all duration-500 border border-[#33432B]/5">
+                  <Link href={`/${lang}/tours/${tour.slug?.current}`} className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-[0_20px_40px_rgba(32,40,8,0.08)] transition-all duration-500 border border-[#33432B]/5">
                     
                     {/* 卡片圖片區 */}
                     <div className="relative h-64 w-full overflow-hidden">
@@ -278,7 +278,7 @@ function ToursLobbyContent() {
                 <h3 className="font-serif text-2xl md:text-3xl text-[#FDFBF5] mb-10 italic">
                  {lang === 'fr' ? 'Prêt pour l’aventure ?' : lang === 'en' ? 'Ready for the journey?' : '準備好開始這趟旅程了嗎？'}
                 </h3>
-            <a href="mailto:funartrip@gmail.com" className="group relative inline-block w-full sm:w-auto px-16 py-5 overflow-hidden rounded-full border border-[#C85555] text-[#1A1A1A] transition-all duration-700 shadow-sm hover:shadow-xl">
+            <a href={`/${lang}/contact`} className="group relative inline-block w-full sm:w-auto px-16 py-5 overflow-hidden rounded-full border border-[#C85555] text-[#1A1A1A] transition-all duration-700 shadow-sm hover:shadow-xl">
                 <span className="relative z-10 font-bold tracking-[0.4em] text-[20px] uppercase group-hover:text-white">
                  {t.reserve}
                 </span>

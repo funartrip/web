@@ -2,7 +2,7 @@
 
 import { client } from '@/sanity/lib/client'
 import Image from 'next/image'
-import { notFound, useParams, useSearchParams } from 'next/navigation' // 🌟 加入 notFound
+import { notFound, useParams } from 'next/navigation' // 🌟 加入 notFound
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect, use, Suspense} from 'react'
 import { PortableText } from '@portabletext/react'
@@ -49,9 +49,9 @@ const portfolioComponents = {
 }
 
 function PortfolioDetailContent({ params: paramsPromise }: any) {
+
   const params: any = use(paramsPromise)
-  const searchParams = useSearchParams()
-  const lang = (searchParams.get('lang') || 'zh_tw').toLowerCase().replace('-', '_')
+  const lang = ((params?.lang as string) || 'zh_tw').toLowerCase().replace('-', '_')
 
   const [project, setProject] = useState<any>(null)
   const [isLoading, setIsLoading] = useState(true) // 🌟 確保有 Loading 狀態判斷 404
@@ -377,7 +377,7 @@ function PortfolioDetailContent({ params: paramsPromise }: any) {
             {/* 🌟 底部聯絡按鈕區 */}
             <div className="mt-40 text-center">
               <Link 
-                href={`/contact?lang=${lang}`}
+                href={`/${lang}/contact`}
                 // 🌟 使用 Pine Tree 深綠 (#202808) 邊框
                 className="group relative inline-block px-16 py-6 overflow-hidden rounded-full 
                           border border-[#8C3B3B] text-[#202808] transition-all duration-500"
