@@ -296,40 +296,32 @@ function TourDetailContent({
                
 
                 {/* 🌟 渲染全新定價模式 (基礎價 + 加人費) */}
+                  {/* 🌟 渲染全新定價模式 */}
                 {tour.priceTemplate?.basePrice ? (
                   <div className="flex flex-col gap-2">
-                    
-                    {/* 1. 基礎價區塊 */}
                     <div className="flex justify-between items-center py-4 border-b border-[#F4F1E1]">
-                      <span className="text-base opacity-80 font-bold">
-                        {getLabel(tour.priceTemplate.baseGroupDesc, lang) || (lang === 'en' ? '1 to 6 people' : lang === 'fr' ? '1 à 6 personnes' : '1至6人')}
-                      </span>
-                      <span className="text-[#2C3522] font-extrabold text-2xl">
-                        €{tour.priceTemplate.basePrice}
-                      </span>
+                      <span className="text-base opacity-80 font-bold">{getLabel(tour.priceTemplate.baseGroupDesc, lang) || '1至6人'}</span>
+                      <span className="text-[#2C3522] font-extrabold text-2xl">€{tour.priceTemplate.basePrice}</span>
                     </div>
                     
-                    {/* 2. 加人費區塊 (如果有填寫才顯示) */}
                     {tour.priceTemplate.extraPersonFee ? (
                       <div className="flex justify-between items-center py-2 text-[#8C9A76]">
                         <span className="text-sm italic font-serif">
-                          + {lang === 'fr' ? 'Personne supplémentaire' : lang === 'en' ? 'Extra person' : '第7人起，每增加一人'}
+                          + {t.extraPerson}
                         </span>
                         <span className="font-bold text-base">+€{tour.priceTemplate.extraPersonFee}</span>
                       </div>
                     ) : null}
 
-                    {/* 3. 最大人數上限 (如果有填寫才顯示) */}
                     {tour.priceTemplate.maxCapacity ? (
                       <div className="text-right text-[11px] text-[#8C9A76] opacity-70 mt-1 uppercase tracking-widest">
-                        {lang === 'fr' ? 'Capacité maximale' : lang === 'en' ? 'Max capacity' : '最大接待人數'} : {tour.priceTemplate.maxCapacity} {lang === 'fr' ? 'pers.' : lang === 'en' ? 'pax' : '人'}
+                        {t.maxCap} : {tour.priceTemplate.maxCapacity} {lang === 'fr' ? 'pers.' : lang === 'en' ? 'pax' : '人'}
                       </div>
                     ) : null}
-
                   </div>
                 ) : (
                   <div className="text-base text-[#8C9A76] italic py-4">
-                    價格建置中...
+                  報價建置中...
                   </div>
                 )}
               </div>
@@ -342,7 +334,7 @@ function TourDetailContent({
                     —— {t.overTen} ——
                   </motion.p>
 
-              <a href="mailto:funartrip@gmail.com" className="group relative block w-full text-center py-5 overflow-hidden rounded-full border border-[#1A1A1A] text-[#1A1A1A] transition-all duration-700">
+              <a href="mailto:contact@funartrip.com" className="group relative block w-full text-center py-5 overflow-hidden rounded-full border border-[#1A1A1A] text-[#1A1A1A] transition-all duration-700">
                 <span className="relative z-10 font-bold tracking-[0.4em] text-[20px] uppercase group-hover:text-white">{t.reserve}</span>
                 <div className="absolute inset-0 z-0 bg-[#1A1A1A] translate-y-full transition-transform duration-500 ease-[0.16, 1, 0.3, 1] group-hover:translate-y-0" />
               </a>
