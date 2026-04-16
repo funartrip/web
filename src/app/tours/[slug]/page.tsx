@@ -105,10 +105,10 @@ function TourDetailContent({
 
  
   const dict: any = {
-    zh_tw: { highlights: '導覽亮點', itinerary: '路線詳情', gallery: '旅途瞬間', practical: '預約須知', duration: '時長', reserve: '立即諮詢預約', process: '01. 預約流程', cancel: '02. 改期與取消', reminders: '03. 博物館提醒', quote: '服務報價', overTen: '超過限制人數？歡迎與我聯繫諮詢細節。'},
-    zh_cn: { highlights: '导览亮点', itinerary: '路线详情', gallery: '旅途瞬间', practical: '预约须知', duration: '时长', reserve: '立即咨询预约', process: '01. 预约流程', cancel: '02. 改期与取消', reminders: '03. 博物馆提醒', quote: '服务报价', overTen: '超过超過限制人數？欢迎与我联系咨询细节。' },
-    fr: { highlights: 'Points Forts', itinerary: 'Itinéraire', gallery: 'Galerie', practical: 'Infos Pratiques', duration: 'Durée', reserve: 'Réserver & Contact', process: '01. Réservation', cancel: '02. Annulation', reminders: '03. Rappels Musée', quote: 'Tarifs', overTen: 'Plus de pers. ? Me contacter pour les détails.' },
-    en: { highlights: 'Highlights', itinerary: 'Itinerary', gallery: 'Gallery', practical: 'Practicalities', duration: 'Duration', reserve: 'Reserve Now', process: '01. Booking', cancel: '02. Cancellation', reminders: '03. Museum Reminders', quote: 'Service Quote', overTen: 'More people? Get in touch to discuss.' },
+    zh_tw: { highlights: '導覽亮點', itinerary: '路線詳情', gallery: '旅途瞬間', practical: '預約須知', duration: '時長', reserve: '立即諮詢預約', process: '01. 預約流程', cancel: '02. 改期與取消', reminders: '03. 博物館提醒', quote: '服務報價', overTen: '超過限制人數？歡迎與我聯繫諮詢細節。', extraPerson: '第7人起，每增加一人', maxCap: '最大接待人數'},
+    zh_cn: { highlights: '导览亮点', itinerary: '路线详情', gallery: '旅途瞬间', practical: '预约须知', duration: '时长', reserve: '立即咨询预约', process: '01. 预约流程', cancel: '02. 改期与取消', reminders: '03. 博物馆提醒', quote: '服务报价', overTen: '超过限制人数？欢迎与我联系咨询细节。', extraPerson: '第7人起，每增加一人', maxCap: '最大接待人数' },
+    fr: { highlights: 'Points Forts', itinerary: 'Itinéraire', gallery: 'Galerie', practical: 'Infos Pratiques', duration: 'Durée', reserve: 'Réserver & Contact', process: '01. Réservation', cancel: '02. Annulation', reminders: '03. Rappels Musée', quote: 'Tarifs', overTen: 'Plus de pers. ? Me contacter pour les détails.', extraPerson: 'Par personne supplémentaire', maxCap: 'Capacité maximale' },
+    en: { highlights: 'Highlights', itinerary: 'Itinerary', gallery: 'Gallery', practical: 'Practicalities', duration: 'Duration', reserve: 'Reserve Now', process: '01. Booking', cancel: '02. Cancellation', reminders: '03. Museum Reminders', quote: 'Service Quote', overTen: 'More people? Get in touch to discuss.', extraPerson: 'Per extra person', maxCap: 'Max capacity' },
   }
   const t = dict[lang] || dict.zh_tw;
   const priceTiers = tour.priceTemplate?.tiers || tour.priceData?.tiers;
@@ -277,7 +277,7 @@ function TourDetailContent({
                       <div className="flex flex-wrap gap-2">
                         {tour.interest.map((item: any, idx: number) => (
                           <span key={idx} className="bg-transparent text-[#8C3B3B] px-3 py-1.5 rounded-full text-[15px] font-bold tracking-widest border border-[#EBE7D9] uppercase">
-                            # {getLabel(item, lang)}
+                            {getLabel(item, lang)}
                           </span>
                         ))}
                       </div>
@@ -297,24 +297,28 @@ function TourDetailContent({
 
                 {/* 🌟 渲染全新定價模式 (基礎價 + 加人費) */}
                   {/* 🌟 渲染全新定價模式 */}
+                  {/* 🌟 渲染全新定價模式 */}
                 {tour.priceTemplate?.basePrice ? (
                   <div className="flex flex-col gap-2">
+                    {/* 基礎價 */}
                     <div className="flex justify-between items-center py-4 border-b border-[#F4F1E1]">
                       <span className="text-base opacity-80 font-bold">{getLabel(tour.priceTemplate.baseGroupDesc, lang) || '1至6人'}</span>
                       <span className="text-[#2C3522] font-extrabold text-2xl">€{tour.priceTemplate.basePrice}</span>
                     </div>
                     
+                    {/* 加人費 */}
                     {tour.priceTemplate.extraPersonFee ? (
-                      <div className="flex justify-between items-center py-2 text-[#8C9A76]">
-                        <span className="text-sm italic font-serif">
+                      <div className="flex justify-between items-center py-3 text-[#4C4E36]">
+                        <span className="text-sm font-bold opacity-90">
                           + {t.extraPerson}
                         </span>
                         <span className="font-bold text-base">+€{tour.priceTemplate.extraPersonFee}</span>
                       </div>
                     ) : null}
 
+                    {/* 最大人數限制 */}
                     {tour.priceTemplate.maxCapacity ? (
-                      <div className="text-right text-[11px] text-[#8C9A76] opacity-70 mt-1 uppercase tracking-widest">
+                      <div className="text-right text-[12px] font-bold text-[#4C4E36] opacity-70 mt-1 tracking-wider">
                         {t.maxCap} : {tour.priceTemplate.maxCapacity} {lang === 'fr' ? 'pers.' : lang === 'en' ? 'pax' : '人'}
                       </div>
                     ) : null}
@@ -324,8 +328,7 @@ function TourDetailContent({
                   報價建置中...
                   </div>
                 )}
-              </div>
-
+               
 
 
                   <motion.p 
