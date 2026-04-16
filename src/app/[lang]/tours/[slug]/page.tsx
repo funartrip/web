@@ -29,14 +29,12 @@ const CustomDivider = () => (
 );
 
 function TourDetailContent({
- 
-  params,
+ paramsPromise,
 }: {
-  params: Promise<{ slug: string, lang: string }>;
+  paramsPromise: Promise<{ slug: string, lang: string }>;
 }) {
   
-  const resolvedParams = use(params);
-  // 🌟 2. 核心升級：直接從 resolvedParams 取得 lang
+  const resolvedParams = use(paramsPromise);
   const lang = ((resolvedParams?.lang as string) || 'zh_tw').toLowerCase().replace('-', '_');
 
   const [tour, setTour] = useState<any>(null);
@@ -69,7 +67,7 @@ function TourDetailContent({
         "priceTemplate": priceTemplate->{baseGroupDesc, basePrice, extraPersonFee, maxCapacity}, // ✅ 換成跟資料庫拿這四個新法寶！
         "serviceType": serviceType->name,
         "suitableAudience": suitableAudience[]->name,
-        "interest": interest->name
+        "interest": interest[]->name
       },
       "bookingTerms": *[_type == "bookingTerms"][0]
     }`;
@@ -105,8 +103,8 @@ function TourDetailContent({
 
  
   const dict: any = {
-    zh_tw: { highlights: '導覽亮點', itinerary: '路線詳情', gallery: '旅途瞬間', practical: '預約須知', duration: '時長', reserve: '立即諮詢預約', process: '01. 預約流程', cancel: '02. 改期與取消', reminders: '03. 博物館提醒', quote: '服務報價', overTen: '超過限制人數？歡迎與我聯繫諮詢細節。', extraPerson: '第7人起，每增加一人', maxCap: '最大接待人數'},
-    zh_cn: { highlights: '导览亮点', itinerary: '路线详情', gallery: '旅途瞬间', practical: '预约须知', duration: '时长', reserve: '立即咨询预约', process: '01. 预约流程', cancel: '02. 改期与取消', reminders: '03. 博物馆提醒', quote: '服务报价', overTen: '超过限制人数？欢迎与我联系咨询细节。', extraPerson: '第7人起，每增加一人', maxCap: '最大接待人数' },
+    zh_tw: { highlights: '導覽亮點', itinerary: '路線詳情', gallery: '旅途瞬間', practical: '預約須知', duration: '時長', reserve: '立即諮詢預約', process: '01. 預約流程', cancel: '02. 改期與取消', reminders: '03. 博物館提醒', quote: '服務報價', overTen: '超過限制人數？歡迎與我聯繫諮詢細節。', extraPerson: '第7人起（含），每增加一人', maxCap: '最大接待人數'},
+    zh_cn: { highlights: '导览亮点', itinerary: '路线详情', gallery: '旅途瞬间', practical: '预约须知', duration: '时长', reserve: '立即咨询预约', process: '01. 预约流程', cancel: '02. 改期与取消', reminders: '03. 博物馆提醒', quote: '服务报价', overTen: '超过限制人数？欢迎与我联系咨询细节。', extraPerson: '第7人起（含），每增加一人', maxCap: '最大接待人数' },
     fr: { highlights: 'Points Forts', itinerary: 'Itinéraire', gallery: 'Galerie', practical: 'Infos Pratiques', duration: 'Durée', reserve: 'Réserver & Contact', process: '01. Réservation', cancel: '02. Annulation', reminders: '03. Rappels Musée', quote: 'Tarifs', overTen: 'Plus de pers. ? Me contacter pour les détails.', extraPerson: 'Par personne supplémentaire', maxCap: 'Capacité maximale' },
     en: { highlights: 'Highlights', itinerary: 'Itinerary', gallery: 'Gallery', practical: 'Practicalities', duration: 'Duration', reserve: 'Reserve Now', process: '01. Booking', cancel: '02. Cancellation', reminders: '03. Museum Reminders', quote: 'Service Quote', overTen: 'More people? Get in touch to discuss.', extraPerson: 'Per extra person', maxCap: 'Max capacity' },
   }
@@ -269,21 +267,27 @@ function TourDetailContent({
                     </div>
                   )}
                   
-                  {/* 🌟 興趣標籤 (已修正為支援單一標籤) */}
-                  {tour.interest && (
+                  {/* 🌟 興趣標籤  */}
+                 {/* 🌟 修正點 2：檢查陣列長度並使用 .map() 渲染每一項 */}
+                  {tour.interest && tour.interest.length > 0 && (
                     <div>
                       <span className="text-base font-serif italic text-[#2C3522] mb-2 block">
                         {lang === 'fr' ? 'Thèmes' : lang === 'en' ? 'Themes' : '特別推薦'}
                       </span>
                       <div className="flex flex-wrap gap-2">
-                        <span className="bg-transparent text-[#8C3B3B] px-3 py-1.5 rounded-full text-[15px] font-bold tracking-widest border border-[#EBE7D9] uppercase">
-                          # {getLabel(tour.interest, lang)}
-                        </span>
+                        {tour.interest.map((item: any, idx: number) => (
+                          <span 
+                            key={idx} 
+                            className="bg-transparent text-[#8C3B3B] px-3 py-1.5 rounded-full text-[15px] font-bold tracking-widest border border-[#EBE7D9] uppercase"
+                          >
+                            # {getLabel(item, lang)}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   )}
-                </div>
-              )}
+                 </div>
+               )}
 
               <div className="space-y-6 mb-12 text-[#1A1A1A]">
                  <div className="flex items-center justify-between py-2">
@@ -313,7 +317,7 @@ function TourDetailContent({
 
                     {/* 最大人數限制 */}
                     {tour.priceTemplate.maxCapacity ? (
-                      <div className="text-right text-[12px] font-bold text-[#4C4E36] opacity-70 mt-1 tracking-wider">
+                      <div className="text-right text-base font-bold text-[#4C4E36] opacity-70 mt-1 tracking-wider">
                         {t.maxCap} : {tour.priceTemplate.maxCapacity} {lang === 'fr' ? 'pers.' : lang === 'en' ? 'pax' : '人'}
                       </div>
                     ) : null}
@@ -334,7 +338,7 @@ function TourDetailContent({
 
               <a href={`/${lang}/contact`}className="group relative block w-full text-center py-5 overflow-hidden rounded-full border border-[#1A1A1A] text-[#1A1A1A] transition-all duration-700">
                 <span className="relative z-10 font-bold tracking-[0.4em] text-[20px] uppercase group-hover:text-white">{t.reserve}</span>
-                <div className="absolute inset-0 z-0 bg-[#1A1A1A] translate-y-full transition-transform duration-500 ease-[0.16, 1, 0.3, 1] group-hover:translate-y-0" />
+                <div className="absolute inset-0 z-0 bg-[#C85555] translate-y-full transition-transform duration-500 ease-[0.16, 1, 0.3, 1] group-hover:translate-y-0" />
               </a>
             </motion.div>
 
@@ -409,8 +413,23 @@ function TourDetailContent({
                     </motion.div>
                   ))}
                 </div>
-                
-                {/* 💡 提示：這裡可以加一個小小的捲軸提示或說明文字 */}
+
+               <motion.div 
+                  {...scrollScaleReveal}
+                  className="max-w-2xl mx-auto px-6 pb-32 text-center" >
+
+                  <CustomDivider />
+                  <h3 className="font-serif text-2xl md:text-3xl text-[#2C3522] mb-10 italic">
+                    {lang === 'fr' ? 'Chaque flânerie est une invitation à collectionner des souvenirs uniques. ?' : lang === 'en' ? 'Every stroll is an invitation to collect a unique memory within the ordinary.' : '每一次漫步，都是為了在日常中收藏一段獨有的記憶。'}
+                  </h3>
+                  <a href="mailto:funartrip@gmail.com" className="group relative inline-block w-full sm:w-auto px-16 py-5 overflow-hidden rounded-full border border-[#1A1A1A] text-[#1A1A1A] transition-all duration-700 shadow-sm hover:shadow-xl">
+                    <span className="relative z-10 font-bold tracking-[0.4em] text-[20px] uppercase group-hover:text-white">
+                      {t.reserve}
+                    </span>
+                    <div className="absolute inset-0 z-0 bg-[#1A1A1A] translate-y-full transition-transform duration-500 ease-[0.16, 1, 0.3, 1] group-hover:translate-y-0" />
+                  </a>
+                </motion.div> 
+               
               </div>
 
             </section>
@@ -579,14 +598,12 @@ function TourDetailContent({
 // 🌟 1. 讓老闆 (Page) 接住 Next.js 給的 params 和 searchParams
 export default function TourDetailPage({
   params,
-  
 }: {
   params: Promise<{ slug: string, lang: string }>;
 }) {
   return (
     <Suspense fallback={<div className="min-h-screen bg-[#FDFBF5] flex items-center justify-center text-[#202808] tracking-widest uppercase font-mono text-xs">Loading...</div>}>
-      {/* 🌟 2. 把接到的參數傳遞給員工 (Content) */}
-      <TourDetailContent params={params}  />
+      <TourDetailContent paramsPromise={params}  />
     </Suspense>
   )
 }

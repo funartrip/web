@@ -199,22 +199,7 @@ function HomeContent({ params }: { params: Promise<{ lang: string }> }) {
             {t.viewAllTours} →
           </Link>
         </motion.div>
-        <motion.div {...fadeUp} className="max-w-4xl mx-auto text-center relative z-10">
-          <div className="w-8 h-8 mx-auto mb-10 bg-[#EAA624] rotate-45 opacity-80" />
-          
-          <h2 className="text-4xl md:text-6xl font-playfair font-bold text-[#202808] mb-12">
-            {lang === 'fr' ? 'Prêt pour l’aventure ?' : lang === 'en' ? 'Ready for the journey?' : '準備好開始這趟旅程了嗎？'}
-          </h2>
-
-          <Link href={`/${lang}/contact`} className="group relative inline-block overflow-hidden rounded-full border border-[#202808] text-[#202808] transition-all duration-700 shadow-sm hover:shadow-xl hover:border-[#C85555]">
-            <div className="px-16 py-5 relative z-10 flex items-center justify-center">
-              <span className="font-bold tracking-[0.4em] text-[16px] uppercase group-hover:text-white transition-colors duration-500">
-                {t.connect}
-              </span>
-            </div>
-            <div className="absolute inset-0 z-0 bg-[#C85555] translate-y-full transition-transform duration-500 ease-[0.16, 1, 0.3, 1] group-hover:translate-y-0" />
-          </Link>
-        </motion.div>
+        
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
           {featuredTours.map((tour, idx) => (
@@ -297,8 +282,25 @@ function HomeContent({ params }: { params: Promise<{ lang: string }> }) {
              
 
             </motion.div>
+            
           ))}
         </div>
+        <motion.div {...fadeUp} className="max-w-4xl mx-auto text-center relative z-10">
+          <div className="w-8 h-8 mx-auto mb-10 bg-[#EAA624] rotate-45 opacity-80" />
+          
+          <h2 className="text-2xl md:text-4xl font-playfair font-bold text-[#202808] mb-12">
+            {lang === 'fr' ? 'Prêt pour l’aventure ?' : lang === 'en' ? 'Ready for the journey?' : '準備好開始這趟旅程了嗎？'}
+          </h2>
+
+          <Link href={`/${lang}/contact`} className="group relative inline-block overflow-hidden rounded-full border border-[#202808] text-[#202808] transition-all duration-700 shadow-sm hover:shadow-xl hover:border-[#C85555]">
+            <div className="px-16 py-5 relative z-10 flex items-center justify-center">
+              <span className="font-bold tracking-[0.4em] text-[20px] uppercase group-hover:text-white transition-colors duration-500">
+                {t.connect}
+              </span>
+            </div>
+            <div className="absolute inset-0 z-0 bg-[#C85555] translate-y-full transition-transform duration-500 ease-[0.16, 1, 0.3, 1] group-hover:translate-y-0" />
+          </Link>
+        </motion.div>
       </section>
 
       {/* 🌟 3. 關於我：法式交疊排版 (French Editorial Overlap) */}
@@ -401,12 +403,12 @@ function HomeContent({ params }: { params: Promise<{ lang: string }> }) {
           <div className="w-8 h-8 mx-auto mb-10 bg-[#EAA624] rotate-45 opacity-80" />
           
           <h2 className="text-4xl md:text-6xl font-playfair font-bold text-[#202808] mb-12">
-            {lang === 'fr' ? 'Prêt pour l’aventure ?' : lang === 'en' ? 'Ready for the journey?' : '準備好開始這趟旅程了嗎？'}
+            {lang === 'fr' ? 'Hâte de vous accompagner pour explorer les secrets de notre patrimoine.' : lang === 'en' ? 'Looking forward to exploring the hidden details of our heritage with you.' : '期待與您一同漫步，發掘隱藏在遺產中的細節。'}
           </h2>
 
           <Link href={`/${lang}/contact`} className="group relative inline-block overflow-hidden rounded-full border border-[#202808] text-[#202808] transition-all duration-700 shadow-sm hover:shadow-xl hover:border-[#C85555]">
             <div className="px-16 py-5 relative z-10 flex items-center justify-center">
-              <span className="font-bold tracking-[0.4em] text-[16px] uppercase group-hover:text-white transition-colors duration-500">
+              <span className="font-bold tracking-[0.4em] text-[20px] uppercase group-hover:text-white transition-colors duration-500">
                 {t.connect}
               </span>
             </div>

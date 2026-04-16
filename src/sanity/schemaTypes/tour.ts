@@ -148,7 +148,7 @@ export const tour = {
     {
       name: 'interest',
       title: 'Interest (興趣取向)',
-      type: 'reference',
+      type: 'array',
       to: [{ type: 'category' }],
       options: {
         filter: 'type == "interest"',
