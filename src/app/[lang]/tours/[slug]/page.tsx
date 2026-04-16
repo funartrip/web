@@ -414,7 +414,7 @@ function TourDetailContent({
 
                <motion.div 
                   {...scrollScaleReveal}
-                  className="max-w-2xl mx-auto px-6 pb-32 text-center" >
+                  className="max-w-4xl mx-auto px-6 pb-32 text-center" >
                      <div className="h-[1px] bg-[#4C4E36]/20 flex-grow" />
                      <div className="w-1.5 h-1.5 rounded-full bg-[#8C3B3B] opacity-50" />
                      <div className="h-[1px] bg-[#4C4E36]/20 flex-grow" />
