@@ -148,12 +148,22 @@ export const tour = {
     {
       name: 'interest',
       title: 'Interest (興趣取向)',
-      type: 'array',
-      to: [{ type: 'category' }],
-      options: {
-        filter: 'type == "interest"',
-      },
+      type: 'array', // 🌟 宣告為陣列
+      // 🌟 修正點：必須使用 "of" 來定義陣列內的項目類型
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'category' }], // 指向你的分類系統
+          options: {
+            // 這裡確保只能選到類型為 interest 的分類
+            filter: 'type == "interest"', 
+          }
+        }
+      ],
+      // 建議：加上 validation 確保不會選到重複的標籤
+      validation: (Rule: any) => Rule.unique(),
     },
+    
     {
       name: 'gallery',
       title: 'Gallery (活動圖集)',
