@@ -102,10 +102,10 @@ function TourDetailContent({
 
  
   const dict: any = {
-    zh_tw: { highlights: '導覽亮點', itinerary: '路線詳情', gallery: '旅途瞬間', practical: '預約須知', duration: '時長', reserve: '立即諮詢預約', process: '01. 預約流程', cancel: '02. 改期與取消', reminders: '03. 博物館提醒', quote: '服務報價', overTen: '超過限制人數？歡迎與我聯繫諮詢細節。', extraPerson: '第7人起（含），每增加一人', maxCap: '最大接待人數'},
-    zh_cn: { highlights: '导览亮点', itinerary: '路线详情', gallery: '旅途瞬间', practical: '预约须知', duration: '时长', reserve: '立即咨询预约', process: '01. 预约流程', cancel: '02. 改期与取消', reminders: '03. 博物馆提醒', quote: '服务报价', overTen: '超过限制人数？欢迎与我联系咨询细节。', extraPerson: '第7人起（含），每增加一人', maxCap: '最大接待人数' },
-    fr: { highlights: 'Points Forts', itinerary: 'Itinéraire', gallery: 'Galerie', practical: 'Infos Pratiques', duration: 'Durée', reserve: 'Réserver & Contact', process: '01. Réservation', cancel: '02. Annulation', reminders: '03. Rappels Musée', quote: 'Tarifs', overTen: 'Plus de pers. ? Me contacter pour les détails.', extraPerson: 'Par personne supplémentaire', maxCap: 'Capacité maximale' },
-    en: { highlights: 'Highlights', itinerary: 'Itinerary', gallery: 'Gallery', practical: 'Practicalities', duration: 'Duration', reserve: 'Reserve Now', process: '01. Booking', cancel: '02. Cancellation', reminders: '03. Museum Reminders', quote: 'Service Quote', overTen: 'More people? Get in touch to discuss.', extraPerson: 'Per extra person', maxCap: 'Max capacity' },
+    zh_tw: { highlights: '導覽亮點', itinerary: '路線詳情', gallery: '旅途瞬間', practical: '預約須知', duration: '導覽解說時長', reserve: '立即諮詢預約', process: '01. 預約流程', cancel: '02. 改期與取消', reminders: '03. 博物館提醒', quote: '服務報價', overTen: '超過限制人數？歡迎與我聯繫諮詢細節。', extraPerson: '第7人起（含），每增加一人', maxCap: '最大接待人數'},
+    zh_cn: { highlights: '导览亮点', itinerary: '路线详情', gallery: '旅途瞬间', practical: '预约须知', duration: '解說时长', reserve: '立即咨询预约', process: '01. 预约流程', cancel: '02. 改期与取消', reminders: '03. 博物馆提醒', quote: '服务报价', overTen: '超过限制人数？欢迎与我联系咨询细节。', extraPerson: '第7人起（含），每增加一人', maxCap: '最大接待人数' },
+    fr: { highlights: 'Points Forts', itinerary: 'Itinéraire', gallery: 'Galerie', practical: 'Infos Pratiques', duration: 'Durée de la visite', reserve: 'Réserver & Contact', process: '01. Réservation', cancel: '02. Annulation', reminders: '03. Rappels Musée', quote: 'Tarifs', overTen: 'Plus de pers. ? Me contacter pour les détails.', extraPerson: 'Par personne supplémentaire', maxCap: 'Capacité maximale' },
+    en: { highlights: 'Highlights', itinerary: 'Itinerary', gallery: 'Gallery', practical: 'Practicalities', duration: 'Duration for the visite', reserve: 'Reserve Now', process: '01. Booking', cancel: '02. Cancellation', reminders: '03. Museum Reminders', quote: 'Service Quote', overTen: 'More people? Get in touch to discuss.', extraPerson: 'Per extra person', maxCap: 'Max capacity' },
   }
   const t = dict[lang] || dict.zh_tw;
   const priceTiers = tour.priceTemplate?.tiers || tour.priceData?.tiers;
@@ -290,7 +290,7 @@ function TourDetailContent({
 
               <div className="space-y-6 mb-12 text-[#1A1A1A]">
                  <div className="flex items-center justify-between py-2">
-                  <span className="text-base font-serif italic text-[#2C3522]">{t.duration}</span>
+                  <span className="text-xl font-serif text-[#2C3522]">{t.duration}</span>
                   <span className="font-bold">{getLabel(tour.duration, lang)}</span>
                 </div>
                 <h3 className="text-xl font-bold text-[#2C3522] mb-4">{t.quote}</h3>
