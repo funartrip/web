@@ -19,6 +19,7 @@ export const category = {
           { title: 'Target Audience (適合對象)', value: 'audience' },
           { title: 'Interest (興趣取向)', value: 'interest' },
           { title: 'Blog Category (部落格分類)', value: 'blogcategory' },
+          { title: 'Duration (參觀時長)', value: 'duration' },
 
       
         ],

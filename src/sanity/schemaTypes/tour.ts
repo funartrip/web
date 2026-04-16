@@ -82,8 +82,13 @@ export const tour = {
     {
       name: 'duration',
       title: 'Duration (參觀時長)',
-      type: 'localeString',
-      description: '請填寫預計的導覽時間，例如：2.5 小時 / 2.5 Heures',
+      type: 'reference', // 🌟 改為引用 (Reference)
+      to: [{ type: 'category' }], // 🌟 指向分類資料表
+      options: {
+        // 🌟 確保下拉選單只會出現「時長」類型的分類，不會混入適合對象或服務類型
+        filter: 'type == "duration"', 
+      },
+      description: '請選擇預計的導覽時間（若選單沒東西，請先到 Categories 新增）',
     },
     {
       name: 'locationTag',
