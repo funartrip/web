@@ -65,7 +65,7 @@ function TourDetailContent({
         "priceTemplate": priceTemplate->{baseGroupDesc, basePrice, extraPersonFee, maxCapacity}, // ✅ 換成跟資料庫拿這四個新法寶！
         "serviceType": serviceType->name,
         "suitableAudience": suitableAudience[]->name,
-        "interest": interest[]->name
+        "interest": interest[]->name,
         "duration": tourDuration->name
       },
       "bookingTerms": *[_type == "bookingTerms"][0]
