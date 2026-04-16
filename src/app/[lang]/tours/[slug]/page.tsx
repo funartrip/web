@@ -22,9 +22,7 @@ const CustomDivider = () => (
     {...scrollScaleReveal}
     className="flex items-center justify-center gap-6 my-24 max-w-xl mx-auto"
   >
-    <div className="h-[1px] bg-[#4C4E36]/20 flex-grow" />
-    <div className="w-1.5 h-1.5 rounded-full bg-[#8C3B3B] opacity-50" />
-    <div className="h-[1px] bg-[#4C4E36]/20 flex-grow" />
+   
   </motion.div>
 );
 
@@ -417,13 +415,15 @@ function TourDetailContent({
                <motion.div 
                   {...scrollScaleReveal}
                   className="max-w-2xl mx-auto px-6 pb-32 text-center" >
-
+                     <div className="h-[1px] bg-[#4C4E36]/20 flex-grow" />
+                     <div className="w-1.5 h-1.5 rounded-full bg-[#8C3B3B] opacity-50" />
+                     <div className="h-[1px] bg-[#4C4E36]/20 flex-grow" />
                   <CustomDivider />
-                  <h3 className="font-serif text-2xl md:text-3xl text-white mb-10 italic">
+                  <h3 className="font-serif text-4xl md:text-3xl text-white mb-10 italic">
                     {lang === 'fr' ? 'Chaque flânerie est une invitation à collectionner des souvenirs uniques. ?' : lang === 'en' ? 'Every stroll is an invitation to collect a unique memory within the ordinary.' : '每一次漫步，都是為了在日常中收藏一段獨有的記憶。'}
                   </h3>
-                  <a href={`/${lang}/contact`} className="group relative inline-block w-full sm:w-auto px-16 py-5 overflow-hidden rounded-full border border-[#1A1A1A] text-[#1A1A1A] transition-all duration-700 shadow-sm hover:shadow-xl">
-                    <span className="relative z-10 font-bold tracking-[0.4em] text-[20px] uppercase group-hover:text-[#C85555]">
+                  <a href={`/${lang}/contact`} className="group relative inline-block w-full sm:w-auto px-16 py-5 overflow-hidden rounded-full border border-[#C85555] text-[#C85555] transition-all duration-700 shadow-sm hover:shadow-xl">
+                    <span className="relative z-10 font-bold tracking-[0.4em] text-[20px] uppercase group-hover:text-[#4C4E36]">
                       {t.reserve}
                     </span>
                     <div className="absolute inset-0 z-0 bg-[#C85555] translate-y-full transition-transform duration-500 ease-[0.16, 1, 0.3, 1] group-hover:translate-y-0" />
@@ -489,11 +489,11 @@ function TourDetailContent({
                   <h3 className="font-serif text-2xl md:text-3xl text-[#2C3522] mb-10 italic">
                     {lang === 'fr' ? 'Prêt pour l’aventure ?' : lang === 'en' ? 'Ready for the journey?' : '準備好開始這趟旅程了嗎？'}
                   </h3>
-                  <a href={`/${lang}/contact`} className="group relative inline-block w-full sm:w-auto px-16 py-5 overflow-hidden rounded-full border border-[#1A1A1A] text-[#1A1A1A] transition-all duration-700 shadow-sm hover:shadow-xl">
+                  <a href={`/${lang}/contact`} className="group relative inline-block w-full sm:w-auto px-16 py-5 overflow-hidden rounded-full border border-[#C85555] text-[#1A1A1A] transition-all duration-700 shadow-sm hover:shadow-xl">
                     <span className="relative z-10 font-bold tracking-[0.4em] text-[20px] uppercase group-hover:text-white">
                       {t.reserve}
                     </span>
-                    <div className="absolute inset-0 z-0 bg-[#1A1A1A] translate-y-full transition-transform duration-500 ease-[0.16, 1, 0.3, 1] group-hover:translate-y-0" />
+                    <div className="absolute inset-0 z-0 bg-[#C85555] translate-y-full transition-transform duration-500 ease-[0.16, 1, 0.3, 1] group-hover:translate-y-0" />
                   </a>
                 </motion.div>
              

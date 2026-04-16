@@ -285,7 +285,7 @@ function HomeContent({ params }: { params: Promise<{ lang: string }> }) {
             
           ))}
         </div>
-        <motion.div {...fadeUp} className="max-w-4xl mx-auto text-center relative z-10">
+        <motion.div {...fadeUp} className="mb-8 max-w-4xl mx-auto text-center relative z-10">
           <div className="w-8 h-8 mx-auto mb-10 bg-[#EAA624] rotate-45 opacity-80" />
           
           <h2 className="text-2xl md:text-4xl font-playfair font-bold text-[#202808] mb-12">
