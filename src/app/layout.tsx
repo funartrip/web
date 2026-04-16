@@ -5,8 +5,10 @@ import ClientLayout from "@/components/ClientLayout";
 // 🌟 關鍵修正：引入我們剛寫好的 CookieBanner 組件
 import CookieBanner from "@/components/CookieBanner"; 
 
+
 // 🌟 1. 設定 SEO 元資料
 export const metadata: Metadata = {
+  metadataBase: new URL('https://funartrip.com'),
   title: {
     template: '%s | Fun ArTrip 楓藝',
     default: 'Fun ArTrip 楓藝 | 您的下一趟文化探險',
