@@ -66,7 +66,7 @@ function TourDetailContent({
       "tour": *[_type == "tour" && slug.current == $slug][0] {
         ...,
         gallery,
-        "priceTemplate": priceTemplate->{tiers},
+        "priceTemplate": priceTemplate->{baseGroupDesc, basePrice, extraPersonFee, maxCapacity}, // ✅ 換成跟資料庫拿這四個新法寶！
         "serviceType": serviceType->name,
         "suitableAudience": suitableAudience[]->name,
         "interest": interest[]->name
