@@ -66,7 +66,7 @@ function TourDetailContent({
         "serviceType": serviceType->name,
         "suitableAudience": suitableAudience[]->name,
         "interest": interest[]->name
-        "duration": duration->name
+        "duration": tourDuration->name
       },
       "bookingTerms": *[_type == "bookingTerms"][0]
     }`;

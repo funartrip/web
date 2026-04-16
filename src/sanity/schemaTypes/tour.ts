@@ -80,7 +80,7 @@ export const tour = {
     },
     // 👇 參觀時長在後
     {
-      name: 'duration',
+      name: 'tourDuration',
       title: 'Duration (參觀時長)',
       type: 'reference', // 🌟 改為引用 (Reference)
       to: [{ type: 'category' }], // 🌟 指向分類資料表
