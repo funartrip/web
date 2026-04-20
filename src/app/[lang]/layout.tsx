@@ -18,11 +18,11 @@ export async function generateMetadata({
   const seoDict: any = {
     zh_tw: {
       title: 'Fun ArTrip 楓藝 | 您的下一趟文化探險',
-      desc: '由法國國家認證導遊與文化推廣員楓芳帶領，提供巴黎與里昂的專屬城市漫步與博物館導覽，將藝術、歷史與遺產轉化為您親身經歷的故事。'
+      desc: '由法國國家認證解說員與文化推廣員楓梵帶領，提供巴黎與里昂的專屬城市漫步與博物館導覽，將藝術、歷史與文化轉化為您親身經歷的故事。'
     },
     zh_cn: {
       title: 'Fun ArTrip 枫艺 | 您的下一趟文化探险',
-      desc: '由法国国家认证导游与文化推广员枫芳带领，提供巴黎与里昂的专属城市漫步与博物馆导览，将艺术、历史与遗产转化为您亲身经历的故事。'
+      desc: '由法国国家认证解說員与文化推广员枫梵带领，提供巴黎与里昂的专属城市漫步与博物馆导览，将艺术、历史与文化转化为您亲身经历的故事。'
     },
     en: {
       title: 'Fun ArTrip | Your Next Cultural Adventure',
@@ -46,7 +46,7 @@ export async function generateMetadata({
       default: seo.title,
     },
     description: seo.desc,
-    keywords: ['法國導遊', '巴黎導覽', '里昂導覽', '博物館解說', '文化轉譯', 'Fun ArTrip', '法國旅遊', '羅浮宮解說', 'Guide Conférencier', 'Paris Tour', 'Lyon Tour'],
+    keywords: ['法國導遊', '巴黎導覽', '里昂導覽', '博物館解說', '文化轉譯', 'Fun ArTrip', '法國旅遊', '羅浮宮解說', 'Guide Conférencier', 'Paris Tour', 'Lyon Tour','文化中介', 'Mediation culturelle','里昂','里昂解說員','解說員','導遊','導覽',],
     openGraph: {
       title: seo.title,
       description: seo.desc,
