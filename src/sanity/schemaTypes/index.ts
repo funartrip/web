@@ -15,6 +15,7 @@ import portfolioPage from './portfolioPage'
 import blogPostPage from './blogPostPage'
 import tourPage from './tourPage'
 import legalPage from './legalPage'
+import { stop } from './stop'
 
 export const schemaTypes = [
   // ... 其他的
@@ -28,6 +29,7 @@ export const schemaTypes = [
   category,
   aboutPage,
   tour,
+  stop,
   portfolio,
   blogPost,
   bookingTerms,

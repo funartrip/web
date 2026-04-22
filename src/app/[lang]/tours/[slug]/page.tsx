@@ -66,7 +66,11 @@ function TourDetailContent({
         "serviceType": serviceType->name,
         "suitableAudience": suitableAudience[]->name,
         "interest": interest[]->name,
-        "duration": tourDuration->name
+        "duration": tourDuration->name,
+        "routeSteps": routeSteps[]->{
+          name,
+          description
+          }
       },
       "bookingTerms": *[_type == "bookingTerms"][0]
     }`;
@@ -215,18 +219,57 @@ function TourDetailContent({
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-20 py-24">
         
         {/* 左側：內容區 */}
-        <div className="lg:col-span-8 space-y-24">
-          <section>
+       {/* 左側：內容區 */}
+        <div className="lg:col-span-8">
+          
+          {/* 🌟 1. 導覽路線：法式散步流 (Editorial Inline Flow) */}
+          {/* 🌟 1. 導覽路線：極簡單線軌道 (Minimalist Track) */}
+          {tour.routeSteps && tour.routeSteps.length > 0 && (
+            <section className="mb-16">
+              <span className="text-[#8C3B3B] font-bold tracking-[0.5em] uppercase text-[16px] mb-6 block">
+                {lang === 'fr' ? 'Le parcours' : lang === 'en' ? 'Route' : '導覽路線'}
+              </span>
+              
+              {/* 橫向滑動容器 */}
+              <div className="relative flex items-start overflow-x-auto snap-x snap-mandatory scrollbar-hide py-4 -mx-6 px-6 md:mx-0 md:px-0">
+                
+                {/* 貫穿的水平細線 (對齊圓點中心) */}
+                <div className="absolute top-[21px] left-0 w-max min-w-full h-[1px] bg-[#4C4E36]/30 z-0" />
+
+                {tour.routeSteps.map((step: any, idx: number) => (
+                  <motion.div 
+                    key={idx}
+                    {...scrollScaleReveal}
+                    className="relative z-10 flex-shrink-0 w-36 md:w-48 snap-start flex flex-col items-center group cursor-default"
+                  >
+                    {/* 實體圓點 */}
+                    <div className="w-2.5 h-2.5 bg-[#4C4E36] rounded-full ring-[8px] ring-[#FDFBF5] group-hover:scale-125 group-hover:bg-[#8C3B3B] transition-all duration-300 mb-6" />
+
+                    {/* 站點名稱 (統一在下方) */}
+                    <h4 className="text-sm md:text-base font-serif font-bold text-[#2C3522] text-center px-2 leading-tight group-hover:text-[#8C3B3B] transition-colors">
+                      {getLabel(step.name, lang)}
+                    </h4>
+                  </motion.div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* 🌟 2. 導覽亮點 (緊貼時間軸) */}
+          <section className="mb-12">
             <span className="text-[#8C3B3B] font-bold tracking-[0.5em] uppercase text-[20px] mb-8 block">{t.highlights}</span>
             <PortableText value={getLabel(tour.summary, lang)} components={tourComponents} />
           </section>
 
-          <CustomDivider />
+          {/* 閱讀感連貫的虛線過渡 */}
+          <div className="w-full border-b border-dashed border-[#4C4E36]/20 mb-12" />
 
+          {/* 🌟 3. 路線詳情 */}
           <article>
             <span className="text-[#8C3B3B] font-bold tracking-[0.5em] uppercase text-[20px] mb-8 block">{t.itinerary}</span>
             <PortableText value={tour.content?.[lang] || []} components={tourComponents} />
           </article>
+          
         </div> {/* ✅ 左側內容區結束 */}
 
        
@@ -352,7 +395,9 @@ function TourDetailContent({
             )}
           </div>
         </div>
-      </div> {/* ✅ 右側側邊欄結束 */}
+      </div>
+    
+       {/* ✅ 右側側邊欄結束 */}
         
       {/* 🌟 滿版底層區塊：Gallery 相簿 & Booking Terms 預約須知 */}
       <div className="max-w-7xl mx-auto px-6 pb-24">

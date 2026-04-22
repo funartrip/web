@@ -32,13 +32,12 @@ export const tour = {
       },
       validation: (Rule: any) => Rule.required().error('請點擊右側 Generate 產生網址代碼'),
     },
-    // 在 tour.ts 和 portfolio.ts 的 fields 陣列中都加上這一段：
     {
       name: 'isFeatured',
       title: '✨ 顯示於首頁精選 (Featured on Home)',
       type: 'boolean',
       description: '打開此開關，這筆資料就會出現在首頁的三大精選版位中。',
-      initialValue: false, // 預設是關閉的
+      initialValue: false, 
     },
     {
       name: 'mainImage',
@@ -71,21 +70,33 @@ export const tour = {
       title: 'Content (詳細介紹內容)',
       type: 'localeBlock',
     },
-    // 👇 已經幫你對換位置了：行前須知在前
+    
+    // 🌟 全新升級：不會報錯的 routeSteps 路線站點
+    {
+  name: 'routeSteps',
+  title: 'Route Steps (路線站點規劃)',
+  type: 'array',
+  description: '請從圖書館中選擇並排序此路線的站點。',
+  of: [
+    {
+      type: 'reference',
+      to: [{ type: 'stop' }], // 🌟 直接指向剛才建立的 stop 資料表
+    }
+    ]
+    },
+
     {
       name: 'bonASavoir',
       title: 'Bon à savoir (行前須知)',
       type: 'localeBlock',
       description: '例如：穿著舒適鞋子、集合地點說明等',
     },
-    // 👇 參觀時長在後
     {
       name: 'tourDuration',
       title: 'Duration (參觀時長)',
-      type: 'reference', // 🌟 改為引用 (Reference)
-      to: [{ type: 'category' }], // 🌟 指向分類資料表
+      type: 'reference', 
+      to: [{ type: 'category' }], 
       options: {
-        // 🌟 確保下拉選單只會出現「時長」類型的分類，不會混入適合對象或服務類型
         filter: 'type == "duration"', 
       },
       description: '請選擇預計的導覽時間（若選單沒東西，請先到 Categories 新增）',
@@ -99,15 +110,15 @@ export const tour = {
           { title: 'Lyon 里昂 ', value: 'lyon' },
           { title: 'Paris 巴黎 ', value: 'paris' },
         ],
-        layout: 'radio', // 用單選鈕呈現
+        layout: 'radio', 
       },
     },
     {
-  name: 'priceTemplate',
-  title: 'Price Range (套用價格範本)',
-  type: 'reference', // 變成一個引用
-  to: [{ type: 'priceOption' }], // 指向我們剛才建立的價格範本
-  description: '請選擇這條路線適用的報價單'
+      name: 'priceTemplate',
+      title: 'Price Range (套用價格範本)',
+      type: 'reference', 
+      to: [{ type: 'priceOption' }], 
+      description: '請選擇這條路線適用的報價單'
     },
     {
       name: 'priceNotes',
@@ -115,7 +126,6 @@ export const tour = {
       type: 'localeBlock',
       description: '例如：巴黎行程需額外加收 TGV 車資等說明',
     },
-
     {
       name: 'suitableAudience',
       title: 'Suitable For (適合對象)',
@@ -153,22 +163,18 @@ export const tour = {
     {
       name: 'interest',
       title: 'Interest (興趣取向)',
-      type: 'array', // 🌟 宣告為陣列
-      // 🌟 修正點：必須使用 "of" 來定義陣列內的項目類型
+      type: 'array', 
       of: [
         {
           type: 'reference',
-          to: [{ type: 'category' }], // 指向你的分類系統
+          to: [{ type: 'category' }], 
           options: {
-            // 這裡確保只能選到類型為 interest 的分類
             filter: 'type == "interest"', 
           }
         }
       ],
-      // 建議：加上 validation 確保不會選到重複的標籤
       validation: (Rule: any) => Rule.unique(),
     },
-    
     {
       name: 'gallery',
       title: 'Gallery (活動圖集)',
