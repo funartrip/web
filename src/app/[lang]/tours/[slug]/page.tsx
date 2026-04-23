@@ -114,7 +114,7 @@ function TourDetailContent({
   const t = dict[lang] || dict.zh_tw;
   const priceTiers = tour.priceTemplate?.tiers || tour.priceData?.tiers;
 
-  const tourComponents = {
+ const tourComponents = {
     block: {
       normal: ({ children }: any) => (
         <motion.p {...scrollScaleReveal} className="mb-6 leading-normal text-base md:text-lg font-serif text-[#1A1A1A] text-justify opacity-90">
@@ -132,7 +132,7 @@ function TourDetailContent({
         </motion.h3>
       ),
       h4: ({ children }: any) => (
-        <motion.h4 {...scrollScaleReveal} className="text-lg font-bold text-[#4C4E36] mt-8 mb-4">
+        <motion.h4 {...scrollScaleReveal} className="text-lg font-bold font-serif text-[#4C4E36] mt-8 mb-4">
           {children}
         </motion.h4>
       ),
@@ -155,15 +155,25 @@ function TourDetailContent({
         </motion.blockquote>
       ),
     },
+    // 🌟 全新加入：控制整組清單的外框與上下間距
+    list: {
+      bullet: ({ children }: any) => (
+        <ul className="mb-8 mt-2 flex flex-col space-y-3">{children}</ul>
+      ),
+      number: ({ children }: any) => (
+        <ol className="mb-8 mt-2 flex flex-col space-y-3">{children}</ol>
+      ),
+    },
+    // 🌟 修正：補上 font-serif，並微調單一項目的間距
     listItem: {
       bullet: ({ children }: any) => (
-        <motion.li {...scrollScaleReveal} className="relative pl-6 text-[#1A1A1A] text-base md:text-lg mb-4 list-none opacity-90">
+        <motion.li {...scrollScaleReveal} className="relative pl-6 text-[#1A1A1A] text-base md:text-lg list-none opacity-90 font-serif">
           <span className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-[#8C3B3B]"></span>
           {children}
         </motion.li>
       ),
       number: ({ children }: any) => (
-        <motion.li {...scrollScaleReveal} className="list-decimal ml-6 text-[#1A1A1A] text-base md:text-lg mb-4 opacity-90 font-serif">
+        <motion.li {...scrollScaleReveal} className="list-decimal ml-6 text-[#1A1A1A] text-base md:text-lg opacity-90 font-serif">
           {children}
         </motion.li>
       )
@@ -222,30 +232,43 @@ function TourDetailContent({
        {/* 左側：內容區 */}
         <div className="lg:col-span-8">
           
-          {/* 🌟 1. 導覽路線：法式散步流 (Editorial Inline Flow) */}
-          {/* 🌟 1. 導覽路線：極簡單線軌道 (Minimalist Track) */}
+          {/* 🌟 1. 導覽路線：極簡單線軌道 (帶方向箭頭完美版) */}
           {tour.routeSteps && tour.routeSteps.length > 0 && (
             <section className="mb-16">
-              <span className="text-[#8C3B3B] font-bold tracking-[0.5em] uppercase text-[16px] mb-6 block">
+              <span className="text-[#8C3B3B] font-bold tracking-[0.5em] uppercase text-[20px] mb-6 block">
                 {lang === 'fr' ? 'Le parcours' : lang === 'en' ? 'Route' : '導覽路線'}
               </span>
               
               {/* 橫向滑動容器 */}
               <div className="relative flex items-start overflow-x-auto snap-x snap-mandatory scrollbar-hide py-4 -mx-6 px-6 md:mx-0 md:px-0">
                 
-                {/* 貫穿的水平細線 (對齊圓點中心) */}
-                <div className="absolute top-[21px] left-0 w-max min-w-full h-[1px] bg-[#4C4E36]/30 z-0" />
+                {/* 🗑️ 已經將原本會斷掉的 absolute 貫穿長線刪除 */}
 
-                {tour.routeSteps.map((step: any, idx: number) => (
+                {tour.routeSteps
+                  .filter((step: any) => step !== null && step.name) // 保留防呆過濾
+                  .map((step: any, idx: number, arr: any[]) => (
                   <motion.div 
                     key={idx}
                     {...scrollScaleReveal}
                     className="relative z-10 flex-shrink-0 w-36 md:w-48 snap-start flex flex-col items-center group cursor-default"
                   >
-                    {/* 實體圓點 */}
-                    <div className="w-2.5 h-2.5 bg-[#4C4E36] rounded-full ring-[8px] ring-[#FDFBF5] group-hover:scale-125 group-hover:bg-[#8C3B3B] transition-all duration-300 mb-6" />
+                    
+                    {/* 🌟 全新設計：每個站點負責畫一條線連接到下一站 */}
+                    {idx !== arr.length - 1 && (
+                      <div className="absolute top-[13px] left-[50%] w-full flex items-center z-0 -translate-y-1/2">
+                        {/* 實體延伸線 */}
+                        <div className="h-[1px] bg-[#4C4E36]/30 flex-grow" />
+                        {/* 優雅的 SVG 幾何小箭頭 */}
+                        <svg className="w-3 h-3 text-[#4C4E36]/30 fill-current mr-6" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    )}
 
-                    {/* 站點名稱 (統一在下方) */}
+                    {/* 實體圓點 (加上 relative z-10 確保蓋在線條上方) */}
+                    <div className="relative z-10 w-2.5 h-2.5 bg-[#4C4E36] rounded-full ring-[8px] ring-[#FDFBF5] group-hover:scale-125 group-hover:bg-[#8C3B3B] transition-all duration-300 mt-2 mb-6" />
+
+                    {/* 站點名稱 */}
                     <h4 className="text-sm md:text-base font-serif font-bold text-[#2C3522] text-center px-2 leading-tight group-hover:text-[#8C3B3B] transition-colors">
                       {getLabel(step.name, lang)}
                     </h4>
