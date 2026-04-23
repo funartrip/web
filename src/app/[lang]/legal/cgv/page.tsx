@@ -6,11 +6,14 @@ import { client } from '@/sanity/lib/client'
 import { PortableText } from '@portabletext/react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import BackButton from '@/components/BackButton'
 
 function CGVContent() {
   const params = useParams()
   const lang = ((params?.lang as string) || 'zh_tw').toLowerCase().replace('-', '_')
   const [data, setData] = useState<any>(null)
+  
+  const backLabel = lang === 'fr' ? 'Retour' : lang === 'en' ? 'Go Back' : '返回上一頁';
 
   useEffect(() => {
     // 🌟 只抓取 CGV 相關欄位
@@ -28,11 +31,9 @@ function CGVContent() {
     <main className="min-h-screen bg-[#FDFBF5] py-24 px-6 md:py-40">
       {/* 🌟 限制文章最大寬度並置中 */}
       <div className="max-w-3xl mx-auto">
-        
+       
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mb-20 border-b border-[#2C3522]/10 pb-12">
-          <Link href={`/${lang}`} className="text-[#8C3B3B] font-bold text-xs tracking-widest uppercase mb-8 inline-block hover:opacity-70 transition-opacity">
-            ← Back
-          </Link>
+          <BackButton label={backLabel} />
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-[#2C3522] mb-4">
             {data.pageTitle?.[lang] || "Conditions Générales de Vente"}
           </h1>

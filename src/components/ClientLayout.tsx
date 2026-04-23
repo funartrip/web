@@ -4,7 +4,7 @@
 import Navbar from "@/components/Navbar";
 import Link from 'next/link';
 import { useState, useEffect, Suspense } from 'react';
-import { useSearchParams, usePathname } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 // 🌟 引入 sanity client
 import { client } from '@/sanity/lib/client';
 // 🌟 引入 Icon，新增了 FaFacebookF (使用單純 F 的版本比較現代)
@@ -12,8 +12,8 @@ import { FaInstagram, FaLinkedinIn, FaFacebookF, FaEnvelope } from 'react-icons/
 
 // 🌟 Footer 內容組件
 function FooterContent() {
-  const searchParams = useSearchParams();
-  const lang = searchParams.get('lang') || 'zh_tw';
+  const params = useParams();
+  const lang = (params?.lang as string) || 'zh_tw';
   
   // 🌟 1. 建立存放精選路線的 State
   const [featuredTours, setFeaturedTours] = useState<any[]>([]);
@@ -127,12 +127,12 @@ function FooterContent() {
             <div>
               <h5 className="font-extrabold border-b-2 border-[#2C3522] inline-block mb-8 pb-1">{t.sitemap}</h5>
               <ul className="space-y-5 text-[20px] font-bold text-[#5C6B47]">
-                <li><Link href={`/?lang=${lang}`}>{t.home}</Link></li>
-                <li><Link href={`/about?lang=${lang}`}>{t.about}</Link></li>
-                <li><Link href={`/tours?lang=${lang}#tours`}>{t.tours}</Link></li>
-                <li><Link href={`/portfolios?lang=${lang}`}>{t.portfolio}</Link></li>
-                <li><Link href={`/blog?lang=${lang}`}>{t.blog}</Link></li>
-                <li><Link href={`/contact?lang=${lang}`}>{t.contact}</Link></li>
+                <li><Link href={`/${lang}`}>{t.home}</Link></li>
+                <li><Link href={`/${lang}/about`}>{t.about}</Link></li>
+                <li><Link href={`/${lang}/tours#tours`}>{t.tours}</Link></li>
+                <li><Link href={`/${lang}/portfolios`}>{t.portfolio}</Link></li>
+                <li><Link href={`/${lang}/blog`}>{t.blog}</Link></li>
+                <li><Link href={`/${lang}/contact`}>{t.contact}</Link></li>
               </ul>
             </div>
 
@@ -143,7 +143,7 @@ function FooterContent() {
                 {featuredTours.map((tour) => (
                   <li key={tour._id}>
                     <Link 
-                      href={`/tours/${tour.slug.current}?lang=${lang}`}
+                     href={`/${lang}/tours/${tour.slug.current}`}
                       className="hover:text-[#D4C376] transition-colors line-clamp-1"
                     >
                       {tour.title?.[lang] || tour.title?.['zh_tw']}
@@ -151,7 +151,7 @@ function FooterContent() {
                   </li>
                 ))}
                 <li className="pt-2">
-                  <Link href={`/tours?lang=${lang}#tours`} className="text-xs text-[#8C3B3B] hover:opacity-70 transition-opacity">
+                  <Link href={`/${lang}/tours#tours`} className="text-xs text-[#8C3B3B] hover:opacity-70 transition-opacity">
                     {t.more} {'>>>'}
                   </Link>
                 </li>
@@ -162,8 +162,8 @@ function FooterContent() {
             <div>
               <h5 className="font-extrabold border-b-2 border-[#2C3522] inline-block mb-8 pb-1">{t.legal}</h5>
               <ul className="space-y-5 text-base font-bold text-[#5C6B47]">
-                <li><Link href={`/legal/mentions-legales?lang=${lang}`}>{t.mentions}</Link></li>
-                <li><Link href={`/legal/cgv?lang=${lang}`}>{t.cgv}</Link></li>
+                <li><Link href={`/${lang}/legal/mentions-legales`}>{t.mentions}</Link></li>
+                <li><Link href={`/${lang}/legal/cgv`}>{t.cgv}</Link></li>
               </ul>
             </div>
           </div>

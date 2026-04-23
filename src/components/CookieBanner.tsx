@@ -2,15 +2,16 @@
 
 import { useState, useEffect, Suspense } from 'react'
 import Script from 'next/script'
-import { useSearchParams } from 'next/navigation' // 🌟 蟲蟲 1 修復：引入抓參數的工具
+import { useParams } from 'next/navigation' // 🌟 蟲蟲 1 修復：引入抓參數的工具
 
 function CookieBannerContent() {
   const [showBanner, setShowBanner] = useState(false)
   const [hasConsent, setHasConsent] = useState(false)
   
   // 抓取目前的語言
-  const searchParams = useSearchParams();
-  const lang = searchParams.get('lang') || 'en';
+  const params = useParams();
+  const lang = (params?.lang as string) || 'en';
+ 
 
   // 建立四語翻譯字典
   const cookieTexts: any = {
@@ -115,7 +116,7 @@ function CookieBannerContent() {
           </div>
 
           <a 
-            href={`/legal/mentions-legales?lang=${lang}`} // 順便幫連結加上語言標籤
+            href={`/${lang}/legal/mentions-legales`} // 順便幫連結加上語言標籤
             className="text-[#EAA624] text-[11px] text-center underline opacity-80 hover:opacity-100"
           >
             {t.policy}
