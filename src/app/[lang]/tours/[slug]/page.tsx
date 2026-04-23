@@ -184,9 +184,23 @@ function TourDetailContent({
       ),
       em: ({ children }: any) => (
         <em className="italic font-serif text-[#5C6B47]">{children}</em>
-      )
+      ),
+      link: ({ children, value }: any) => {
+        // 判斷是否為外部連結 (http開頭)，如果是就另開新分頁
+        const isExternal = value?.href?.startsWith('http');
+        return (
+          <a
+            href={value?.href}
+            target={isExternal ? '_blank' : '_self'}
+            rel={isExternal ? 'noopener noreferrer' : undefined}
+            className="text-[#C85555] font-bold underline underline-offset-[6px] decoration-[#C85555]/30 hover:decoration-[#C85555] transition-colors duration-300"
+          >
+            {children}
+          </a>
+       );
+      }
     }
-  };
+   };
 
   return (
     <main className="min-h-screen bg-[#FDFBF5] selection:bg-[#8C3B3B]/10 overflow-x-hidden relative">
@@ -484,10 +498,7 @@ function TourDetailContent({
                <motion.div 
                   {...scrollScaleReveal}
                   className="max-w-4xl mx-auto px-6 pb-32 text-center" >
-                     <div className="h-[1px] bg-[#4C4E36]/20 flex-grow" />
-                     <div className="w-1.5 h-1.5 rounded-full bg-[#8C3B3B] opacity-50" />
-                     <div className="h-[1px] bg-[#4C4E36]/20 flex-grow" />
-                  <CustomDivider />
+                     
                   <h3 className="font-serif text-4xl md:text-3xl text-white mb-10 italic">
                     {lang === 'fr' ? 'Chaque flânerie est une invitation à collectionner des souvenirs uniques. ?' : lang === 'en' ? 'Every stroll is an invitation to collect a unique memory within the ordinary.' : '每一次漫步，都是為了在日常中收藏一段獨有的記憶。'}
                   </h3>
@@ -511,7 +522,7 @@ function TourDetailContent({
         {/* Booking Terms 預約須知：滿版兩欄 + 獨立提醒卡片 */}
         {bookingTerms && (
           <>
-            <CustomDivider />
+          
             <section className="pt-12 pb-24">
               <span className="text-[#8C3B3B] font-bold tracking-[0.5em] uppercase text-[20px] mb-16 block">{t.practical}</span>
               
@@ -554,7 +565,7 @@ function TourDetailContent({
                   {...scrollScaleReveal}
                   className="max-w-2xl mx-auto px-6 pb-32 text-center" >
 
-                  <CustomDivider />
+                  
                   <h3 className="font-serif text-2xl md:text-3xl text-[#2C3522] mb-10 italic">
                     {lang === 'fr' ? 'Prêt pour l’aventure ?' : lang === 'en' ? 'Ready for the journey?' : '準備好開始這趟旅程了嗎？'}
                   </h3>
