@@ -1,45 +1,53 @@
-// schemaTypes/priceOption.ts
+// src/sanity/schemaTypes/priceOption.ts
 export const priceOption = {
   name: 'priceOption',
-  title: 'Price Templates (價格範本)',
+  title: 'Price Templates (報價與人數模板)',
   type: 'document',
   fields: [
     {
       name: 'name',
-      title: '範本名稱 (僅供內部辨識)',
+      title: '模板名稱 (僅供後台辨識)',
       type: 'string',
-      description: '例如：2026 里昂半日遊標準報價 (1-6人基礎價 + 加人費)'
+      description: '例如：2026 巴黎羅浮宮 (1-6人) 或 里昂老城 (1-10人)'
     },
-    // 🗑️ 已經將原本的 baseGroupDesc 刪除，讓後台更乾淨！
-    { 
-      name: 'basePrice', 
-      title: '1-6人 基礎整團費用 (€)', // 🌟 標題直接寫明是1-6人
-      type: 'number', 
-      description: '符合基礎人數（1至6人）的總收費，輸入純數字'
+    // 🌟 全新加入：基礎涵蓋人數
+    {
+       name: 'baseCapacity',
+       title: '基礎涵蓋人數 (Base Capacity)',
+       type: 'number',
+       description: '填入包含在基礎價內的人數限制（例如：填入 6，前台就會顯示 1-6 人）',
+       initialValue: 6
     },
-    { 
-      name: 'extraPersonFee', 
-      title: '第7人起 額外加人費 (€ / 每人)',
-      type: 'number', 
-      description: '第7人起，每增加一名旅客需額外加收的費用，輸入純數字'
+    {
+       name: 'basePrice',
+       title: '基礎報價 (Base Price - 歐元)',
+       type: 'number',
+       description: '上述基礎人數範圍內的總報價'
+    },
+    {
+       name: 'extraPersonFee',
+       title: '加人費 (Extra Person Fee - 歐元/每人)',
+       type: 'number',
+       description: '超過基礎人數後，每增加一人的費用 (若無則留空)'
     },
     {
       name: 'maxCapacity',
-      title: '一團最大接待人數上限 (選填)',
+      title: '最大接待人數限制 (Max Capacity)',
       type: 'number',
-      description: '例如最多只接 10 人。這可以方便未來前端做表單人數限制'
+      description: '例如：最多 10 人或 20 人 (若無限制則留空)'
     }
   ],
   preview: {
     select: {
       title: 'name',
       base: 'basePrice',
+      cap: 'baseCapacity',
       extra: 'extraPersonFee'
     },
-    prepare({ title, base, extra }: any) {
+    prepare({ title, base, cap, extra }: any) {
       return {
-        title: title || '未命名報價範本',
-        subtitle: `1-6人: €${base || 0} | 每多一人: +€${extra || 0}`
+        title: title || '未命名報價',
+        subtitle: `1-${cap || '?'}人 €${base || 0} | 超過加收 €${extra || 0}`
       }
     }
   }
