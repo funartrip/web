@@ -109,6 +109,8 @@ export const tour = {
         list: [
           { title: 'Lyon 里昂 ', value: 'lyon' },
           { title: 'Paris 巴黎 ', value: 'paris' },
+          { title: 'Rhône-Alpes 羅納-阿爾卑斯 ', value: 'rhone-alpes' },
+          { title: 'Provence-Alpes-Côte dAzur 普羅旺斯-阿爾卑斯-蔚藍海岸 ', value: 'provence-alpes-cote dazur' },
         ],
         layout: 'radio', 
       },
