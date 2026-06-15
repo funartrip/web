@@ -85,11 +85,18 @@ export const tour = {
     ]
     },
 
+    // 🌟 全新升級：模組化的 Bon à savoir
     {
-      name: 'bonASavoir',
-      title: 'Bon à savoir (行前須知)',
-      type: 'localeBlock',
-      description: '例如：穿著舒適鞋子、集合地點說明等',
+      name: 'notices',
+      title: 'Bon à savoir (行前須知 / 注意事項)',
+      type: 'array',
+      description: '請從圖書館中選擇適用於此路線的注意事項（可多選，例如：通用徒步須知 + 羅浮宮專屬規定）',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'notice' }], // 🌟 指向剛剛建立的 notice 圖書館
+        }
+      ],
     },
     {
       name: 'tourDuration',

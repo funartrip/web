@@ -67,6 +67,10 @@ function TourDetailContent({
         "suitableAudience": suitableAudience[]->name,
         "interest": interest[]->name,
         "duration": tourDuration->name,
+        "notices": notices[]->{
+          name,
+          content
+        },
         "routeSteps": routeSteps[]->{
           name,
           description
@@ -424,12 +428,19 @@ function TourDetailContent({
               </a>
             </motion.div>
 
-            {getLabel(tour.bonASavoir, lang) && (
+            {/* 🌟 升級版：動態渲染多個注意事項模塊 */}
+            {tour.notices && tour.notices.length > 0 && (
               <motion.div {...scrollScaleReveal} className="bg-[#F4F1E1] p-8 rounded-[35px] text-[#8C3B3B] shadow-2xl relative">
                 <div className="absolute top-0 right-0 p-4 opacity-10 text-4xl">💡</div>
                 <h4 className="font-bold tracking-[0.3em] text-[20px] uppercase mb-6 opacity-60">Bon à savoir</h4>
-                <div className="text-base font-serif leading-relaxed opacity-90 text-[#4C4E36] prose-invert">
-                  <PortableText value={getLabel(tour.bonASavoir, lang)} />
+                
+                <div className="text-base font-serif leading-relaxed opacity-90 text-[#4C4E36] prose-invert space-y-8">
+                  {/* 🌟 把所有選中的須知模塊一個一個印出來 */}
+                  {tour.notices.map((notice: any, idx: number) => (
+                    <div key={idx}>
+                      <PortableText value={getLabel(notice.content, lang)} />
+                    </div>
+                  ))}
                 </div>
               </motion.div>
             )}
