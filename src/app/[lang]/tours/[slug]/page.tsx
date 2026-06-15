@@ -205,7 +205,46 @@ function TourDetailContent({
       }
     }
    };
-
+// 🌟 注意事項 (Bon à savoir) 專屬的富文本樣式
+  const noticeComponents = {
+    block: {
+      normal: ({ children }: any) => (
+        <p className="mb-4 leading-relaxed text-[15px] md:text-base font-serif text-[#4C4E36] opacity-90 text-justify">
+          {children}
+        </p>
+      ),
+    },
+    list: {
+      bullet: ({ children }: any) => (
+        <ul className="mb-6 mt-2 flex flex-col space-y-2.5">{children}</ul>
+      ),
+      number: ({ children }: any) => (
+        <ol className="mb-6 mt-2 flex flex-col space-y-2.5">{children}</ol>
+      ),
+    },
+    listItem: {
+      bullet: ({ children }: any) => (
+        <li className="relative pl-5 text-[#4C4E36] text-[15px] md:text-base list-none opacity-90 font-serif text-justify">
+          {/* 優雅的酒紅色小圓點 */}
+          <span className="absolute left-0 top-[8px] w-1.5 h-1.5 rounded-full bg-[#8C3B3B]/60"></span>
+          {children}
+        </li>
+      ),
+      number: ({ children }: any) => (
+        <li className="list-decimal ml-5 text-[#4C4E36] text-[15px] md:text-base opacity-90 font-serif text-justify">
+          {children}
+        </li>
+      )
+    },
+    marks: {
+      strong: ({ children }: any) => (
+        <strong className="font-bold text-[#8C3B3B]">{children}</strong>
+      ),
+      em: ({ children }: any) => (
+        <em className="italic font-serif text-[#5C6B47]">{children}</em>
+      )
+    }
+  };
   return (
     <main className="min-h-screen bg-[#FDFBF5] selection:bg-[#8C3B3B]/10 overflow-x-hidden relative">
       
@@ -438,7 +477,7 @@ function TourDetailContent({
                   {/* 🌟 把所有選中的須知模塊一個一個印出來 */}
                   {tour.notices.map((notice: any, idx: number) => (
                     <div key={idx}>
-                      <PortableText value={getLabel(notice.content, lang)} />
+                      <PortableText value={getLabel(notice.content, lang)} components={noticeComponents} />
                     </div>
                   ))}
                 </div>
