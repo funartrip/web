@@ -111,8 +111,8 @@ function TourDetailContent({
 
  
   const dict: any = {
-    zh_tw: { highlights: '導覽亮點', itinerary: '詳細內容與行程', gallery: '旅途瞬間', practical: '預約須知', duration: '解說時長', reserve: '立即諮詢預約', process: '01. 預約流程', cancel: '02. 改期與取消', reminders: '03. 博物館提醒', quote: '服務報價', overTen: '超過限制人數？歡迎與我聯繫諮詢細節。', extraPerson: '超過基礎人數，每增加一人', maxCap: '最大接待人數', priceOnRequest: '費用請諮詢 (Tarif sur demande)', privateQuoteDesc: '此行程專為同業同盟夥伴、旅行社或客製化商務團體設計。費率不對外公開，歡迎點擊下方按鈕索取同業專屬合作報價。' , railwayQuoteDesc: '此行程為高端客製化鐵道旅程。費用將依據最終規劃之半日遊或一日遊路線、火車艙等與特殊體驗彈性調整，歡迎點擊下方按鈕與我聯繫，共同規劃您的專屬鐵道足跡。'},
-    zh_cn: { highlights: '导览亮点', itinerary: '详细内容与行程', gallery: '旅途瞬间', practical: '预约须知', duration: '解说时长', reserve: '立即咨询预约', process: '01. 预约流程', cancel: '02. 改期与取消', reminders: '03. 博物馆提醒', quote: '服务报价', overTen: '超过限制人数？欢迎与我联系咨询细节。', extraPerson: '超过基础人数，每增加一人', maxCap: '最大接待人数', priceOnRequest: '费用请咨询 (Tarif sur demande)', privateQuoteDesc: '此行程专为同业同盟伙伴、旅行社或客製化商务团体设计。费率不对外公开，欢迎点击下方按钮索取同业专属合作报价。', railwayQuoteDesc: '此行程为高端客製化铁道旅程。费用将依据最终规划之半日游或一日游路线、火车舱等与特殊体验弹性调整，欢迎点击下方按钮與我联系，共同规划您的专属铁道足迹。' },
+    zh_tw: { highlights: '導覽亮點', itinerary: '詳細內容與行程', gallery: '旅途瞬間', practical: '預約須知', duration: '解說時長', reserve: '立即諮詢預約', process: '01. 預約流程', cancel: '02. 改期與取消', reminders: '03. 博物館提醒', quote: '服務報價', overTen: '超過限制人數？歡迎與我聯繫諮詢細節。', extraPerson: '超過基礎人數，每增加一人', maxCap: '最大接待人數', priceOnRequest: '費用請諮詢', privateQuoteDesc: '此行程專為同業同盟夥伴、旅行社或客製化商務團體設計。費率不對外公開，歡迎點擊下方按鈕索取同業專屬合作報價。' , railwayQuoteDesc: '此行程為高端客製化鐵道旅程。費用將依據最終規劃之半日遊或一日遊路線、火車艙等與特殊體驗彈性調整，歡迎點擊下方按鈕與我聯繫，共同規劃您的專屬鐵道足跡。'},
+    zh_cn: { highlights: '导览亮点', itinerary: '详细内容与行程', gallery: '旅途瞬间', practical: '预约须知', duration: '解说时长', reserve: '立即咨询预约', process: '01. 预约流程', cancel: '02. 改期与取消', reminders: '03. 博物馆提醒', quote: '服务报价', overTen: '超过限制人数？欢迎与我联系咨询细节。', extraPerson: '超过基础人数，每增加一人', maxCap: '最大接待人数', priceOnRequest: '费用请咨询', privateQuoteDesc: '此行程专为同业同盟伙伴、旅行社或客製化商务团体设计。费率不对外公开，欢迎点击下方按钮索取同业专属合作报价。', railwayQuoteDesc: '此行程为高端客製化铁道旅程。费用将依据最终规划之半日游或一日游路线、火车舱等与特殊体验弹性调整，欢迎点击下方按钮與我联系，共同规划您的专属铁道足迹。' },
     fr: { highlights: 'Points Forts', itinerary: 'Détails & Programme', gallery: 'Galerie', practical: 'Infos Pratiques', duration: 'Durée de la visite', reserve: 'Réserver & Contact', process: '01. Réservation', cancel: '02. Annulation', reminders: '03. Rappels Musée', quote: 'Tarifs', overTen: 'Plus de pers. ? Me contacter pour les détails.', extraPerson: 'Par personne supplémentaire', maxCap: 'Capacité maximale', priceOnRequest: 'Tarif sur demande', privateQuoteDesc: 'Ce parcours est optimisé pour les agences de voyages et partenaires professionnels. Les tarifs sont confidentiels. Veuillez nous contacter pour obtenir un devis personnalisé.', railwayQuoteDesc: 'Ce voyage ferroviaire est entièrement sur mesure. Le tarif varie selon la formule choisie (demi-journée ou journée complète), les classes de train et les prestations. Contactez-nous pour co-créer votre itinéraire.'},
     en: { highlights: 'Highlights', itinerary: 'Details & Itinerary', gallery: 'Gallery', practical: 'Practicalities', duration:'Duration', reserve: 'Reserve Now', process: '01. Booking', cancel: '02. Cancellation', reminders:'03. Museum Reminders', quote: 'Service Quote', overTen: 'More people? Get in touch to discuss.', extraPerson:('Per extra person'), maxCap:'Max capacity', priceOnRequest: 'Rate on request', privateQuoteDesc: 'This tour is specially tailored for travel agencies and corporate partners. Rates are highly confidential. Please contact us below to receive our exclusive B2B tariff sheet.', railwayQuoteDesc: 'This premium rail journey is fully tailor-made. Rates depend entirely on your final preference (half-day or full-day excursion), train cabin classes, and curated experiences. Please get in touch to discuss your bespoke itinerary.' },
   }
@@ -286,113 +286,50 @@ function TourDetailContent({
       {/* 🌟 2. 內容與側邊欄 (上層 Grid 佈局) */}
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-20 py-24">
         
-        {/* 左側：內容區 */}
-       {/* 左側：內容區 */}
-        <div className="lg:col-span-8">
-          
-          {/* 🌟 1. 導覽路線：極簡單線軌道 (帶方向箭頭完美版) */}
-          {tour.routeSteps && tour.routeSteps.length > 0 && (
-            <section className="mb-16">
-              <span className="text-[#8C3B3B] font-bold tracking-[0.5em] uppercase text-[20px] mb-6 block">
-                {lang === 'fr' ? 'Le parcours' : lang === 'en' ? 'Route' : '導覽路線'}
-              </span>
-              
-              {/* 橫向滑動容器 */}
-              <div className="relative flex items-start overflow-x-auto snap-x snap-mandatory scrollbar-hide py-4 -mx-6 px-6 md:mx-0 md:px-0">
-                
-                {/* 🗑️ 已經將原本會斷掉的 absolute 貫穿長線刪除 */}
-
-                {tour.routeSteps
-                  .filter((step: any) => step !== null && step.name) // 保留防呆過濾
-                  .map((step: any, idx: number, arr: any[]) => (
-                  <motion.div 
-                    key={idx}
-                    {...scrollScaleReveal}
-                    className="relative z-10 flex-shrink-0 w-36 md:w-48 snap-start flex flex-col items-center group cursor-default"
-                  >
-                    
-                    {/* 🌟 全新設計：每個站點負責畫一條線連接到下一站 */}
-                    {idx !== arr.length - 1 && (
-                      <div className="absolute top-[13px] left-[50%] w-full flex items-center z-0 -translate-y-1/2">
-                        {/* 實體延伸線 */}
-                        <div className="h-[1px] bg-[#4C4E36]/30 flex-grow" />
-                        {/* 優雅的 SVG 幾何小箭頭 */}
-                        <svg className="w-3 h-3 text-[#4C4E36]/30 fill-current mr-6" viewBox="0 0 24 24">
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
-                      </div>
-                    )}
-
-                    {/* 實體圓點 (加上 relative z-10 確保蓋在線條上方) */}
-                    <div className="relative z-10 w-2.5 h-2.5 bg-[#4C4E36] rounded-full ring-[8px] ring-[#FDFBF5] group-hover:scale-125 group-hover:bg-[#8C3B3B] transition-all duration-300 mt-2 mb-6" />
-
-                    {/* 站點名稱 */}
-                    <h4 className="text-sm md:text-base font-serif font-bold text-[#2C3522] text-center px-2 leading-tight group-hover:text-[#8C3B3B] transition-colors">
-                      {getLabel(step.name, lang)}
-                    </h4>
-                  </motion.div>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* 🌟 2. 導覽亮點 (緊貼時間軸) */}
-          <section className="mb-12">
-            <span className="text-[#8C3B3B] font-bold tracking-[0.5em] uppercase text-[20px] mb-8 block">{t.highlights}</span>
-            <PortableText value={getLabel(tour.summary, lang)} components={tourComponents} />
-          </section>
-
-          {/* 閱讀感連貫的虛線過渡 */}
-          <div className="w-full border-b border-dashed border-[#4C4E36]/20 mb-12" />
-
-          {/* 🌟 3. 路線詳情 */}
-          <article>
-            <span className="text-[#8C3B3B] font-bold tracking-[0.5em] uppercase text-[20px] mb-8 block">{t.itinerary}</span>
-            <PortableText value={tour.content?.[lang] || []} components={tourComponents} />
-          </article>
-          
-        </div> {/* ✅ 左側內容區結束 */}
-
-       
-        {/* 🌟 右側：精緻法式資訊欄 */}
+        {/* 🌟 右側：無障礙友善（大字體、高對比）精緻資訊欄 */}
         <div className="lg:col-span-4">
           <div className="sticky top-32 space-y-8">
             <motion.div 
               {...scrollScaleReveal} 
-              className="bg-white p-8 md:p-10 rounded-card-xl shadow-[0_15px_50px_-20px_rgba(44,53,34,0.06)] border border-brand-gray relative overflow-hidden"
+              className="bg-white p-8 md:p-10 rounded-card-xl shadow-[0_20px_60px_-20px_rgba(44,53,34,0.08)] border border-brand-gray relative overflow-hidden"
             >
               {/* 頂部品牌裝飾色線 */}
-              <div className="absolute top-0 left-0 w-full h-1.5 bg-brand-olive" />
+              <div className="absolute top-0 left-0 w-full h-1.5 bg-brand-green" />
               
               {/* 頂部標籤區：分類與語系 */}
-              <div className="flex justify-between items-center mb-8 pb-5 border-b border-brand-gray/60">
-                <span className="text-xs font-sans font-bold tracking-widest text-brand-green bg-brand-gray/50 px-3.5 py-2 rounded-card-sm uppercase">
+              <div className="flex flex-wrap justify-between items-center gap-4 mb-8 pb-5 border-b border-brand-gray/60">
+                <span className="text-base font-sans font-bold tracking-wider text-brand-green bg-brand-gray/60 px-4 py-2 rounded-card-sm uppercase">
                   {getLabel(tour.serviceType, lang)}
                 </span>
-                <div className="flex gap-2">
-                  {tour.language?.map((l: string) => (
-                    <span 
-                      key={l} 
-                      className="text-[11px] font-sans font-medium border border-brand-gray text-brand-sage uppercase tracking-wider px-2.5 py-1 rounded-card-sm bg-brand-cream/30"
-                    >
-                      {l.slice(0, 2)}
-                    </span>
-                  ))}
+                <div className="flex flex-wrap gap-2">
+                  {tour.language?.map((l: string) => {
+                    {/* 🌟 核心需求：將「中文」動態調整為「中文 Mandarin」 */}
+                    const displayLang = l === '中文' ? '中文 Mandarin' : l;
+                    return (
+                      <span 
+                        key={l} 
+                        className="text-sm font-sans font-bold border border-brand-gray-dark text-brand-green uppercase tracking-wide px-3 py-1.5 rounded-card-sm bg-brand-cream"
+                      >
+                        {displayLang}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
 
               {/* 適合對象與特別推薦群組 */}
               {(tour.suitableAudience?.length > 0 || tour.interest) && (
-                <div className="mb-8 pb-6 border-b border-brand-gray/60 space-y-6">
+                <div className="mb-8 pb-6 border-b border-brand-gray/60 space-y-8">
                   {/* 適合對象 */}
                   {tour.suitableAudience?.length > 0 && (
                     <div>
-                      <span className="text-xs font-mono font-bold tracking-widest text-brand-sage-dark uppercase block mb-3">
-                        {lang === 'fr' ? 'Pour qui' : lang === 'en' ? 'Perfect for' : '// 適合對象'}
+                      {/* 🌟 核心需求：字體放大至 text-xl、顏色加深至 text-brand-green */}
+                      <span className="text-xl font-sans font-bold tracking-wide text-brand-green block mb-4">
+                        // {lang === 'fr' ? 'Pour qui' : lang === 'en' ? 'Perfect for' : '適合對象'}
                       </span>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-2.5">
                         {tour.suitableAudience.map((item: any, idx: number) => (
-                          <span key={idx} className="bg-brand-cream/80 text-brand-olive px-3 py-1.5 rounded-full text-xs font-sans font-medium tracking-wide border border-brand-gray">
+                          <span key={idx} className="bg-brand-cream text-brand-green px-4 py-2.5 rounded-full text-base font-sans font-bold tracking-wide border border-brand-gray-dark shadow-sm">
                             {getLabel(item, lang)}
                           </span>
                         ))}
@@ -403,14 +340,15 @@ function TourDetailContent({
                   {/* 特別推薦 */}
                   {tour.interest && tour.interest.length > 0 && (
                     <div>
-                      <span className="text-xs font-mono font-bold tracking-widest text-brand-sage-dark uppercase block mb-3">
-                        {lang === 'fr' ? 'Thèmes' : lang === 'en' ? 'Themes' : '// 特別推薦'}
+                      {/* 🌟 核心需求：字體放大至 text-xl、顏色加深至 text-brand-green */}
+                      <span className="text-xl font-sans font-bold tracking-wide text-brand-green block mb-4">
+                        // {lang === 'fr' ? 'Thèmes' : lang === 'en' ? 'Themes' : '特別推薦'}
                       </span>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-2.5">
                         {tour.interest.map((item: any, idx: number) => (
                           <span 
                             key={idx} 
-                            className="bg-brand-red/5 text-brand-red px-3 py-1.5 rounded-full text-xs font-sans font-medium tracking-wide border border-brand-red/10"
+                            className="bg-brand-red/5 text-brand-red px-4 py-2.5 rounded-full text-base font-sans font-bold tracking-wide border border-brand-red/20 shadow-sm"
                           >
                             # {getLabel(item, lang)}
                           </span>
@@ -422,103 +360,100 @@ function TourDetailContent({
               )}
 
               {/* 時長與報價區 */}
-              <div className="space-y-6 mb-8 text-brand-green">
-                {/* 導覽時長項目：修復文字斷行問題 */}
-                <div className="flex items-center justify-between py-1 border-b border-dashed border-brand-gray/40 pb-4">
-                  <span className="text-sm font-sans font-bold text-brand-sage-dark uppercase tracking-wider">// {t.duration}</span>
-                  <span className="text-sm font-sans font-bold text-brand-green bg-brand-gray/30 px-3 py-1 rounded-card-sm">
+              <div className="space-y-8 mb-8 text-brand-green">
+                {/* 導覽解說時長項目 */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-1 border-b border-dashed border-brand-gray-dark pb-5">
+                  {/* 🌟 核心需求：字體放大至 text-xl、顏色加深至 text-brand-green */}
+                  <span className="text-xl font-sans font-bold text-brand-green tracking-wide">// {t.duration}</span>
+                  <span className="text-lg font-sans font-bold text-brand-green bg-brand-gray/50 px-4 py-2 rounded-card-md border border-brand-gray">
                     {getLabel(tour.duration, lang)}
                   </span>
                 </div>
 
                 {/* 服務報價 */}
-                {/* 服務報價 */}
                 <div>
-                  <span className="text-xs font-mono font-bold tracking-widest text-brand-sage-dark uppercase block mb-3">
+                  {/* 🌟 核心需求：字體放大至 text-xl、顏色加深至 text-brand-green */}
+                  <span className="text-xl font-sans font-bold text-brand-green tracking-wide block mb-4">
                     // {t.quote}
                   </span>
                
                   {/* 智慧判斷價格顯示 */}
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {tour.priceTemplate?.displayMode === 'b2b' ? (
                       /* 🔒 1. 專業 B2B 同業模式 */
-                      <div className="space-y-2">
-                        <div className="text-xl font-serif font-bold text-brand-red tracking-wide">
+                      <div className="space-y-3">
+                        <div className="text-2xl font-serif font-bold text-brand-red tracking-wide">
                           {t.priceOnRequest}
                         </div>
-                        <p className="text-xs font-sans text-brand-olive/90 leading-relaxed text-justify bg-brand-cream p-4 rounded-card-md border border-brand-gray">
+                        <p className="text-base font-sans text-brand-green bg-brand-cream p-5 rounded-card-md border border-brand-gray-dark leading-relaxed text-justify">
                           {t.privateQuoteDesc}
                         </p>
                       </div>
                     ) : tour.priceTemplate?.displayMode === 'railway-custom' ? (
                       /* 🚂 2. 鐵道客製化模式 */
-                      <div className="space-y-2">
-                        <div className="text-xl font-serif font-bold text-brand-red tracking-wide">
+                      <div className="space-y-3">
+                        <div className="text-2xl font-serif font-bold text-brand-red tracking-wide">
                           {t.priceOnRequest}
                         </div>
-                        <p className="text-xs font-sans text-brand-olive/90 leading-relaxed text-justify bg-brand-cream p-4 rounded-card-md border border-brand-gray">
+                        <p className="text-base font-sans text-brand-green bg-brand-cream p-5 rounded-card-md border border-brand-gray-dark leading-relaxed text-justify">
                           {t.railwayQuoteDesc}
                         </p>
                       </div>
                     ) : tour.priceTemplate?.basePrice ? (
                       /* 🔓 3. 常規公開零售價模式 */
-                      <div className="flex flex-col gap-2">
-                        <div className="flex justify-between items-center py-2">
-                          <span className="text-lg opacity-80 font-bold font-serif">
+                      <div className="flex flex-col gap-3">
+                        <div className="flex justify-between items-center py-2 border-b border-brand-gray/40">
+                          <span className="text-xl font-bold font-serif text-brand-green">
                             1 - {tour.priceTemplate.baseCapacity || 6} {lang === 'fr' ? 'pers.' : lang === 'en' ? 'people' : '人'}
                           </span>
-                          <span className="text-brand-green font-extrabold text-2xl">€{tour.priceTemplate.basePrice}</span>
+                          <span className="text-brand-green font-extrabold text-3xl">€{tour.priceTemplate.basePrice}</span>
                         </div>
                         {tour.priceTemplate.extraPersonFee ? (
-                          <div className="flex justify-between items-center py-1 text-brand-sage-dark text-sm">
+                          <div className="flex justify-between items-center py-1 text-brand-green text-base font-bold">
                             <span>+ {t.extraPerson}</span>
-                            <span className="font-bold">+€{tour.priceTemplate.extraPersonFee}</span>
+                            <span className="text-lg text-brand-red">+€{tour.priceTemplate.extraPersonFee}</span>
                           </div>
                         ) : null}
                       </div>
                     ) : (
-                      <div className="text-sm text-brand-sage italic py-2">
+                      <div className="text-base text-brand-sage-dark font-bold italic py-2">
                         報價建置中...
                       </div>
                     )}
 
-                    {/* 🌟 核心修正：完全抽離！只要後台有填最大人數，不論是 B2B、鐵道客製還是公開價，一律無條件顯示 */}
+                    {/* 最大人數限制（無條件解耦大字體呈現） */}
                     {tour.priceTemplate?.maxCapacity && (
-                      <div className="text-right text-xs font-sans font-bold text-brand-sage-dark mt-2 tracking-wider">
+                      <div className="text-left text-base font-sans font-bold text-brand-red mt-2 tracking-wide bg-brand-red/5 px-4 py-2 rounded-card-sm inline-block">
                         {t.maxCap} : {tour.priceTemplate.maxCapacity} {lang === 'fr' ? 'pers.' : lang === 'en' ? 'pax' : '人'}
                       </div>
                     )}
                   </div>
                 </div>
-                 
               </div>
 
               {/* 超過人數提示 */}
               <motion.p 
                 {...scrollScaleReveal}
-                className="mt-6 mb-6 text-center text-xs italic text-brand-sage-dark font-serif tracking-wide block"
+                className="mt-8 mb-8 text-center text-sm font-bold text-brand-olive font-serif tracking-wide block"
               >
                 —— {t.overTen} ——
               </motion.p>
 
-              {/* 🌟 核心引導按鈕 (CTA)：改為實心質感亮色，強烈吸引預約點擊 */}
+              {/* 核心引導按鈕 (CTA) */}
               <a 
                 href={`/${lang}/contact`}
-                className="group relative block w-full text-center py-4 bg-brand-terracotta hover:bg-brand-red text-white rounded-full font-serif font-bold tracking-[0.2em] text-base transition-all duration-300 shadow-md hover:shadow-xl hover:scale-[1.01]"
+                className="group relative block w-full text-center py-5 bg-brand-terracotta hover:bg-brand-red text-white rounded-full font-sans font-bold tracking-[0.2em] text-lg transition-all duration-300 shadow-md hover:shadow-xl active:scale-95"
               >
                 {t.reserve}
               </a>
             </motion.div>
 
-
-            {/* 🌟 升級版：動態渲染多個注意事項模塊 */}
+            {/* 💡 底部精選 Notices（維持原樣） */}
             {tour.notices && tour.notices.length > 0 && (
-              <motion.div {...scrollScaleReveal} className="bg-[#F4F1E1] p-8 rounded-[35px] text-[#8C3B3B] shadow-2xl relative">
+              <motion.div {...scrollScaleReveal} className="bg-[#F4F1E1] p-8 rounded-card-xl text-brand-red shadow-[0_15px_40px_-20px_rgba(0,0,0,0.05)] border border-brand-gray relative">
                 <div className="absolute top-0 right-0 p-4 opacity-10 text-4xl">💡</div>
-                <h4 className="font-bold tracking-[0.3em] text-[20px] uppercase mb-6 opacity-60">Bon à savoir</h4>
-                
-                <div className="text-base font-serif leading-relaxed opacity-90 text-[#4C4E36] prose-invert space-y-8">
-                  {/* 🌟 把所有選中的須知模塊一個一個印出來 */}
+                <h4 className="font-bold tracking-[0.3em] text-[18px] uppercase mb-6 opacity-60">Bon à savoir</h4>
+                <div className="text-base font-serif leading-relaxed opacity-90 text-brand-olive space-y-6">
                   {tour.notices.map((notice: any, idx: number) => (
                     <div key={idx}>
                       <PortableText value={getLabel(notice.content, lang)} components={noticeComponents} />
@@ -529,8 +464,7 @@ function TourDetailContent({
             )}
           </div>
         </div>
-      </div>
-    
+    </div>
        {/* ✅ 右側側邊欄結束 */}
         
       {/* 🌟 滿版底層區塊：Gallery 相簿 & Booking Terms 預約須知 */}
