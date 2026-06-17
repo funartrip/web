@@ -74,9 +74,12 @@ function ToursLobbyContent() {
   }
   const t = dict[lang] || dict.zh_tw
 
-  // 提取所有不重複的「服務類型」供篩選列使用
-  const availableTypes = Array.from(new Set(tours.map(tour => getLabel(tour.serviceTypeName, lang)).filter(Boolean)))
-
+  // 🌟 1. 動態提取所有地點 (自動抓取後台資料庫內的標籤)
+  // 因為 locationTag 在 Sanity 是字串，我們直接 mapping 即可
+  const availableLocations = Array.from(new Set(tours.map(t => t.locationTag).filter(Boolean)));
+  
+  // 🌟 2. 動態提取所有類型 (自動抓取後台服務類型)
+  const availableTypes = Array.from(new Set(tours.map(t => getLabel(t.serviceTypeName, lang)).filter(Boolean)));
   // 執行篩選邏輯
   const filteredTours = tours.filter(tour => {
     const matchLocation = activeLocation === 'all' || tour.locationTag === activeLocation
@@ -141,7 +144,7 @@ function ToursLobbyContent() {
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}
             className="bg-[#8DA249]/20 backdrop-blur-md p-8 md:p-12 rounded-2xl shadow-[0_20px_40px_rgba(32,40,8,0.05)]"
            >
-            <div className="prose-lg text-[#6A784D] font-serif leading-relaxed mx-auto">
+            <div className="prose-lg text-brand-green font-serif leading-relaxed mx-auto">
               <PortableText value={getLabel(pageData.narrativeIntro, lang)} />
             </div>
            </motion.div>
@@ -149,27 +152,31 @@ function ToursLobbyContent() {
       )}
 
       {/* 🌟 3. 搜尋與篩選列 (Filter Bar) */}
+      {/* 🌟 3. 搜尋與篩選列 (動態化 + 品牌色對齊) */}
       <section className="max-w-7xl mx-auto px-6 mb-12 w-full">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 border-b border-[#33432B]/10 pb-6">
-          <div className="flex flex-wrap gap-3 w-full md:w-auto">
-            <span className="text-xs font-mono tracking-widest text-[#C85555] uppercase font-bold flex items-center mr-4">
-              Filter By //
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 border-b border-brand-green/10 pb-8">
+          <div className="flex flex-wrap gap-4 w-full md:w-auto items-center">
+            <span className="text-xs font-mono font-bold tracking-[0.3em] text-brand-red uppercase mr-2">
+              FILTER //
             </span>
             
-            {/* 地點篩選 (Van Gogh Blue #AADCF2) */}
+            {/* 地點篩選器 */}
             <select 
-              value={activeLocation} onChange={(e) => setActiveLocation(e.target.value)}
-              className="bg-[#AADCF2]/20 border border-[#AADCF2] text-[#33432B] font-medium px-4 py-2 rounded-full outline-none focus:ring-2 focus:ring-[#AADCF2] transition-all cursor-pointer text-sm"
+              value={activeLocation} 
+              onChange={(e) => setActiveLocation(e.target.value)}
+              className="bg-brand-gray/50 border border-brand-gray-dark text-brand-green font-sans font-bold px-5 py-2.5 rounded-card-sm outline-none focus:ring-2 focus:ring-brand-gold transition-all cursor-pointer text-sm"
             >
               <option value="all">{t.allLocation}</option>
-              <option value="paris">Paris 巴黎</option>
-              <option value="lyon">Lyon 里昂</option>
+              {availableLocations.map((loc: string) => (
+                <option key={loc} value={loc}>{loc.toUpperCase()}</option>
+              ))}
             </select>
 
-            {/* 類型篩選 (Light Melon #F7BCB0) */}
+            {/* 類型篩選器 */}
             <select 
-              value={activeType} onChange={(e) => setActiveType(e.target.value)}
-              className="bg-[#F7BCB0]/20 border border-[#F7BCB0] text-[#33432B] font-medium px-4 py-2 rounded-full outline-none focus:ring-2 focus:ring-[#F7BCB0] transition-all cursor-pointer text-sm"
+              value={activeType} 
+              onChange={(e) => setActiveType(e.target.value)}
+              className="bg-brand-gray/50 border border-brand-gray-dark text-brand-green font-sans font-bold px-5 py-2.5 rounded-card-sm outline-none focus:ring-2 focus:ring-brand-gold transition-all cursor-pointer text-sm"
             >
               <option value="all">{t.allType}</option>
               {availableTypes.map((type, idx) => (
@@ -178,7 +185,7 @@ function ToursLobbyContent() {
             </select>
           </div>
           
-          <div className="text-sm font-serif text-[#6A784D] whitespace-nowrap w-full md:w-auto text-right">
+          <div className="text-sm font-serif text-brand-olive opacity-80 tracking-wide">
             {filteredTours.length} {filteredTours.length > 1 ? 'Tours' : 'Tour'} Available
           </div>
         </div>
@@ -204,7 +211,7 @@ function ToursLobbyContent() {
                     {/* 卡片圖片區 */}
                     <div className="relative h-64 w-full overflow-hidden">
                       {tour.mainImage ? (
-                        <Image src={urlFor(tour.mainImage).url()} alt="Tour Image" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <Image src={urlFor(tour.mainImage).url()} alt="Tour Image" fill className="object-cover transition-transform duration-1000 group-hover:scale-110" />
                       ) : (
                         <div className="w-full h-full bg-[#EBE8E0]" />
                       )}
@@ -218,36 +225,37 @@ function ToursLobbyContent() {
                     </div>
 
                     {/* 卡片內容區 */}
-                    <div className="p-8 flex flex-col flex-grow">
-                      {/* 類型與對象標籤 */}
+                    <div className="p-8 flex flex-col flex-grow transition-transform duration-500 group-hover:scale-[1.02] group-hover:origin-bottom-left">
+                      {/* 🌟 核心修正：將標籤升級為「高對比品牌色塊」 */}
                       <div className="flex flex-wrap gap-2 mb-4">
                         {tour.serviceTypeName && (
-                          <span className="bg-[#6A784D]/10 text-[#6A784D] text-xs font-bold px-2.5 py-1 rounded-md">
+                          <span className="bg-brand-green text-brand-cream text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
                             {getLabel(tour.serviceTypeName, lang)}
                           </span>
                         )}
                         {tour.audienceNames && tour.audienceNames.length > 0 && (
-                          <span className="bg-[#DEC59E]/30 text-[#33432B] text-xs font-medium px-2.5 py-1 rounded-md">
+                          <span className="bg-brand-gold/20 text-brand-green text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest border border-brand-gold/30">
                             {getLabel(tour.audienceNames[0], lang)} {tour.audienceNames.length > 1 ? '+' : ''}
                           </span>
                         )}
                       </div>
 
                       {/* 標題與副標 */}
-                      <h3 className="text-2xl font-serif font-bold text-[#202808] mb-3 line-clamp-2 group-hover:text-[#C85555] transition-colors">
+                      <h3 className="text-2xl font-serif font-bold text-[#202808] mb-3 line-clamp-2 transition-colors group-hover:text-[#C85555]">
                         {getLabel(tour.title, lang)}
                       </h3>
-                      <p className="text-[#6A784D] text-sm leading-relaxed mb-6 line-clamp-3 flex-grow">
+                      <p className="text-[#6A784D] text-sm leading-relaxed mb-6 line-clamp-3 flex-grow font-serif">
                         {getLabel(tour.subtitle, lang)}
                       </p>
 
-                      {/* 探索按鈕 */}
+                      {/* 🌟 按鈕優化：放大探索箭頭區，強化與截圖中「那個紅色箭頭」的一致性 */}
                       <div className="mt-auto pt-4 border-t border-[#33432B]/10 flex items-center justify-between">
                         <span className="text-[#C85555] font-serif font-bold text-sm tracking-wide group-hover:translate-x-2 transition-transform">
                           {t.explore}
                         </span>
-                        <div className="w-8 h-8 rounded-full bg-[#FDFBF5] border border-[#33432B]/10 flex items-center justify-center group-hover:bg-[#C85555] group-hover:border-[#C85555] transition-colors">
-                          <span className="text-[#33432B] group-hover:text-white text-xs">↗</span>
+                        {/* 🌟 加大按鈕尺寸，讓點擊更直覺 */}
+                        <div className="w-10 h-10 rounded-full bg-brand-gray/30 flex items-center justify-center group-hover:bg-brand-red group-hover:text-white transition-all">
+                          <span className="text-brand-green group-hover:text-white text-lg">↗</span>
                         </div>
                       </div>
                     </div>
