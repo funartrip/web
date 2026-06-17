@@ -21,11 +21,5 @@ export const bookingTerms = {
       title: '2. 改期／取消政策',
       type: 'localeBlock',
     },
-    
-    {
-      name: 'reminders',
-      title: '3. 博物館提醒',
-      type: 'localeBlock',
-    },
   ],
 }

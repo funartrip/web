@@ -129,11 +129,22 @@ export const tour = {
       to: [{ type: 'priceOption' }], 
       description: '請選擇這條路線適用的報價單'
     },
+    // 🌟 替換原本的 priceNotes 文字欄位
     {
       name: 'priceNotes',
-      title: 'Price Notes (價格備註)',
-      type: 'localeBlock',
-      description: '例如：巴黎行程需額外加收 TGV 車資等說明',
+      title: 'Price Notes (價格備註模塊)',
+      type: 'array',
+      description: '從圖書館選擇適用此路線的價格備註（例如：TGV加價說明、門票說明等）',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'notice' }],
+          options: {
+            // 🌟 只讓選單出現「價格類別」的選項
+            filter: 'category == "price"' 
+          }
+        }
+      ],
     },
     {
       name: 'suitableAudience',

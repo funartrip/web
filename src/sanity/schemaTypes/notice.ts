@@ -1,31 +1,41 @@
 // src/sanity/schemaTypes/notice.ts
 export const notice = {
   name: 'notice',
-  title: 'Notices (注意事項圖書館)',
+  title: 'Notice Library (須知與備註圖書館)',
   type: 'document',
   fields: [
     {
       name: 'name',
       title: '內部命名 (Internal Name)',
       type: 'string',
-      description: '僅供後台辨識使用，例如：博物館安檢規定、戶外徒步建議',
       validation: (Rule: any) => Rule.required(),
+    },
+    // 🌟 新增分類：區分這條資訊的用途
+    {
+      name: 'category',
+      title: '類別 (Category)',
+      type: 'string',
+      options: {
+        list: [
+          { title: '一般須知 (Bon à savoir)', value: 'general' },
+          { title: '價格備註 (Price Notes)', value: 'price' }
+        ],
+        layout: 'radio'
+      },
+      initialValue: 'general'
     },
     {
       name: 'content',
-      title: '須知內容 (Content)',
-      type: 'localeBlock', // 🌟 套用你的四語富文本
-      description: '請在此輸入完整的注意事項內容',
+      title: '詳細內容',
+      type: 'localeBlock',
     }
   ],
   preview: {
-    select: {
-      title: 'name',
-    },
-    prepare({ title }: any) {
+    select: { title: 'name', cat: 'category' },
+    prepare({ title, cat }: any) {
       return {
         title: title,
-        subtitle: '💡 Bon à savoir 模組'
+        subtitle: cat === 'price' ? '💰 價格備註模塊' : '💡 一般須知模塊'
       }
     }
   }

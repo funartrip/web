@@ -71,6 +71,7 @@ function TourDetailContent({
           name,
           content
         },
+        "priceNotes": priceNotes[]->{name, content},
         "routeSteps": routeSteps[]->{
           name,
           description
@@ -611,20 +612,27 @@ function TourDetailContent({
                   </div>
               </div>
 
-              {/* 🌟 下半部：博物館提醒 (獨立滿版卡片設計) */}
-              {bookingTerms.reminders && bookingTerms.reminders[lang] && (
+              {/* 🌟 完美落腳：將「價格須知與特定提醒」放到預約須知（流程與取消）的後面 */}
+              {tour.priceNotes && tour.priceNotes.length > 0 && (
                 <motion.div 
                   {...scrollScaleReveal} 
                   className="bg-[#F8F6EF] p-8 md:p-12 rounded-[20px] border border-[#EBE7D9] relative overflow-hidden"
                 >
-                  {/* 卡片左側的法式裝飾線 */}
+                  {/* 保留優雅的酒紅色法式裝飾邊線 */}
                   <div className="absolute left-0 top-0 w-1.5 h-full bg-[#8C3B3B]/80" />
                   
                   <h3 className="font-serif text-[20px] font-bold text-[#8C3B3B] mb-6 flex items-center gap-3">
-                    <span className="text-2xl opacity-80">💡</span> {t.reminders}
+                    <span className="text-2xl opacity-80">💡</span> 
+                    {lang === 'fr' ? 'Notes importantes & Rappels' : lang === 'en' ? 'Important Notes & Reminders' : '行程重要須知與提醒'}
                   </h3>
-                  <div className="opacity-90 text-[#4C4E36]">
-                    <PortableText value={bookingTerms.reminders[lang]} components={tourComponents} />
+                  
+                  <div className="opacity-90 text-[#4C4E36] space-y-6">
+                    {/* 循環把這條路線勾選的價格須知（如羅浮宮安檢、奧賽門票規範）依序印出 */}
+                    {tour.priceNotes.map((note: any, idx: number) => (
+                      <div key={idx} className={idx > 0 ? "pt-6 border-t border-[#EBE7D9]/60" : ""}>
+                        <PortableText value={getLabel(note.content, lang)} components={noticeComponents} />
+                      </div>
+                    ))}
                   </div>
                 </motion.div>
               )}
