@@ -62,7 +62,7 @@ function TourDetailContent({
       "tour": *[_type == "tour" && slug.current == $slug][0] {
         ...,
         gallery,
-        "priceTemplate": priceTemplate->{baseCapacity, basePrice, extraPersonFee, maxCapacity,isPrivate}, // 🌟 加上 baseCapacity // ✅ 換成跟資料庫拿這四個新法寶！
+        "priceTemplate": priceTemplate->{baseCapacity, basePrice, extraPersonFee, maxCapacity,displayMode}, // 🌟 加上 baseCapacity // ✅ 換成跟資料庫拿這四個新法寶！
         "serviceType": serviceType->name,
         "suitableAudience": suitableAudience[]->name,
         "interest": interest[]->name,
@@ -111,10 +111,10 @@ function TourDetailContent({
 
  
   const dict: any = {
-    zh_tw: { highlights: '導覽亮點', itinerary: '詳細內容與行程', gallery: '旅途瞬間', practical: '預約須知', duration: '導覽解說時長', reserve: '立即諮詢預約', process: '01. 預約流程', cancel: '02. 改期與取消', reminders: '03. 博物館提醒', quote: '服務報價', overTen: '超過限制人數？歡迎與我聯繫諮詢細節。', extraPerson: '超過基礎人數，每增加一人', maxCap: '最大接待人數', priceOnRequest: '費用請諮詢 (Tarif sur demande)', privateQuoteDesc: '此行程專為同業同盟夥伴、旅行社或客製化商務團體設計。費率不對外公開，歡迎點擊下方按鈕索取同業專屬合作報價。' },
-    zh_cn: { highlights: '导览亮点', itinerary: '详细内容与行程', gallery: '旅途瞬间', practical: '预约须知', duration: '解说时长', reserve: '立即咨询预约', process: '01. 预约流程', cancel: '02. 改期与取消', reminders: '03. 博物馆提醒', quote: '服务报价', overTen: '超过限制人数？欢迎与我联系咨询细节。', extraPerson: '超过基础人数，每增加一人', maxCap: '最大接待人数', priceOnRequest: '费用请咨询 (Tarif sur demande)', privateQuoteDesc: '此行程专为同业同盟伙伴、旅行社或客製化商务团体设计。费率不对外公开，欢迎点击下方按钮索取同业专属合作报价。' },
-    fr: { highlights: 'Points Forts', itinerary: 'Détails & Programme', gallery: 'Galerie', practical: 'Infos Pratiques', duration: 'Durée de la visite', reserve: 'Réserver & Contact', process: '01. Réservation', cancel: '02. Annulation', reminders: '03. Rappels Musée', quote: 'Tarifs', overTen: 'Plus de pers. ? Me contacter pour les détails.', extraPerson: 'Par personne supplémentaire', maxCap: 'Capacité maximale', priceOnRequest: 'Tarif sur demande', privateQuoteDesc: 'Ce parcours est optimisé pour les agences de voyages et partenaires professionnels. Les tarifs sont confidentiels. Veuillez nous contacter pour obtenir un devis personnalisé.' },
-    en: { highlights: 'Highlights', itinerary: 'Details & Itinerary', gallery: 'Gallery', practical: 'Practicalities', duration:'Duration', reserve: 'Reserve Now', process: '01. Booking', cancel: '02. Cancellation', reminders:'03. Museum Reminders', quote: 'Service Quote', overTen: 'More people? Get in touch to discuss.', extraPerson:('Per extra person'), maxCap:'Max capacity', priceOnRequest: 'Rate on request', privateQuoteDesc: 'This tour is specially tailored for travel agencies and corporate partners. Rates are highly confidential. Please contact us below to receive our exclusive B2B tariff sheet.' },
+    zh_tw: { highlights: '導覽亮點', itinerary: '詳細內容與行程', gallery: '旅途瞬間', practical: '預約須知', duration: '導覽解說時長', reserve: '立即諮詢預約', process: '01. 預約流程', cancel: '02. 改期與取消', reminders: '03. 博物館提醒', quote: '服務報價', overTen: '超過限制人數？歡迎與我聯繫諮詢細節。', extraPerson: '超過基礎人數，每增加一人', maxCap: '最大接待人數', priceOnRequest: '費用請諮詢 (Tarif sur demande)', privateQuoteDesc: '此行程專為同業同盟夥伴、旅行社或客製化商務團體設計。費率不對外公開，歡迎點擊下方按鈕索取同業專屬合作報價。' , railwayQuoteDesc: '此行程為高端客製化鐵道旅程。費用將依據最終規劃之半日遊或一日遊路線、火車艙等與特殊體驗彈性調整，歡迎點擊下方按鈕與我聯繫，共同規劃您的專屬鐵道足跡。'},
+    zh_cn: { highlights: '导览亮点', itinerary: '详细内容与行程', gallery: '旅途瞬间', practical: '预约须知', duration: '解说时长', reserve: '立即咨询预约', process: '01. 预约流程', cancel: '02. 改期与取消', reminders: '03. 博物馆提醒', quote: '服务报价', overTen: '超过限制人数？欢迎与我联系咨询细节。', extraPerson: '超过基础人数，每增加一人', maxCap: '最大接待人数', priceOnRequest: '费用请咨询 (Tarif sur demande)', privateQuoteDesc: '此行程专为同业同盟伙伴、旅行社或客製化商务团体设计。费率不对外公开，欢迎点击下方按钮索取同业专属合作报价。', railwayQuoteDesc: '此行程为高端客製化铁道旅程。费用将依据最终规划之半日游或一日游路线、火车舱等与特殊体验弹性调整，欢迎点击下方按钮與我联系，共同规划您的专属铁道足迹。' },
+    fr: { highlights: 'Points Forts', itinerary: 'Détails & Programme', gallery: 'Galerie', practical: 'Infos Pratiques', duration: 'Durée de la visite', reserve: 'Réserver & Contact', process: '01. Réservation', cancel: '02. Annulation', reminders: '03. Rappels Musée', quote: 'Tarifs', overTen: 'Plus de pers. ? Me contacter pour les détails.', extraPerson: 'Par personne supplémentaire', maxCap: 'Capacité maximale', priceOnRequest: 'Tarif sur demande', privateQuoteDesc: 'Ce parcours est optimisé pour les agences de voyages et partenaires professionnels. Les tarifs sont confidentiels. Veuillez nous contacter pour obtenir un devis personnalisé.', railwayQuoteDesc: 'Ce voyage ferroviaire est entièrement sur mesure. Le tarif varie selon la formule choisie (demi-journée ou journée complète), les classes de train et les prestations. Contactez-nous pour co-créer votre itinéraire.'},
+    en: { highlights: 'Highlights', itinerary: 'Details & Itinerary', gallery: 'Gallery', practical: 'Practicalities', duration:'Duration', reserve: 'Reserve Now', process: '01. Booking', cancel: '02. Cancellation', reminders:'03. Museum Reminders', quote: 'Service Quote', overTen: 'More people? Get in touch to discuss.', extraPerson:('Per extra person'), maxCap:'Max capacity', priceOnRequest: 'Rate on request', privateQuoteDesc: 'This tour is specially tailored for travel agencies and corporate partners. Rates are highly confidential. Please contact us below to receive our exclusive B2B tariff sheet.', railwayQuoteDesc: 'This premium rail journey is fully tailor-made. Rates depend entirely on your final preference (half-day or full-day excursion), train cabin classes, and curated experiences. Please get in touch to discuss your bespoke itinerary.' },
   }
   const t = dict[lang] || dict.zh_tw;
   const priceTiers = tour.priceTemplate?.tiers || tour.priceData?.tiers;
@@ -420,9 +420,9 @@ function TourDetailContent({
                 <h3 className="text-xl font-bold text-[#2C3522] mb-4">{t.quote}</h3>
                
                 
-                {/* 🌟 智慧判斷：常規零售價模式 vs 專業同業不公開模式 */}
-                {tour.priceTemplate?.isPrivate ? (
-                  /* 🔒 1. 專業 B2B 客戶顯示畫面 */
+                {/* 🌟 智慧判斷：常規公開價 vs B2B 隱藏 vs 鐵道客製化隱藏 */}
+                {tour.priceTemplate?.displayMode === 'b2b' ? (
+                  /* 🔒 1. 專業 B2B 同業模式 */
                   <div className="py-2 space-y-4">
                     <div className="text-2xl font-serif font-bold text-[#8C3B3B] tracking-wide border-b border-[#F4F1E1] pb-4">
                       {t.priceOnRequest}
@@ -430,37 +430,30 @@ function TourDetailContent({
                     <p className="text-sm font-sans text-[#4C4E36]/90 leading-relaxed text-justify italic bg-[#F8F6EF] p-4 rounded-2xl border border-[#EBE7D9]">
                       {t.privateQuoteDesc}
                     </p>
-                    {tour.priceTemplate.maxCapacity ? (
-                      <div className="text-right text-sm font-bold text-[#4C4E36] opacity-70 mt-2 tracking-wider">
-                        {t.maxCap} : {tour.priceTemplate.maxCapacity} {lang === 'fr' ? 'pers.' : lang === 'en' ? 'pax' : '人'}
-                      </div>
-                    ) : null}
+                  </div>
+                ) : tour.priceTemplate?.displayMode === 'railway-custom' ? (
+                  /* 🚂 2. 鐵道客製化模式 */
+                  <div className="py-2 space-y-4">
+                    <div className="text-2xl font-serif font-bold text-[#8C3B3B] tracking-wide border-b border-[#F4F1E1] pb-4">
+                      {t.priceOnRequest}
+                    </div>
+                    <p className="text-sm font-sans text-[#4C4E36]/90 leading-relaxed text-justify italic bg-[#F8F6EF] p-4 rounded-2xl border border-[#EBE7D9]">
+                      {t.railwayQuoteDesc}
+                    </p>
                   </div>
                 ) : tour.priceTemplate?.basePrice ? (
-                  /* 🔓 2. 原本的常規公開價格顯示畫面 */
+                  /* 🔓 3. 常規公開零售價模式 */
                   <div className="flex flex-col gap-2">
-                    {/* 基礎價 */}
                     <div className="flex justify-between items-center py-4 border-b border-[#F4F1E1]">
                       <span className="text-2xl opacity-80 font-bold">
                         1 - {tour.priceTemplate.baseCapacity || 6} {lang === 'fr' ? 'pers.' : lang === 'en' ? 'people' : '人'}
                       </span>
                       <span className="text-[#2C3522] font-extrabold text-2xl">€{tour.priceTemplate.basePrice}</span>
                     </div>
-                    
-                    {/* 加人費 */}
                     {tour.priceTemplate.extraPersonFee ? (
                       <div className="flex justify-between items-center py-3 text-[#4C4E36]">
-                        <span className="text-sm font-bold opacity-90">
-                          + {t.extraPerson}
-                        </span>
+                        <span className="text-sm font-bold opacity-90">+ {t.extraPerson}</span>
                         <span className="font-bold text-base">+€{tour.priceTemplate.extraPersonFee}</span>
-                      </div>
-                    ) : null}
-
-                    {/* 最大人數限制 */}
-                    {tour.priceTemplate.maxCapacity ? (
-                      <div className="text-right text-base font-bold text-[#4C4E36] opacity-70 mt-1 tracking-wider">
-                        {t.maxCap} : {tour.priceTemplate.maxCapacity} {lang === 'fr' ? 'pers.' : lang === 'en' ? 'pax' : '人'}
                       </div>
                     ) : null}
                   </div>
@@ -469,6 +462,13 @@ function TourDetailContent({
                     報價建置中...
                   </div>
                 )}
+
+                {/* 顯示最大人數限制 (不論哪種模式，只要後台有填就顯示) */}
+                {!['b2b', 'railway-custom'].includes(tour.priceTemplate?.displayMode) && tour.priceTemplate?.maxCapacity ? (
+                  <div className="text-right text-base font-bold text-[#4C4E36] opacity-70 mt-1 tracking-wider">
+                    {t.maxCap} : {tour.priceTemplate.maxCapacity} {lang === 'fr' ? 'pers.' : lang === 'en' ? 'pax' : '人'}
+                  </div>
+                ) : null}
               </div>
 
               {/* 🌟 修正間距：加入 mb-8 撐開與按鈕的距離 */}

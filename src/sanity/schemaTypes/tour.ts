@@ -165,7 +165,7 @@ export const tour = {
       of: [{ type: 'string' }],
       options: {
         list: [
-          { title: '中文', value: '中文' },
+          { title: '中文 Mandarin', value: '中文' },
           { title: 'Français', value: 'Français' },
           { title: 'English', value: 'English' }
         ],
