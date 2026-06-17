@@ -98,10 +98,43 @@ function TourDetailContent({
   }
 
   const dict: any = {
-    zh_tw: { highlights: '導覽亮點', itinerary: '詳細內容與行程', gallery: '旅途瞬間', practical: '預約須知', duration: '解說時長', reserve: '立即諮詢預約', process: '01. 預約流程', cancel: '02. 改期與取消', reminders: '03. 博物館提醒', quote: '服務報價', overTen: '超過限制人數？歡迎與我聯繫諮詢細節。', extraPerson: '超過基礎人數，每增加一人', maxCap: '最大接待人數', priceOnRequest: '費用請諮詢 (Tarif sur demande)', privateQuoteDesc: '此行程專為同業同盟夥伴、旅行社或客製化商務團體設計。費率不對外公開，歡迎點擊下方按鈕索取同業專屬合作報價。', railwayQuoteDesc: '此行程為高端客製化鐵道旅程。費用將依據最終規劃之半日遊或一日遊路線、火車艙等與特殊體驗彈性調整，歡迎點擊下方按鈕與我聯繫，共同規劃您的專屬鐵道足跡。' },
-    zh_cn: { highlights: '导览亮点', itinerary: '详细内容与行程', gallery: '旅途瞬间', practical: '预约须知', duration: '解说时长', reserve: '立即咨询预约', process: '01. 预约流程', cancel: '02. 改期与取消', reminders: '03. 博物馆提醒', quote: '服务报价', overTen: '超过限制人数？欢迎与我联系咨询细节。', extraPerson: '超过基础人数，每增加一人', maxCap: '最大接待人数', priceOnRequest: '费用请咨询 (Tarif sur demande)', privateQuoteDesc: '此行程专为同业同盟伙伴、旅行社或客製化商务团体设计。费率不对外公开，欢迎点击下方按钮索取同业专属合作报价。', railwayQuoteDesc: '此行程为高端客製化铁道旅程。费用将依据最终规划之半日游或一日游路线、火车舱等与特殊体验弹性調整，欢迎点击下方按钮與我联系，共同规划您的专属铁道足迹。' },
-    fr: { highlights: 'Points Forts', itinerary: 'Détails & Programme', gallery: 'Galerie', practical: 'Infos Pratiques', duration: 'Durée de la visite', reserve: 'Réserver & Contact', process: '01. Réservation', cancel: '02. Annulation', reminders: '03. Rappels Musée', quote: 'Tarifs', overTen: 'Plus de pers. ? Me contacter pour les détails.', extraPerson: 'Par personne supplémentaire', maxCap: 'Capacité maximale', priceOnRequest: 'Tarif sur demande', privateQuoteDesc: 'Ce parcours est optimisé pour les agences de voyages et partenaires professionnels. Les tarifs sont confidentiels. Veuillez nous contacter pour obtenir un devis personnalisé.', railwayQuoteDesc: 'Ce voyage ferroviaire est entièrement sur mesure. Le tarif varie selon la formule choisie (demi-journée ou journée complète), les classes de train et les prestations. Contactez-nous pour co-créer votre itinéraire.' },
-    en: { highlights: 'Highlights', itinerary: 'Details & Itinerary', gallery: 'Gallery', practical: 'Practicalities', duration:'Duration', reserve: 'Reserve Now', process: '01. Booking', cancel: '02. Cancellation', reminders:'03. Museum Reminders', quote: 'Service Quote', overTen: 'More people? Get in touch to discuss.', extraPerson:('Per extra person'), maxCap:'Max capacity', priceOnRequest: 'Rate on request', privateQuoteDesc: 'This tour is specially tailored for travel agencies and corporate partners. Rates are highly confidential. Please contact us below to receive our exclusive B2B tariff sheet.', railwayQuoteDesc: 'This premium rail journey is fully tailor-made. Rates depend entirely on your final preference (half-day or full-day excursion), train cabin classes, and curated experiences. Please get in touch to discuss your bespoke itinerary.' },
+    zh_tw: { 
+      highlights: '導覽亮點', itinerary: '詳細內容與行程', gallery: '旅途瞬間', practical: '預約須知', duration: '解說時長', reserve: '立即諮詢預約', process: '01. 預約流程', cancel: '02. 改期與取消', reminders: '03. 博物館提醒', quote: '服務報價', overTen: '超過限制人數？歡迎與我聯繫諮詢細節。', extraPerson: '超過基礎人數，每增加一人', maxCap: '最大接待人數', priceOnRequest: '費用請諮詢', privateQuoteDesc: '此行程專為同業同盟夥伴、旅行社或客製化商務團體設計。費率不對外公開，歡迎點擊下方按鈕索取同業專屬合作報價。', railwayQuoteDesc: '此行程為高端客製化鐵道旅程。費用將依據最終規劃之半日遊或一日遊路線、火車艙等與特殊體驗彈性調整，歡迎點擊下方按鈕與我聯繫，共同規劃您的專屬鐵道足跡。',
+      // 🌟 新增：活動地點動態標籤對照表
+      locationTags: {
+        'lyon': '📍 LYON 里昂',
+        'paris': '📍 PARIS 巴黎',
+        'rhone-alpes': '🏔️ RHÔNE-ALPES 隆河-阿爾卑斯大區',
+        'provence-alpes-cote dazur': '🌿 PROVENCE 普羅旺斯-蔚藍海岸'
+      }
+    },
+    zh_cn: { 
+      highlights: '导览亮点', itinerary: '详细内容与行程', gallery: '旅途瞬间', practical: '预约须知', duration: '解说时长', reserve: '立即咨询预约', process: '01. 预约流程', cancel: '02. 改期与取消', reminders: '03. 博物馆提醒', quote: '服务报价', overTen: '超过限制人数？欢迎与我联系咨询细节。', extraPerson: '超过基础人数，每增加一人', maxCap: '最大接待人数', priceOnRequest: '费用请咨询', privateQuoteDesc: '此行程专为同业同盟伙伴、旅行社或客製化商务团体设计。费率不对外公开，欢迎点击下方按钮索取同业专属合作报价。', railwayQuoteDesc: '此行程为高端客製化铁道旅程。费用将依据最终规划之半日游或一日游路线、火车舱等与特殊体验弹性調整，欢迎点击下方按钮與我联系，共同规划您的专属铁道足迹。',
+      locationTags: {
+        'lyon': '📍 LYON 里昂',
+        'paris': '📍 PARIS 巴黎',
+        'rhone-alpes': '🏔️ RHÔNE-ALPES 隆河-阿尔卑斯大区',
+        'provence-alpes-cote dazur': '🌿 PROVENCE 普罗旺斯-蔚蓝海岸'
+      }
+    },
+    fr: { 
+      highlights: 'Points Forts', itinerary: 'Détails & Programme', gallery: 'Galerie', practical: 'Infos Pratiques', duration: 'Durée de la visite', reserve: 'Réserver & Contact', process: '01. Réservation', cancel: '02. Annulation', reminders: '03. Rappels Musée', quote: 'Tarifs', overTen: 'Plus de pers. ? Me contacter pour les détails.', extraPerson: 'Par personne supplémentaire', maxCap: 'Capacité maximale', priceOnRequest: 'Tarif sur demande', privateQuoteDesc: 'Ce parcours est optimisé pour les agences de voyages et partenaires professionnels. Les tarifs sont confidentiels. Veuillez nous contacter pour obtenir un devis personnalisé.', railwayQuoteDesc: 'Ce voyage ferroviaire est entièrement sur mesure. Le tarif varie selon la formule choisie (demi-journée ou journée complète), les classes de train et les prestations. Contactez-nous pour co-créer votre itinéraire.',
+      locationTags: {
+        'lyon': '📍 LYON',
+        'paris': '📍 PARIS',
+        'rhone-alpes': '🏔️ RHÔNE-ALPES',
+        'provence-alpes-cote dazur': '🌿 PROVENCE-ALPES-CÔTE D\'AZUR'
+      }
+    },
+    en: { 
+      highlights: 'Highlights', itinerary: 'Details & Itinerary', gallery: 'Gallery', practical: 'Practicalities', duration:'Duration', reserve: 'Reserve Now', process: '01. Booking', cancel: '02. Cancellation', reminders:'03. Museum Reminders', quote: 'Service Quote', overTen: 'More people? Get in touch to discuss.', extraPerson:('Per extra person'), maxCap:'Max capacity', priceOnRequest: 'Rate on request', privateQuoteDesc: 'This tour is specially tailored for travel agencies and corporate partners. Rates are highly confidential. Please contact us below to receive our exclusive B2B tariff sheet.', railwayQuoteDesc: 'This premium rail journey is fully tailor-made. Rates depend entirely on your final preference (half-day or full-day excursion), train cabin classes, and curated experiences. Please get in touch to discuss your bespoke itinerary.',
+      locationTags: {
+        'lyon': '📍 LYON',
+        'paris': '📍 PARIS',
+        'rhone-alpes': '🏔️ RHÔNE-ALPES',
+        'provence-alpes-cote dazur': '🌿 PROVENCE'
+      }
+    },
   };
   const t = dict[lang] || dict.zh_tw;
 
@@ -191,12 +224,10 @@ function TourDetailContent({
     }
   };
 
-  // 🌟 注意事項 (Bon à savoir) 專屬的富文本樣式包
   // 🌟 重新設計：無障礙高對比度注意事項 (Notice) 富文本樣式包
   const noticeComponents = {
     block: {
       normal: ({ children }: any) => (
-        /* 🌟 核心優化：移除 opacity-90，字體改為 font-sans 並放大到 text-base md:text-lg，顏色鎖定最深綠 */
         <p className="mb-4 leading-relaxed text-base md:text-lg font-sans text-brand-green text-justify">
           {children}
         </p>
@@ -204,30 +235,29 @@ function TourDetailContent({
     },
     list: {
       bullet: ({ children }: any) => (
-        <ul className="mb-6 mt-2 flex flex-col space-y-3">{children}</ul>
+        /* 🌟 調整：給予清單微調間距 */
+        <ul className="mb-4 mt-2 flex flex-col space-y-4">{children}</ul>
       ),
       number: ({ children }: any) => (
-        <ol className="mb-6 mt-2 flex flex-col space-y-3">{children}</ol>
+        <ol className="mb-4 mt-2 flex flex-col space-y-4">{children}</ol>
       ),
     },
     listItem: {
       bullet: ({ children }: any) => (
-        /* 🌟 核心優化：加深列表字體與清除透明度 */
-        <li className="relative pl-6 text-brand-green text-base md:text-lg list-none font-sans text-justify">
-          {/* 加深清單小圓點為顯眼的引導紅 */}
+        /* 🌟 核心優化：加上 break-inside-avoid，防止項目在換欄時被攔腰折斷，並改用 mb-4 撐開條款間距 */
+        <li className="relative pl-6 text-brand-green text-base md:text-lg list-none font-sans text-justify break-inside-avoid mb-4">
           <span className="absolute left-0 top-[10px] w-1.5 h-1.5 rounded-full bg-brand-red"></span>
           {children}
         </li>
       ),
       number: ({ children }: any) => (
-        <li className="list-decimal ml-6 text-brand-green text-base md:text-lg font-sans text-justify">
+        <li className="list-decimal ml-6 text-brand-green text-base md:text-lg font-sans text-justify break-inside-avoid mb-4">
           {children}
         </li>
       )
     },
     marks: {
       strong: ({ children }: any) => (
-        /* 🌟 核心優化：強烈建議對強烈字元（如交通費用）給予高對比的磚紅微光底襯，讓重點一目了然 */
         <strong className="font-bold text-brand-red bg-brand-red/5 px-1.5 py-0.5 rounded">{children}</strong>
       ),
       em: ({ children }: any) => (
@@ -239,28 +269,45 @@ function TourDetailContent({
   return (
     <main className="min-h-screen bg-[#FDFBF5] selection:bg-[#8C3B3B]/10 overflow-x-hidden relative">
       
-      {/* 🌟 1. 沉浸式首圖 */}
-      <section className="relative w-full h-[85vh] flex items-center justify-center overflow-hidden">
-        {tour.mainImage && (
-          <Image src={urlFor(tour.mainImage).url()} alt="Cover" fill className="object-cover" priority unoptimized={true} />
-        )}
-        <div className="absolute inset-0 bg-black/5" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#FDFBF5]" />
+     
+     {/* 首圖 */}
+     <section className="relative w-full min-h-[80vh] lg:h-[85vh] flex items-center justify-center overflow-hidden bg-brand-cream pt-24 pb-16 isolate">
         
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+        {/* 背景大圖 */}
+        <div className="absolute inset-0 z-0">
+          {tour.mainImage && (
+            <Image 
+              src={urlFor(tour.mainImage).url()} 
+              alt="Cover" fill 
+              className="object-cover brightness-[1.1] contrast-[1.02]" 
+              priority unoptimized={true} 
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-[#FDFBF5]" />
+        </div>
+        
+        {/* 🌟 核心調整：w-fit 讓卡片緊貼內容，min-w 確保手機端不會太窄 */}
+        <div className="relative z-10 w-fit min-w-[min(90vw,600px)] max-w-[90vw] mx-auto px-6 flex items-center justify-center">
           <motion.div 
-            initial={{ opacity: 0, y: 30 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            transition={{ duration: 1.2 }}
-            className="bg-white/5 rounded-[40px] inline-block px-16 py-16 backdrop-blur-[6px] border-none"
+            initial={{ opacity: 0, scale: 0.98 }} 
+            animate={{ opacity: 1, scale: 1 }} 
+            transition={{ duration: 1 }}
+            /* 🌟 調整細節：bg-brand-green/30 (更透明) + backdrop-blur-lg (更模糊) */
+            /* 使用 w-fit 讓容器寬度隨內部標題文字內容自動縮放 */
+            className="w-fit bg-brand-green/30 backdrop-blur-lg rounded-card-xl p-8 md:p-12 lg:p-16 border border-white/10 shadow-[0_20px_50px_-15px_rgba(44,53,34,0.3)] text-center"
           >
-            <span className="inline-block bg-[#8C3B3B] text-white px-6 py-1.5 rounded-full tracking-[0.4em] uppercase text-[10px] mb-8 font-bold shadow-xl">
-              📍 {tour.locationTag === 'lyon' ? 'LYON 里昂' : 'PARIS 巴黎'}
+            {/* 地區標籤 */}
+            <span className="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full tracking-[0.3em] uppercase text-xs mb-6 font-sans font-bold shadow-md border border-white/10">
+              {t.locationTags?.[tour.locationTag] || '📍 TOUR'}
             </span>
-            <h1 className="text-5xl md:text-8xl font-extrabold mb-8 tracking-tighter text-white drop-shadow-2xl leading-normal">
+            
+            {/* 🌟 導覽主標題：white-space-nowrap 強制不換行 (中日韓語適用)，確保一行到底 */}
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold tracking-wide text-white drop-shadow-md leading-[1.3] text-balance">
               {getLabel(tour.title, lang)}
             </h1>
-            <p className="text-white drop-shadow-lg text-lg md:text-2xl font-serif italic max-w-2xl mx-auto">
+            
+            {/* 副標題 Highlight 區 */}
+            <p className="text-[#F2E3C6] drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)] text-lg md:text-xl lg:text-[22px] font-serif italic max-w-3xl mx-auto mt-10 md:mt-12 leading-[1.75] opacity-100">
               {getLabel(tour.highlight, lang)}
             </p>
           </motion.div>
@@ -469,23 +516,39 @@ function TourDetailContent({
                 {t.reserve}
               </a>
             </motion.div>
-
-            {/* 💡 底部精選 bon à savoir */}
-            {tour.notices && tour.notices.length > 0 && (
-              <motion.div {...scrollScaleReveal} className="bg-[#F4F1E1] p-8 rounded-card-xl text-brand-red shadow-[0_15px_40px_-20px_rgba(0,0,0,0.05)] border border-brand-gray relative">
-                <div className="absolute top-0 right-0 p-4 opacity-10 text-4xl">💡</div>
-                <h4 className="font-bold tracking-[0.3em] text-[18px] uppercase mb-6 opacity-60">Bon à savoir</h4>
-                <div className="text-base font-serif leading-relaxed text-brand-olive space-y-6">
+          </div>
+        </div>
+        {/* 🌟 滿版 Bon à savoir 區塊 (從右側欄解放出來) */}
+        {tour.notices && tour.notices.length > 0 && (
+            <div className="col-span-1 lg:col-span-12 w-full mt-12">
+              <motion.div 
+                {...scrollScaleReveal} 
+                className="bg-[#F4F1E1] p-8 md:p-12 rounded-card-xl shadow-md border border-brand-gray relative w-full"
+              >
+                {/* 裝飾燈泡圖示 */}
+                <div className="absolute top-0 right-0 p-6 opacity-10 text-5xl">💡</div>
+                
+                <h4 className="font-sans font-bold tracking-[0.3em] text-[22px] uppercase mb-10 text-brand-red opacity-90">
+                  Bon à savoir
+                </h4>
+                
+                <div className="w-full">
                   {tour.notices.map((notice: any, idx: number) => (
-                    <div key={idx}>
-                      <PortableText value={getLabel(notice.content, lang)} components={noticeComponents} />
+                    <div 
+                      key={idx} 
+                      className="border-t border-brand-gray/40 pt-6 first:border-none first:pt-0"
+                    >
+                      {/* 🌟 關鍵修正：移除了原本的 grid-cols-2，改用 columns-1 md:columns-2 gap-x-16 */}
+                      {/* 這樣瀏覽器就會化身魔法師，直接把這一個富文本裡面的所有黑點點清單，完美、均勻地平分到左右兩欄！ */}
+                      <div className="text-brand-green text-base leading-relaxed columns-1 md:columns-2 gap-x-16">
+                        <PortableText value={getLabel(notice.content, lang)} components={noticeComponents} />
+                      </div>
                     </div>
                   ))}
                 </div>
               </motion.div>
-            )}
-          </div>
-        </div>
+            </div>
+          )}
       </div>
         
       {/* 🌟 滿版底層區塊：Gallery 相簿 & Booking Terms 預約須知 */}
