@@ -192,41 +192,46 @@ function TourDetailContent({
   };
 
   // 🌟 注意事項 (Bon à savoir) 專屬的富文本樣式包
+  // 🌟 重新設計：無障礙高對比度注意事項 (Notice) 富文本樣式包
   const noticeComponents = {
     block: {
       normal: ({ children }: any) => (
-        <p className="mb-4 leading-relaxed text-[15px] md:text-base font-serif text-[#4C4E36] opacity-90 text-justify">
+        /* 🌟 核心優化：移除 opacity-90，字體改為 font-sans 並放大到 text-base md:text-lg，顏色鎖定最深綠 */
+        <p className="mb-4 leading-relaxed text-base md:text-lg font-sans text-brand-green text-justify">
           {children}
         </p>
       ),
     },
     list: {
       bullet: ({ children }: any) => (
-        <ul className="mb-6 mt-2 flex flex-col space-y-2.5">{children}</ul>
+        <ul className="mb-6 mt-2 flex flex-col space-y-3">{children}</ul>
       ),
       number: ({ children }: any) => (
-        <ol className="mb-6 mt-2 flex flex-col space-y-2.5">{children}</ol>
+        <ol className="mb-6 mt-2 flex flex-col space-y-3">{children}</ol>
       ),
     },
     listItem: {
       bullet: ({ children }: any) => (
-        <li className="relative pl-5 text-[#4C4E36] text-[15px] md:text-base list-none opacity-90 font-serif text-justify">
-          <span className="absolute left-0 top-[8px] w-1.5 h-1.5 rounded-full bg-[#8C3B3B]/60"></span>
+        /* 🌟 核心優化：加深列表字體與清除透明度 */
+        <li className="relative pl-6 text-brand-green text-base md:text-lg list-none font-sans text-justify">
+          {/* 加深清單小圓點為顯眼的引導紅 */}
+          <span className="absolute left-0 top-[10px] w-1.5 h-1.5 rounded-full bg-brand-red"></span>
           {children}
         </li>
       ),
       number: ({ children }: any) => (
-        <li className="list-decimal ml-5 text-[#4C4E36] text-[15px] md:text-base opacity-90 font-serif text-justify">
+        <li className="list-decimal ml-6 text-brand-green text-base md:text-lg font-sans text-justify">
           {children}
         </li>
       )
     },
     marks: {
       strong: ({ children }: any) => (
-        <strong className="font-bold text-[#8C3B3B]">{children}</strong>
+        /* 🌟 核心優化：強烈建議對強烈字元（如交通費用）給予高對比的磚紅微光底襯，讓重點一目了然 */
+        <strong className="font-bold text-brand-red bg-brand-red/5 px-1.5 py-0.5 rounded">{children}</strong>
       ),
       em: ({ children }: any) => (
-        <em className="italic font-serif text-[#5C6B47]">{children}</em>
+        <em className="italic text-brand-green font-bold">{children}</em>
       )
     }
   };
@@ -470,7 +475,7 @@ function TourDetailContent({
               <motion.div {...scrollScaleReveal} className="bg-[#F4F1E1] p-8 rounded-card-xl text-brand-red shadow-[0_15px_40px_-20px_rgba(0,0,0,0.05)] border border-brand-gray relative">
                 <div className="absolute top-0 right-0 p-4 opacity-10 text-4xl">💡</div>
                 <h4 className="font-bold tracking-[0.3em] text-[18px] uppercase mb-6 opacity-60">Bon à savoir</h4>
-                <div className="text-base font-serif leading-relaxed opacity-90 text-brand-olive space-y-6">
+                <div className="text-base font-serif leading-relaxed text-brand-olive space-y-6">
                   {tour.notices.map((notice: any, idx: number) => (
                     <div key={idx}>
                       <PortableText value={getLabel(notice.content, lang)} components={noticeComponents} />
@@ -580,7 +585,7 @@ function TourDetailContent({
                     {lang === 'fr' ? 'Notes importantes & Rappels' : lang === 'en' ? 'Important Notes & Reminders' : '行程重要須知與提醒'}
                   </h3>
                   
-                  <div className="opacity-90 text-[#4C4E36] space-y-6">
+                  <div className="text-brand-green space-y-6">
                     {tour.priceNotes.map((note: any, idx: number) => (
                       <div key={idx} className={idx > 0 ? "pt-6 border-t border-[#EBE7D9]/60" : ""}>
                         <PortableText value={getLabel(note.content, lang)} components={noticeComponents} />
