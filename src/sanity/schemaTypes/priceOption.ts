@@ -8,9 +8,16 @@ export const priceOption = {
       name: 'name',
       title: '模板名稱 (僅供後台辨識)',
       type: 'string',
-      description: '例如：2026 巴黎羅浮宮 (1-6人) 或 里昂老城 (1-10人)'
+      description: '例如：2026 巴黎羅浮宮 (1-6人) 或 同業同盟夥伴專用 (不公開費用)'
     },
-    // 🌟 全新加入：基礎涵蓋人數
+    // 🌟 全新加入：不公開費用開關
+    {
+      name: 'isPrivate',
+      title: '🔒 不公開費用 (專業客戶 / 旅行社同業專用)',
+      type: 'boolean',
+      description: '開啟後，前台該路線將隱藏具體歐元數字，改為顯示「費用請諮詢 (Tarif sur demande)」，非常適合 B2B 合作。',
+      initialValue: false
+    },
     {
        name: 'baseCapacity',
        title: '基礎涵蓋人數 (Base Capacity)',
@@ -22,7 +29,7 @@ export const priceOption = {
        name: 'basePrice',
        title: '基礎報價 (Base Price - 歐元)',
        type: 'number',
-       description: '上述基礎人數範圍內的總報價'
+       description: '非公開費用模板時此處可隨便填寫（前台不會顯示），但建議仍填個數字供自己內部參考。'
     },
     {
        name: 'extraPersonFee',
@@ -42,12 +49,16 @@ export const priceOption = {
       title: 'name',
       base: 'basePrice',
       cap: 'baseCapacity',
-      extra: 'extraPersonFee'
+      extra: 'extraPersonFee',
+      isPrivate: 'isPrivate' // 🌟 抓取隱私狀態
     },
-    prepare({ title, base, cap, extra }: any) {
+    prepare({ title, base, cap, extra, isPrivate }: any) {
       return {
         title: title || '未命名報價',
-        subtitle: `1-${cap || '?'}人 €${base || 0} | 超過加收 €${extra || 0}`
+        // 🌟 如果開啟隱私，後台清單會打上鎖頭圖籤
+        subtitle: isPrivate 
+          ? '🔒 專業同業模式 (前台已隱藏歐元報價)' 
+          : `1-${cap || '?'}人 €${base || 0} | 超過加收 €${extra || 0}`
       }
     }
   }

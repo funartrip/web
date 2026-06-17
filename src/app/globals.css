@@ -1,23 +1,56 @@
+/* src/app/globals.css */
+
 /* 🌟 VIP 區：所有的 @import 必須在檔案最上方！ */
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=LXGW+WenKai+TC:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
 @import "tailwindcss";
 
-/* 🌟 定義 Tailwind v4 專屬變數 */
+/* 🌟 定義 Tailwind v4 專屬變數 (Design Tokens) */
 @theme {
-  /* 全站預設中文字體 (文楷) */
+  /* ========================================================================= */
+  /* ✍️ 字型系統 (Typography Fonts) */
+  /* ========================================================================= */
   --font-sans: "LXGW WenKai TC", ui-sans-serif, system-ui, sans-serif;
-  
-  /* 襯線體與標題用 (Playfair) */
   --font-serif: "Playfair Display", "LXGW WenKai TC", ui-serif, Georgia, serif;
   --font-playfair: "Playfair Display", "LXGW WenKai TC", ui-serif, Georgia, serif;
-  
-  /* 手寫體 (Caveat) */
   --font-cursive: "Caveat", cursive;
 
-  /* 你的品牌色也可以定義在這裡，方便以後使用 */
-  --color-brand-green: #2C3522;
-  --color-brand-gold: #EAA624;
-  --color-brand-cream: #FDFBF5;
+  /* ========================================================================= */
+  /* 🏛️ 顏色系統：常規頁面 (常規美學體系) */
+  /* ========================================================================= */
+  --color-brand-cream: #FDFBF5;      /* 全站主網頁背景色、常規導覽列背景 */
+  --color-brand-green: #2C3522;      /* 網頁大標題 (H1~H3)、頁尾背景字體、主要粗重標題 */
+  --color-brand-olive: #4C4E36;      /* 通用描述內文、Bon à savoir 內文、滿版相簿深色背景 */
+  --color-brand-sage: #5C6B47;       /* 導覽時長字體、適合對象/特別推薦標籤次要字體 */
+  --color-brand-sage-dark: #6A784D;  /* 網頁引言背景、卡片次要輔助文案 */
+  --color-brand-gold: #EAA624;       /* 地區標籤背景、網頁菱形裝飾方塊、高亮勳章點綴色 */
+  --color-brand-red: #8C3B3B;        /* 全站核心引導粗體字、富文本連結、清單小圓點、按鈕懸停邊框 */
+  --color-brand-terracotta: #C85555; /* 立即諮詢預約按鈕主色、橫向相簿導覽箭頭、返回按鈕 */
+  --color-brand-gray: #EBE7D9;       /* 輕量級卡片微弱邊框、虛線過渡線 */
+  --color-brand-gray-dark: #D5D2C8;  /* 深色裝飾線、相簿卡片外框 */
+
+  /* ========================================================================= */
+  /* 🌌 顏色系統：獨立部落格 (深夜沉浸體系) */
+  /* ========================================================================= */
+  --color-blog-bg: #223843;          /* 部落格大廳與文章詳情頁的滿版深夜大背景色 */
+  --color-blog-cream: #F2E3C6;       /* 旅行誌的核心「實體卡紙卡片背景」、閱讀按鈕底色 */
+  --color-blog-text-dark: #223843;   /* 卡紙卡片上的 H2/H3 標題與內文主要字體色 (深復古藍) */
+  --color-blog-terracotta: #D87348;  /* 部落格富文本 strong 粗體強調色、連結色、菱形分割方塊 */
+  --color-blog-sage: #819A78;        /* 引用區 (Blockquote) 左側裝飾厚線、發布日期輔助字體 */
+  --color-blog-ice: #AADCF2;         /* 部落格大廳卡片的立體底色、分類標籤高亮色 */
+
+  /* ========================================================================= */
+  /* 📐 幾何維度：全站圓角規範 (Border Radius) */
+  /* ========================================================================= */
+  --radius-card-sm: 12px;            /* 導覽列語系下拉選單、品牌精神小勳章 */
+  --radius-card-md: 20px;            /* 聯絡表單輸入框背景、博物館提醒独立卡片、部落格大廳卡片 */
+  --radius-card-lg: 30px;            /* 橫向相簿照片框、作品集檔案抽屜卡片 */
+  --radius-card-xl: 40px;            /* 經典 Sticky 報價卡片、首頁 3D 翻轉卡片、關於我形象照 */
+
+  /* ========================================================================= */
+  /* 📦 空間留白：大區塊上下留白間距 (Spacing) */
+  /* ========================================================================= */
+  --spacing-section-gap: 6rem;       /* 常規大區塊上下 Padding (96px)，營造高奢專案的氣靈魂空間感 */
+  --spacing-section-gap-lg: 8rem;    /* 滿版相簿區、結語聯絡區的加大 Padding (128px) */
 }
 
 /* ========================================= */
@@ -39,7 +72,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-playfair); /* 標題通常建議用 Playfair */
+    font-family: var(--font-playfair); 
     letter-spacing: 0.015em;
     line-height: 1.3;
     font-weight: 700;
@@ -57,29 +90,32 @@
   }
 
   .prose a {
-    color: #5C6B47;
+    /* 🌟 優化：將超連結文字顏色改為品牌標誌性的橄欖綠變數 */
+    color: var(--color-brand-sage);
     text-decoration: underline;
     text-underline-offset: 4px;
     transition: all 0.2s ease-in-out;
   }
 
   .prose a:hover {
-    background-color: #FDF6D9;
+    /* 🌟 優化：Hover 背景改為與品牌米白相襯的淡淡微黃柔光 */
+    background-color: var(--color-brand-cream);
+    opacity: 0.8;
   }
   
-  /* 📖 長篇文章與條款專用排版容器 */
+  /* 📖 長篇文章與法律條款專用排版容器 */
   /* ========================================= */
   .article-content {
-    /* 基礎內文設定：寬鬆的行距 */
     line-height: 1.8;
-    color: #334155; 
+    /* 🌟 核心修正：將法規內文顏色綁定品牌橄欖綠，拒絕死色 */
+    color: var(--color-brand-olive); 
   }
 
   /* 標題 1 (大標題) */
   .article-content h1 {
     font-family: var(--font-playfair);
-    font-size: 2.25rem; /* 大約 36px */
-    color: var(--color-brand-gold, #EAA624); /* 品牌金 */
+    font-size: 2.25rem; 
+    color: var(--color-brand-gold); /* 🌟 修正：綁定品牌金變數 */
     margin-top: 3rem;
     margin-bottom: 1.5rem;
     font-weight: 700;
@@ -88,20 +124,19 @@
   /* 標題 2 (章節標題) */
   .article-content h2 {
     font-family: var(--font-playfair);
-    font-size: 1.5rem; /* 大約 24px */
-    color: var(--color-brand-green, #2C3522); /* 品牌綠 */
+    font-size: 1.5rem; 
+    color: var(--color-brand-green); /* 🌟 修正：綁定品牌深綠變數 */
     margin-top: 2.5rem;
     margin-bottom: 1rem;
     font-weight: 700;
-    /* 加一條淡淡的底線，讓條款看起來更專業 */
     border-bottom: 1px solid rgba(44, 53, 34, 0.1); 
     padding-bottom: 0.5rem;
   }
 
   /* 標題 3 (小節標題) */
   .article-content h3 {
-    font-size: 1.25rem; /* 大約 20px */
-    color: #3A432A;
+    font-size: 1.25rem; 
+    color: var(--color-brand-olive); /* 🌟 修正：綁定品牌深橄欖綠 */
     margin-top: 1.5rem;
     margin-bottom: 0.75rem;
     font-weight: 700;
@@ -115,7 +150,7 @@
   /* 找回無序清單 (黑點點) */
   .article-content ul {
     list-style-type: disc;
-    padding-left: 1.5rem; /* 往右縮排 */
+    padding-left: 1.5rem; 
     margin-bottom: 1.5rem;
   }
 
@@ -134,13 +169,13 @@
 
   /* 文章內的超連結 */
   .article-content a {
-    color: var(--color-brand-gold, #EAA624);
+    color: var(--color-brand-gold); /* 🌟 修正：綁定品牌高亮金 */
     text-decoration: underline;
     text-underline-offset: 4px;
     transition: all 0.2s ease-in-out;
   }
   .article-content a:hover {
-    color: var(--color-brand-green, #2C3522);
+    color: var(--color-brand-red); /* 🌟 修正：Hover 時切換為引導酒紅 */
   }
 }
 
@@ -148,21 +183,24 @@
 /* 3. 工具層 (Utilities) */
 /* ========================================= */
 @layer utilities {
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  /* 🌟🌟 核心大補帖：解決跨網頁類名大打架的「隱藏捲軸」三合一防護網 🌟🌟 */
+  /* 無論你在組件裡手滑寫了哪一種，都能在 Chrome/Safari/Firefox 完美隱藏捲軸 */
+  .hide-scrollbar, .scrollbar-hide, .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;    /* Firefox */
   }
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
+  .hide-scrollbar::-webkit-scrollbar, 
+  .scrollbar-hide::-webkit-scrollbar, 
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;            /* Chrome, Safari and Opera */
   }
 
+  /* 圖片預約詳情頁面專用：精緻極細垂直滾動條 */
   .custom-scrollbar::-webkit-scrollbar {
     width: 4px;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(140, 59, 59, 0.2); 
+    background: rgba(140, 59, 59, 0.2); /* 淡淡的酒紅透明質感滑塊 */
     border-radius: 10px;
   }
 }
-
-/* --- 🍋 如果你有要把檸檬塔 CSS 寫在這裡，也可以放在最下面 --- */
