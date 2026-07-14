@@ -218,7 +218,12 @@ function BlogContent() {
                         <Image src={post.thumbnail || '/placeholder.jpg'} alt="cover" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div className="absolute inset-0 bg-[#223843]/10 group-hover:bg-transparent transition-colors duration-500" />
                       </div>
-                      {/* 🌟 大氣、高雅的設計：把所有 #Hashtags 裝進毛玻璃小深色方塊，整齊排列在圖片左下角 */}
+                      {/* 🌿 圖片區（內含全新的懸浮 Hashtags 圖層） */}
+                      <div className="relative aspect-[4/3] overflow-hidden shrink-0">
+                        <Image src={post.thumbnail || '/placeholder.jpg'} alt="cover" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                        <div className="absolute inset-0 bg-[#223843]/10 group-hover:bg-transparent transition-colors duration-500" />
+                        
+                        {/* 🌟 大氣、高雅的設計：把所有 #Hashtags 裝進毛玻璃小深色方塊，整齊排列在圖片左下角 */}
                         {post.tags && post.tags.length > 0 && (
                           <div className="absolute bottom-3 left-4 right-4 z-20 flex flex-wrap gap-2 animate-in fade-in slide-in-from-bottom-2 duration-500">
                             {post.tags.map((tag: string, i: number) => (
@@ -231,7 +236,7 @@ function BlogContent() {
                             ))}
                           </div>
                         )}
-                      
+                      </div>
                       
                       {/* 文字區塊 */}
                       <div className="flex flex-col flex-1 p-8">
