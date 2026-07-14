@@ -51,10 +51,14 @@ export const blogPost = {
       type: 'localeString', // 用於前台列表的簡短介紹
     },
     {
-      name: 'seoKeywords',
-      title: '🔑 自由標籤與 SEO 關鍵字 (Hashtags & Keywords)',
-      type: 'string',
-      description: '請用「英文逗號」隔開每個標籤。這些標籤會同時變成 Google 的關鍵字，並顯示在文章標題下方。例如：日常, 里昂生活, 藝術策展',
+      name: 'tags',
+      title: '🏷️ 部落格隨行標籤 (Hashtags)',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        layout: 'tags' // 🌟 魔法核心：讓後台變成打字按 Enter 就建立標籤的漂亮介面！
+      },
+      description: '輸入標籤名稱後按下 Enter 鍵即可建立。這些標籤會同時用於前台顯示與 SEO 關鍵字。',
     },
     {
       name: 'thumbnail',

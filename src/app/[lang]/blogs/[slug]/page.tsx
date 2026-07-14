@@ -188,10 +188,9 @@ function BlogPostContent() {
             <p className="text-[#819A78] font-mono text-sm tracking-widest font-bold">
               {dict.date} // {formatDate(post._createdAt)}
             </p>
-            {/* 🌟 核心修改：對齊第一張截圖紅框！渲染出 IG 自由 Hashtags */}
-            {tagsArray.length > 0 && (
-              <div className="flex flex-wrap justify-center gap-3 mt-4">
-                {tagsArray.map((tag: string, i: number) => (
+            {post.tags && post.tags.length > 0 && (
+              <div className="flex flex-wrap justify-center gap-4 mt-5">
+                {post.tags.map((tag: string, i: number) => (
                   <span 
                     key={i} 
                     className="text-[#D87348] hover:text-[#223843] font-serif italic text-base font-bold tracking-wide transition-colors cursor-pointer"

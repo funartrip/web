@@ -16,7 +16,7 @@ const query = `{
   "posts": *[_type == "blogPost" && publishStatus == "published"] | order(_createdAt desc) {
     title,
     summary,
-    seoKeywords,
+    tags,
     "slug": slug.current,
     "thumbnail": thumbnail.asset->url,
     blogCategory[]->{ name, _id }
