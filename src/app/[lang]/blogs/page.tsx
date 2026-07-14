@@ -218,12 +218,15 @@ function BlogContent() {
                         <Image src={post.thumbnail || '/placeholder.jpg'} alt="cover" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div className="absolute inset-0 bg-[#223843]/10 group-hover:bg-transparent transition-colors duration-500" />
                       </div>
-                    {/* 🌟 核心修改：對齊第二張截圖紅框！在圖片左上角懸浮顯示第一個自訂 Hashtag */}
-                         {post.seoKeywords && (
-                           <div className="absolute top-4 left-4 z-20 bg-[#D87348] text-[#223843] text-[11px] font-bold px-3 py-1 rounded-md shadow-md tracking-wide font-serif italic">
-                             #{post.seoKeywords.split(',')[0].trim()}
-                           </div>
-                         )}
+                   {post.tags && post.tags.length > 0 && (
+                          <div className="flex flex-wrap gap-x-2 gap-y-1 mb-2">
+                            {post.tags.map((tag: string, i: number) => (
+                              <span key={i} className="text-[#D87348] font-serif italic text-xs font-bold">
+                                #{tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
                       
                       {/* 文字區塊 */}
                       <div className="flex flex-col flex-1 p-8">

@@ -1,12 +1,19 @@
 import { client } from '@/sanity/lib/client';
 import { Metadata } from 'next';
 
-// 🌐 1. 伺服器端獨立運作的 Blog SEO 引擎 (Next.js 規定只能在 Server 運作)
+// 🌐 伺服器端獨立運作的 Blog SEO 引擎
 export async function generateMetadata({ params }: { params: Promise<{ slug: string; lang: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
   const lang = (resolvedParams?.lang || 'zh_tw').toLowerCase().replace('-', '_');
 
-  const tourQuery = `*[_type == "blogPost" && slug.current == $slug && publishStatus == "published"][0] { title, summary, tags, thumbnail }`;
+  // 🌟 修正點：將 thumbnail 轉為 thumbnailUrl 字串網址，防止伺服器序列化崩潰
+  const tourQuery = `*[_type == "blogPost" && slug.current == $slug && publishStatus == "published"][0] { 
+    title, 
+    summary, 
+    tags, 
+    "thumbnailUrl": thumbnail.asset->url 
+  }`;
+  
   const post = await client.fetch(tourQuery, { slug: resolvedParams.slug });
   if (!post) return {};
 
@@ -29,12 +36,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: `${pageTitle} | Fun ArTrip 楓藝`,
       description: pageDesc,
-      images: post.thumbnail ? [{ url: post.thumbnail }] : [],
+      // 🌟 修正點：確保傳給 url 的是純字串網址
+      images: post.thumbnailUrl ? [{ url: post.thumbnailUrl }] : [],
     },
   };
 }
 
-// 🌟 2. 補上 Vercel 報錯缺少的「預設導出組件」，單純做個外殼把文章內容 (children) 傳下去渲染
 export default function BlogPostLayout({
   children,
 }: {

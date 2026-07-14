@@ -13,6 +13,7 @@ import Navbar from '@/components/Navbar'
 const query = `*[_type == "blogPost" && slug.current == $slug && publishStatus == "published"][0] {
   title,
   summary,
+  tags,
   "thumbnail": thumbnail.asset->url,
   blogCategory[]->{ name, _id },
   postContent,
