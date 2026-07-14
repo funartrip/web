@@ -513,3 +513,59 @@ export default function PortfolioDetailPage({
     </Suspense>
   )
 }
+// =========================================================================
+// 🌐 智慧動態作品集 SEO 引擎：自動組合「專案標題 + 專案副標 + 後台自訂關鍵字」
+// =========================================================================
+export async function generateMetadata({ params, searchParams }: { 
+  params: Promise<{ slug: string }>; 
+  searchParams: Promise<{ lang?: string }> 
+}) {
+  const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
+  
+  // 1. 解析當前的語系 (對齊你內頁的語系解析邏輯)
+  const lang = ((resolvedSearchParams?.lang as string) || 'zh_tw').toLowerCase().replace('-', '_');
+
+  // 2. 派出取貨員去撈這篇文章的顯示標題、副標、關鍵字以及封面圖 URL
+  const query = `*[_type == "portfolio" && slug.current == $slug && publishStatus == "published"][0] { 
+    displayTitle, 
+    subtitle, 
+    seoKeywords, 
+    "projectCoverUrl": projectCover.asset->url
+  }`;
+  const project = await client.fetch(query, { slug: resolvedParams.slug });
+
+  // 如果找不到專案，回傳空名片
+  if (!project) return {};
+
+  // 語系轉換助理 (對齊你的 getLabel 邏輯)
+  const getLabel = (field: any, l: string) => {
+    if (!field) return '';
+    if (typeof field === 'string') return field;
+    return field[l] || field[l.replace('_', '-')] || field['zh_tw'] || Object.values(field).find(v => v) || '';
+  };
+
+  // 3. 提取並處理資料
+  const pageTitle = getLabel(project.displayTitle, lang); // 抓取你的 Display Title
+  const pageDesc = getLabel(project.subtitle, lang);     // 抓取你的 Subtitle
+  const rawKeywords = project.seoKeywords || '';          // 抓取後台填寫的關鍵字
+
+  // 4. 融合固定標籤與後台自訂標籤
+  const defaultKeywords = ['Fun ArTrip', '楓藝', '跨界合作專案', '文化中介'];
+  const customKeywords = rawKeywords.split(',').map((k: string) => k.trim()).filter(Boolean);
+  const finalKeywords = [...customKeywords, ...defaultKeywords];
+
+  // 5. 遞給 Google 完美的名片
+  return {
+    title: pageTitle, // 瀏覽器標籤會自動變成：專案名稱 | Fun ArTrip
+    description: pageDesc, // 搜尋結果下方的摘要說明
+    keywords: finalKeywords, // 讓搜尋引擎看見你的專案 Tags
+    
+    // 社群分享卡片 (LINE, FB)
+    openGraph: {
+      title: `${pageTitle} | Fun ArTrip 楓藝`,
+      description: pageDesc,
+      images: project.projectCoverUrl ? [{ url: project.projectCoverUrl }] : [],
+    },
+  };
+}

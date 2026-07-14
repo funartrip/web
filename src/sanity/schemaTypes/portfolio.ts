@@ -55,6 +55,12 @@ export const portfolio = {
       initialValue: false, // 預設是關閉的
     },
     {
+      name: 'seoKeywords',
+      title: '🔑 SEO 搜尋關鍵字 (Keywords)',
+      type: 'string',
+      description: '請輸入這個專案作品的專屬標籤，用「英文逗號」隔開。例如：文化中介專案, 里昂跨國合作, 藝術策展標籤',
+    },
+    {
       name: 'subtitle',
       title: 'Subtitle (專案副標題)',
       type: 'localeString',

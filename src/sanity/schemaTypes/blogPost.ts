@@ -51,6 +51,12 @@ export const blogPost = {
       type: 'localeString', // 用於前台列表的簡短介紹
     },
     {
+      name: 'seoKeywords',
+      title: '🔑 自由標籤與 SEO 關鍵字 (Hashtags & Keywords)',
+      type: 'string',
+      description: '請用「英文逗號」隔開每個標籤。這些標籤會同時變成 Google 的關鍵字，並顯示在文章標題下方。例如：日常, 里昂生活, 藝術策展',
+    },
+    {
       name: 'thumbnail',
       title: 'Thumbnail (封面圖)',
       type: 'image',

@@ -147,7 +147,7 @@ function BlogPostContent() {
       </div>
     )
   }
-  
+  const tagsArray = post.seoKeywords ? post.seoKeywords.split(',').map((k: string) => k.trim()).filter(Boolean) : [];
   return (
     <main className="min-h-screen bg-[#223843] font-sans selection:bg-[#D87348] selection:text-[#F2E3C6] pb-32">
       <Navbar/>
@@ -188,7 +188,19 @@ function BlogPostContent() {
             <p className="text-[#819A78] font-mono text-sm tracking-widest font-bold">
               {dict.date} // {formatDate(post._createdAt)}
             </p>
-
+            {/* 🌟 核心修改：對齊第一張截圖紅框！渲染出 IG 自由 Hashtags */}
+            {tagsArray.length > 0 && (
+              <div className="flex flex-wrap justify-center gap-3 mt-4">
+                {tagsArray.map((tag: string, i: number) => (
+                  <span 
+                    key={i} 
+                    className="text-[#D87348] hover:text-[#223843] font-serif italic text-base font-bold tracking-wide transition-colors cursor-pointer"
+                  >
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            )}
             {/* 復古菱形分割線 (深色版) */}
             <div className="flex justify-center items-center gap-4 mx-auto mt-12 mb-12">
               <div className="w-16 md:w-24 h-[1px] bg-[#223843]/20" />

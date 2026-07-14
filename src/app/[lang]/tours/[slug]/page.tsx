@@ -771,3 +771,54 @@ export default function TourDetailPage({
     </Suspense>
   )
 }
+// =========================================================================
+// 🌐 智慧動態 SEO 引擎：自動組合「標題 + 副標題 + 後台自訂關鍵字」
+// =========================================================================
+export async function generateMetadata({ params }: { params: Promise<{ slug: string; lang: string }> }) {
+  const resolvedParams = await params;
+  const lang = (resolvedParams?.lang || 'zh_tw').toLowerCase().replace('-', '_');
+
+  // 1. 取貨員出發！去後台把這條路線的標題、副標題、以及你剛剛加的「關鍵字欄位」通通拿出來
+  const query = `*[_type == "tour" && slug.current == $slug && publishStatus == "published"][0] { 
+    title, 
+    subtitle, 
+    seoKeywords, 
+    mainImage 
+  }`;
+  const tour = await client.fetch(query, { slug: resolvedParams.slug });
+
+  // 如果找不到這條路線，就給空的名片
+  if (!tour) return {};
+
+  // 語系轉換小助手
+  const getLabel = (field: any, l: string) => {
+    if (!field) return '';
+    if (typeof field === 'string') return field;
+    return field[l] || field['zh_tw'] || Object.values(field).find(v => v) || '';
+  };
+
+  // 2. 開始解析後台資料
+  const pageTitle = getLabel(tour.title, lang);     // 抓取你的導覽標題
+  const pageDesc = getLabel(tour.subtitle, lang);   // 抓取你的導覽副標題
+  const rawKeywords = tour.seoKeywords || '';       // 抓取你在後台輸入的關鍵字字串
+
+  // 3. 自動化組合關鍵字清單
+  // 我們把後台填寫的字串拆開，並順便幫你塞入全站通用的固定關鍵字（例如 Fun ArTrip、楓藝）
+  const defaultKeywords = ['Fun ArTrip', '楓藝', '法國官方持證導覽'];
+  const customKeywords = rawKeywords.split(',').map((k: string) => k.trim()).filter(Boolean);
+  const finalKeywords = [...customKeywords, ...defaultKeywords];
+
+  // 4. 做出完美的隱形名片遞給 Google
+  return {
+    title: pageTitle, // 瀏覽器標籤會自動變成：行程名稱 | Fun ArTrip
+    description: pageDesc, // 搜尋結果底下的說明文字，直接套用你的優美副標題
+    keywords: finalKeywords, // 這裡面就包含了你在後台填寫的專屬 Tags！
+    
+    // LINE、FB、微信分享時的縮圖與卡片
+    openGraph: {
+      title: `${pageTitle} | Fun ArTrip 楓藝`,
+      description: pageDesc,
+      images: tour.mainImage ? [{ url: urlFor(tour.mainImage).url() }] : [],
+    },
+  };
+}

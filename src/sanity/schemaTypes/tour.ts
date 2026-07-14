@@ -63,6 +63,12 @@ export const tour = {
       validation: (Rule: any) => Rule.required(),
     },
     {
+      name: 'seoKeywords',
+      title: '🔑 SEO 搜尋關鍵字 (Keywords)',
+      type: 'string',
+      description: '請輸入這條路線的專屬標籤或關鍵字，用「英文逗號」隔開。例如：里昂中文導覽, 羅浮宮私人解說, 法國深度旅遊',
+    },
+    {
       name: 'subtitle',
       title: 'Subtitle (卡片副標題)',
       type: 'localeString',
