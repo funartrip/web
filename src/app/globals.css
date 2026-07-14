@@ -203,4 +203,21 @@
     background: rgba(140, 59, 59, 0.2); /* 淡淡的酒紅透明質感滑塊 */
     border-radius: 10px;
   }
+  /* ========================================================================= */
+  /* 🔒 全站原創內容防護盾 (CSS Text Selection Protection) */
+  /* ========================================================================= */
+  body {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE 10+ */
+    user-select: none;         /* 標準語法：禁止全選、反白文字 */
+  }
+
+  /* 🌟 關鍵例外：必須允許聯絡表單的輸入框可以選取文字，否則使用者會無法打字修改 */
+  input, textarea, select {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+  }
 }

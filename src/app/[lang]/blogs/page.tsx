@@ -13,12 +13,12 @@ import Navbar from '@/components/Navbar'
 // 🌟 精準的 Query 語法
 const query = `{
   "lobby": *[_type == "blogPostPage"][0],
-  "posts": *[_type == "blogPost"] | order(_createdAt desc) {
+  "posts": *[_type == "blogPost" && publishStatus == "published"] | order(_createdAt desc) {
     title,
     summary,
     "slug": slug.current,
     "thumbnail": thumbnail.asset->url,
-    blogCategory[]->{ name, _id } 
+    blogCategory[]->{ name, _id }
   },
   "category": *[_type == "category" && type == "blogcategory"] {
     name,

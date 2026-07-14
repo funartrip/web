@@ -180,16 +180,43 @@ function FooterContent() {
 }
 
 // ClientLayout 主組件
-export default function ClientLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname(); 
+// =========================================================================
+// 🔒 升域完全體：全站 ClientLayout (含原創內容防護盾)
+// =========================================================================
+  export default function ClientLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   const [showTopBtn, setShowTopBtn] = useState(false);
   const isStudio = pathname.startsWith('/studio');
 
   useEffect(() => {
-    if (isStudio) return; 
+    if (isStudio) return; // 如果在後台 Studio 管理介面，自動放行所有防護
+
+    // 1. 原本控制「回到頂部按鈕」的滾動監聽邏輯
     const handleBtn = () => setShowTopBtn(window.scrollY > 400);
     window.addEventListener('scroll', handleBtn);
-    return () => window.removeEventListener('scroll', handleBtn);
+
+    // 🔒 2. 禁用全站滑鼠右鍵（防護盾第 2 道防線）
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+    };
+
+    // 🔒 3. 禁用圖片拖拽（防護盾第 3 道防線）
+    const handleDragStart = (e: DragEvent) => {
+      if ((e.target as HTMLElement).tagName === 'IMG') {
+        e.preventDefault();
+      }
+    };
+
+    // 註冊防護監聽器
+    window.addEventListener('contextmenu', handleContextMenu);
+    window.addEventListener('dragstart', handleDragStart);
+
+    // 清除監聽器，釋放記憶體維持網頁優良效能
+    return () => {
+      window.removeEventListener('scroll', handleBtn);
+      window.removeEventListener('contextmenu', handleContextMenu);
+      window.removeEventListener('dragstart', handleDragStart);
+    };
   }, [isStudio]);
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -203,13 +230,13 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       <Suspense fallback={<div className="h-20" />}>
         <Navbar />
       </Suspense>
-
+      
       {children}
-
+      
       {showTopBtn && (
         <button 
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-40 bg-[#5C6B47]/30 backdrop-blur-md text-white w-12 h-12 rounded-full flex items-center justify-center border border-white/10 hover:bg-[#5C6B47] transition-all shadow-lg text-xl"
+          className="fixed bottom-8 right-8 z-40 bg-[#5C6B47]/30 backdrop-blur-md text-white w-12 h-12 rounded-full flex items-center justify-center border border-white/10 hover:bg-[#5C6B47] transition-all shadow-lg text-xl cursor-pointer"
         >
           ↑
         </button>

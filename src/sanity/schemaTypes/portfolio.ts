@@ -32,6 +32,20 @@ export const portfolio = {
       },
       validation: (Rule: any) => Rule.required().error('請點擊右側 Generate 產生網址代碼'),
     },
+    {
+      name: 'publishStatus',
+      title: '🚀 前台發布狀態 (Frontend Visibility)',
+      type: 'string',
+      options: {
+        list: [
+          { title: '🌱 僅儲存/後台隱藏 (Draft / Hidden)', value: 'draft' },
+          { title: '✨ 正式公開發布 (Live / Published)', value: 'published' }
+        ],
+        layout: 'radio', // 變成直覺的單選大按鈕
+      },
+      initialValue: 'draft', // 預設一建立新文章就是隱藏狀態，安全第一！
+      validation: (Rule: any) => Rule.required(),
+    },
     // 在 tour.ts 和 portfolio.ts 的 fields 陣列中都加上這一段：
     {
       name: 'isFeatured',

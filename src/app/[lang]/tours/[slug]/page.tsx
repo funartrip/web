@@ -51,7 +51,7 @@ function TourDetailContent({
 
   useEffect(() => {
     const query = `{
-      "tour": *[_type == "tour" && slug.current == $slug][0] {
+      "tour": *[_type == "tour" && slug.current == $slug && publishStatus == "published"][0] {
         ...,
         gallery,
         "priceTemplate": priceTemplate->{baseCapacity, basePrice, extraPersonFee, maxCapacity, displayMode},

@@ -27,11 +27,11 @@ function HomeContent({ params }: { params: Promise<{ lang: string }> }) {
   useEffect(() => {
     const fetchData = async () => {
       const query = `{
-        "tours": *[_type == "tour" && isFeatured == true] | order(_updatedAt desc)[0...3] {
+        "tours": *[_type == "tour" && isFeatured == true && publishStatus == "published"] | order(_updatedAt desc)[0...3] {
           ...,
           "serviceTypeName": serviceType->name
         },
-        "portfolios": *[_type == "portfolio" && isFeatured == true] | order(dateProject desc)[0...3] {
+        "portfolios": *[_type == "portfolio" && isFeatured == true && publishStatus == "published"] | order(dateProject desc)[0...3] {
           ...
         }
       }`

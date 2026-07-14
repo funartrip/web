@@ -10,7 +10,7 @@ import { useParams } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 
 // 獲取單篇文章與分類的 GROQ Query
-const query = `*[_type == "blogPost" && slug.current == $slug][0] {
+const query = `*[_type == "blogPost" && slug.current == $slug && publishStatus == "published"][0] {
   title,
   summary,
   "thumbnail": thumbnail.asset->url,

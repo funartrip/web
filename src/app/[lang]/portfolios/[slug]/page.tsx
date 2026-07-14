@@ -58,7 +58,7 @@ function PortfolioDetailContent({ params: paramsPromise }: any) {
   const [selectedImgIndex, setSelectedImgIndex] = useState<number | null>(null)
 
   useEffect(() => {
-    const query = `*[_type == "portfolio" && slug.current == $slug][0] {
+    const query = `*[_type == "portfolio" && slug.current == $slug && publishStatus == "published"][0] {
       ...,
       "projectCover": projectCover.asset->url,
       "gallery": gallery[].asset->url,

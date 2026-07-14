@@ -44,7 +44,7 @@ function ToursLobbyContent() {
     const fetchData = async () => {
       const query = `{
         "pageData": *[_type == "tourPage"][0],
-        "tours": *[_type == "tour"] {
+        "tours": *[_type == "tour" && publishStatus == "published"] {
           ...,
           "serviceTypeName": serviceType->name,
           "audienceNames": suitableAudience[]->name

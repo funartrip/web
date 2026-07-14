@@ -22,7 +22,7 @@ function PortfoliosContent() {
   useEffect(() => {
     Promise.all([
       client.fetch(`*[_type == "portfolioPage"][0]`),
-      client.fetch(`*[_type == "portfolio"] | order(date desc) {
+      client.fetch(`*[_type == "portfolio" && publishStatus == "published"] | order(date desc) {
         _id, "slug": slug.current, displayTitle, subtitle, summary, highlight,
         "projectCover": projectCover.asset->url, date,
         "targetAudience": targetAudience[]->{ name }
