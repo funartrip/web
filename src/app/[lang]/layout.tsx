@@ -46,7 +46,7 @@ export async function generateMetadata({
       default: seo.title,
     },
     description: seo.desc,
-    keywords: ['法國導遊', '巴黎導覽', '里昂導覽', '博物館解說', '文化轉譯', 'Fun ArTrip', '法國旅遊', '羅浮宮解說', 'Guide Conférencier', 'Paris Tour', 'Lyon Tour','文化中介', 'Mediation culturelle','里昂','里昂解說員','解說員','導遊','導覽',],
+    keywords: ['法國導遊', '巴黎導覽', '里昂導覽', '博物館解說', '文化轉譯', 'Fun ArTrip', '法國旅遊', '羅浮宮解說', 'Guide Conférencier', 'Paris Tour', 'Lyon Tour','文化中介', 'Mediation culturelle','里昂','里昂解說員','解說員','導遊','導覽','法國華人解說', '中文解說', '法國中文解說', '法國中文解說員',],
     openGraph: {
       title: seo.title,
       description: seo.desc,
