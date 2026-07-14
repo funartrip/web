@@ -213,11 +213,7 @@ function BlogContent() {
                     className="group relative flex flex-col bg-[#AADCF2] rounded-2xl overflow-hidden shadow-[0_15px_30px_rgba(0,0,0,0.3),_inset_0_4px_6px_rgba(255,255,255,0.7)] hover:shadow-[0_25px_40px_rgba(216,115,72,0.25),_inset_0_4px_10px_rgba(255,255,255,0.9)] transition-shadow duration-300"
                   >
                     <Link href={`/${lang}/blogs/${post.slug}`} className="flex flex-col h-full">
-                      {/* 縮圖 */}
-                      <div className="relative aspect-[4/3] overflow-hidden">
-                        <Image src={post.thumbnail || '/placeholder.jpg'} alt="cover" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
-                        <div className="absolute inset-0 bg-[#223843]/10 group-hover:bg-transparent transition-colors duration-500" />
-                      </div>
+            
                       {/* 🌿 圖片區（內含全新的懸浮 Hashtags 圖層） */}
                       <div className="relative aspect-[4/3] overflow-hidden shrink-0">
                         <Image src={post.thumbnail || '/placeholder.jpg'} alt="cover" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
@@ -225,11 +221,11 @@ function BlogContent() {
                         
                         {/* 🌟 大氣、高雅的設計：把所有 #Hashtags 裝進毛玻璃小深色方塊，整齊排列在圖片左下角 */}
                         {post.tags && post.tags.length > 0 && (
-                          <div className="absolute bottom-3 left-4 right-4 z-20 flex flex-wrap gap-2 animate-in fade-in slide-in-from-bottom-2 duration-500">
+                          <div className="absolute top-4 right-4 z-20 flex flex-wrap gap-1.5 justify-end max-w-[calc(100%-2rem)]">
                             {post.tags.map((tag: string, i: number) => (
                               <span 
                                 key={i} 
-                                className="bg-[#223843]/75 backdrop-blur-md text-[#F2E3C6] border border-[#D87348]/20 px-2.5 py-0.5 rounded-md text-[11px] font-serif italic font-bold tracking-wide shadow-md"
+                                className="bg-[#D87348] text-[#223843] px-3 py-1 rounded-full text-[11px] font-sans font-bold tracking-wide shadow-lg uppercase transition-transform duration-300 hover:scale-105"
                               >
                                 #{tag}
                               </span>
