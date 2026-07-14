@@ -1,8 +1,8 @@
 import { client } from '@/sanity/lib/client';
 import { Metadata } from 'next';
 
-// 🌐 伺服器端獨立運作的 Blog SEO 引擎
-export async function generateMetadata({ params }: { params: Promise<{ slug: string; lang: string }> }) {
+// 🌐 1. 伺服器端獨立運作的 Blog SEO 引擎 (Next.js 規定只能在 Server 運作)
+export async function generateMetadata({ params }: { params: Promise<{ slug: string; lang: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
   const lang = (resolvedParams?.lang || 'zh_tw').toLowerCase().replace('-', '_');
 
@@ -32,4 +32,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       images: post.thumbnail ? [{ url: post.thumbnail }] : [],
     },
   };
+}
+
+// 🌟 2. 補上 Vercel 報錯缺少的「預設導出組件」，單純做個外殼把文章內容 (children) 傳下去渲染
+export default function BlogPostLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return <>{children}</>;
 }
