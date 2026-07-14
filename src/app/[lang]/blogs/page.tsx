@@ -218,15 +218,20 @@ function BlogContent() {
                         <Image src={post.thumbnail || '/placeholder.jpg'} alt="cover" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
                         <div className="absolute inset-0 bg-[#223843]/10 group-hover:bg-transparent transition-colors duration-500" />
                       </div>
-                   {post.tags && post.tags.length > 0 && (
-                          <div className="flex flex-wrap gap-x-2 gap-y-1 mb-2">
+                      {/* 🌟 大氣、高雅的設計：把所有 #Hashtags 裝進毛玻璃小深色方塊，整齊排列在圖片左下角 */}
+                        {post.tags && post.tags.length > 0 && (
+                          <div className="absolute bottom-3 left-4 right-4 z-20 flex flex-wrap gap-2 animate-in fade-in slide-in-from-bottom-2 duration-500">
                             {post.tags.map((tag: string, i: number) => (
-                              <span key={i} className="text-[#D87348] font-serif italic text-xs font-bold">
+                              <span 
+                                key={i} 
+                                className="bg-[#223843]/75 backdrop-blur-md text-[#F2E3C6] border border-[#D87348]/20 px-2.5 py-0.5 rounded-md text-[11px] font-serif italic font-bold tracking-wide shadow-md"
+                              >
                                 #{tag}
                               </span>
                             ))}
                           </div>
                         )}
+                      
                       
                       {/* 文字區塊 */}
                       <div className="flex flex-col flex-1 p-8">
