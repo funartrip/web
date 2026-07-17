@@ -73,12 +73,13 @@ function FooterContent() {
           
           {/* 左側：品牌資訊 */}
           <div className="lg:col-span-4 space-y-8">
-            <div className="relative w-48 h-48 md:w-52 md:h-52 bg-white p-3 rounded-2xl shadow-md border border-slate-200/60 shrink-0 mb-6">
+            <div className="relative w-48 h-48 md:w-52 md:h-52 shrink-0 mb-4 text-left">
                 <Image 
                   src="/logo.png" 
                   alt="Fun ArTrip Logo" 
                   fill 
-                  className="object-contain p-1"
+                  className="object-contain object-left" /* 🌟 確保圖案靠左切齊下方文字 */
+                  priority
                 />
               </div>
               
