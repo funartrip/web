@@ -97,21 +97,21 @@ function NavbarContent() {
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
           
           {/* 首頁連結也必須套用動態路徑 */}
-          <Link href={`/${lang}`} className="z-[70]" onClick={() => setIsMobileMenuOpen(false)}>
-            <div className="relative w-10 h-10 md:w-12 md:h-12 overflow-hidden rounded-lg transition-transform duration-300 group-hover:scale-105">
+          <Link href={`/${lang}`} className="z-[70] flex flex-row items-center gap-4 group shrink-0" onClick={() => setIsMobileMenuOpen(false)}>
+            <div className="relative w-14 h-14 md:w-16 md:h-16 overflow-hidden rounded-xl transition-transform duration-300 group-hover:scale-105 shrink-0">
               <Image
-                src="/logo.png" // 🌟 讀取 public/logo.png
+                src="/logo.png"
                 alt="Fun ArTrip Logo"
                 fill
                 className="object-contain"
                 priority
               />
             </div>
-            <div className="flex flex-col">
-              <span className={`text-xl md:text-2xl font-extrabold tracking-tighter transition-colors ${textColorClass}`}>
-                Fun ArTrip <span className={`font-medium ${isBlog ? 'text-[#D87348]' : 'text-[#D4C376]'}`}>楓藝</span>
+            <div className="flex flex-col text-left justify-center">
+              <span className={`text-xl md:text-2xl font-serif font-black tracking-tight transition-colors leading-tight ${textColorClass}`}>
+                Fun ArTrip <span className={`font-sans font-medium ${isBlog ? 'text-[#D87348]' : 'text-[#D4C376]'}`}>楓藝</span>
               </span>
-              <span className={`text-[10px] md:text-[11px] font-sans font-normal tracking-wider opacity-75 mt-1 leading-none transition-colors ${textColorClass}`}>
+              <span className={`text-[11px] md:text-xs font-sans font-normal tracking-wide opacity-75 mt-1.5 leading-none transition-colors ${textColorClass}`}>
                 {labels.tagline}
               </span>
             </div>

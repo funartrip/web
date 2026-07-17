@@ -73,17 +73,21 @@ function FooterContent() {
           
           {/* 左側：品牌資訊 */}
           <div className="lg:col-span-4 space-y-8">
-            <div className="relative w-14 h-14 bg-white p-1 rounded-xl shadow-sm border border-slate-100 shrink-0">
+            <div className="relative w-48 h-48 md:w-52 md:h-52 bg-white p-3 rounded-2xl shadow-md border border-slate-200/60 shrink-0 mb-6">
                 <Image 
                   src="/logo.png" 
                   alt="Fun ArTrip Logo" 
                   fill 
                   className="object-contain p-1"
                 />
-            </div>
-            <div className="space-y-1.5 text-left">
-                <h4 className="text-2xl font-extrabold tracking-tight leading-none">Fun ArTrip 楓藝</h4>
-                <p className="text-[11px] font-sans font-medium text-[#5C6B47] tracking-wider opacity-80 leading-none">
+              </div>
+              
+              {/* 第二排：完全切齊商標寬度的多語系標題與品牌小字 */}
+              <div className="flex flex-col text-left">
+                <h4 className="text-2xl md:text-3xl font-serif font-black tracking-tight leading-none text-[#2C3522]">
+                  Fun ArTrip <span className="font-sans font-medium">楓藝</span>
+                </h4>
+                <p className="text-xs md:text-sm font-sans font-medium text-[#5C6B47] tracking-wide mt-3.5 leading-none opacity-90">
                   {t.tagline}
                 </p>
               </div>
