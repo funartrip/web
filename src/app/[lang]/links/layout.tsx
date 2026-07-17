@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   twitter: {
     // 🌟 核心關鍵：這個 summary_large_image 參數，會強迫 LINE 和各大社群平台「必須使用滿版大圖」來顯示！
     card: 'summary_large_image', 
-    title: '李楓梵 ╳ 數位名片',
-    description: '點擊進入 Fun ArTrip 楓藝高訂品牌傳送門，直接與我聯絡。',
+    title: '李楓梵 ╳ Business Card',
+    description: ' Fun ArTrip 楓藝 Art & Culture Interpretation Atelier',
     images: ['https://www.funartrip.com/og-links.jpg'],
   },
 }
