@@ -125,7 +125,7 @@ export default function LinktreePage() {
           className="flex flex-col gap-1 text-sm font-sans font-bold text-[#8C3B3B] tracking-wide mb-10 text-center"
         >
           <span>法國官方持證導覽解說員</span>
-          <span className="text-xs font-serif font-medium text-[#5C6B47] italic">Guide-Conférencière Agréée</span>
+          <span className="text-xs font-serif font-medium text-[#5C6B47] italic">Guide-Conférencière</span>
         </motion.div>
 
         {/* 📱 「黃金字體層級」水晶玻璃傳送門按鈕清單 */}
