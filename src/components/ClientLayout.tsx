@@ -9,6 +9,7 @@ import { useParams, usePathname } from 'next/navigation';
 import { client } from '@/sanity/lib/client';
 // 🌟 引入 Icon，新增了 FaFacebookF (使用單純 F 的版本比較現代)
 import { FaInstagram, FaLinkedinIn, FaFacebookF, FaEnvelope } from 'react-icons/fa';
+import Image from 'next/image';
 
 // 🌟 Footer 內容組件
 function FooterContent() {
@@ -24,25 +25,28 @@ function FooterContent() {
       services: '里昂城市解說 ｜ 巴黎・里昂博物館導讀',
       sitemap: '網站地圖', home: '首頁', about: '關於我', tours: '探索路線', portfolio: '合作專案', blog: '旅行誌', contact: '預約聯絡',
       featured: '精選路線', more: '更多冒險路線', legal: '法律與責任條款', mentions: "法律資訊", cgv: "一般銷售條款",
+      tagline: '藝術與文化 導覽解說工作室'
     },
     zh_cn: {
       guideTitle: '法国官方持证导览解说员 (Guide-conférencier)',
       services: '里昂城市解说 ｜ 巴黎・里昂博物馆导读',
       sitemap: '网站地图', home: '首页', about: '关于我', tours: '探索路线', portfolio: '合作专案', blog: '旅行志', contact: '预约联系',
       featured: '精选路线', more: '更多冒险路线', legal: '法律与责任条款', mentions: "法律信息", cgv: "一般销售条款",
+      tagline: '艺术与文化 导览解说工作室'
     },
     fr: {
       guideTitle: "Guide-conférencier agréé par l'État français",
       services: 'Visites de Lyon | Conférences dans les musées de Paris et Lyon',
       sitemap: 'Plan du site', home: 'Accueil', about: 'À propos', tours: 'Explore Tours', portfolio: 'Projets', blog: 'Blog', contact: 'Contact',
       featured: 'Parcours phares', more: 'Plus de parcours', legal: 'Mentions Légales', mentions: "Mentions Légales", cgv: "Conditions Générales de Vente (CGV)",
+      tagline: 'Studio de Visites Guidées • Art & Culture'
     },
     en: {
       guideTitle: 'French State Licensed Tour Guide (Guide-conférencier)',
       services: 'Lyon City Tours | Museum Tours in Paris & Lyon',
       sitemap: 'Sitemap', home: 'Home', about: 'About Me', tours: 'Explore Tours', portfolio: 'Projects', blog: 'Blog', contact: 'Inquiry',
       featured: 'Featured Tours', more: 'More adventures', legal: 'Legal & Terms', mentions: "Legal Notice", cgv: "Terms & Conditions (CGV)",
-    }
+      tagline: 'Art & Culture Guided Tours Studio'}
   };
 
   const t = ft[lang] || ft.zh_tw;
@@ -69,11 +73,22 @@ function FooterContent() {
           
           {/* 左側：品牌資訊 */}
           <div className="lg:col-span-4 space-y-8">
-            <div className="bg-white px-6 py-3 inline-block rounded-xl shadow-sm font-bold border border-slate-100 text-sm">
-              Fun ArTrip 楓藝
+            <div className="relative w-14 h-14 bg-white p-1 rounded-xl shadow-sm border border-slate-100 shrink-0">
+                <Image 
+                  src="/logo.png" 
+                  alt="Fun ArTrip Logo" 
+                  fill 
+                  className="object-contain p-1"
+                />
             </div>
-            <div className="space-y-2">
-              <h4 className="text-2xl font-extrabold tracking-tight">Fun ArTrip 楓藝</h4>
+            <div className="space-y-1.5 text-left">
+                <h4 className="text-2xl font-extrabold tracking-tight leading-none">Fun ArTrip 楓藝</h4>
+                <p className="text-[11px] font-sans font-medium text-[#5C6B47] tracking-wider opacity-80 leading-none">
+                  {t.tagline}
+                </p>
+              </div>
+
+            <div className="space-y-2 pt-2 text-left">
               <p className="text-sm font-bold text-[#5C6B47] leading-relaxed">
                 {t.guideTitle} <br/>
                 {t.services}

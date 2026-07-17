@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { useState, useEffect, Suspense } from 'react'
-// 🌟 1. 核心升級：移除 useSearchParams，改用 useParams, usePathname, useRouter
+import Image from 'next/image'
 import { useParams, usePathname, useRouter } from 'next/navigation'
 
 function NavbarContent() {
@@ -21,10 +21,22 @@ function NavbarContent() {
   const isLegal = pathname?.includes('/legal')
 
   const t: any = {
-    zh_tw: { about: '關於我', tours: '探索路線', portfolios: '合作專案', blogs: '旅行誌', contact: '預約聯絡', langBtn: 'ZH' },
-    zh_cn: { about: '关于我', tours: '探索路线', portfolios: '合作专案', blogs: '旅行志', contact: '预约联系', langBtn: 'CN' },
-    fr: { about: 'À propos', tours: 'Explore Tours', portfolios: 'Projets', blogs: 'Blog', contact: 'Contact', langBtn: 'FR' },
-    en: { about: 'About', tours: 'Explore Tours', portfolios: 'Projects', blogs: 'Blog', contact: 'Inquiry', langBtn: 'EN' }
+    zh_tw: { 
+      about: '關於我', tours: '探索路線', portfolios: '合作專案', blogs: '旅行誌', contact: '預約聯絡', langBtn: '繁中',
+      tagline: '藝術與文化 導覽解說工作室' 
+    },
+    zh_cn: { 
+      about: '关于我', tours: '探索路线', portfolios: '合作专案', blogs: '旅行志', contact: '预约联系', langBtn: '简中',
+      tagline: '艺术与文化 导览解说工作室' 
+    },
+    fr: { 
+      about: 'À propos', tours: 'Explore Tours', portfolios: 'Projets', blogs: 'Blog', contact: 'Contact', langBtn: 'FR',
+      tagline: 'Studio de Visites Guidées • Art & Culture' 
+    },
+    en: { 
+      about: 'About', tours: 'Explore Tours', portfolios: 'Projects', blogs: 'Blog', contact: 'Inquiry', langBtn: 'EN',
+      tagline: 'Art & Culture Guided Tours Studio' 
+    }
   }
 
   const labels = t[lang] || t.zh_tw
@@ -86,9 +98,21 @@ function NavbarContent() {
           
           {/* 首頁連結也必須套用動態路徑 */}
           <Link href={`/${lang}`} className="z-[70]" onClick={() => setIsMobileMenuOpen(false)}>
+            <div className="relative w-10 h-10 md:w-12 md:h-12 overflow-hidden rounded-lg transition-transform duration-300 group-hover:scale-105">
+              <Image
+                src="/logo.png" // 🌟 讀取 public/logo.png
+                alt="Fun ArTrip Logo"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
             <div className="flex flex-col">
               <span className={`text-xl md:text-2xl font-extrabold tracking-tighter transition-colors ${textColorClass}`}>
                 Fun ArTrip <span className={`font-medium ${isBlog ? 'text-[#D87348]' : 'text-[#D4C376]'}`}>楓藝</span>
+              </span>
+              <span className={`text-[10px] md:text-[11px] font-sans font-normal tracking-wider opacity-75 mt-1 leading-none transition-colors ${textColorClass}`}>
+                {labels.tagline}
               </span>
             </div>
           </Link>
