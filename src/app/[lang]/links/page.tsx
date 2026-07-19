@@ -5,8 +5,7 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { useParams } from 'next/navigation'
-import { FaLine, FaWhatsapp, FaWeixin, FaInstagram, FaEnvelope, FaGlobe, FaCopy, FaCheck, FaHome } from 'react-icons/fa'
-
+import { FaLine, FaWhatsapp, FaWeixin, FaInstagram, FaEnvelope, FaGlobe, FaCopy, FaCheck, FaHome, FaMapMarkerAlt } from 'react-icons/fa'
 export default function LinktreePage() {
   const params = useParams()
   const lang = ((params?.lang as string) || 'zh_tw').toLowerCase().replace('-', '_')
@@ -85,7 +84,7 @@ export default function LinktreePage() {
               Fun ArTrip <span className="font-sans font-medium text-[#EAA624]">楓藝</span>
             </span>
             <span className="text-[10px] font-sans font-normal text-[#5C6B47] tracking-wider mt-1 leading-none">
-              Studio de Visites Guidées • Art & Culture
+              Art & Culture Interpretation Atelier
             </span>
           </div>
         </div>
@@ -104,29 +103,57 @@ export default function LinktreePage() {
       {/* 🌿 個人形象與雙語職稱金字塔區 */}
       <div className="w-full max-w-md flex flex-col items-center text-center">
         
-        {/* 大頭照 */}
+        {/* 大頭照：立體柔和陰影 */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, type: 'spring' }}
-          className="relative w-28 h-28 rounded-full overflow-hidden shadow-[0_8px_20px_rgba(44,53,34,0.1)] mb-6 shrink-0"
+          className="relative w-28 h-28 rounded-full overflow-hidden shadow-[0_10px_30px_rgba(44,53,34,0.12)] mb-6 shrink-0 border border-white/20"
         >
           <Image src="/profile.png" alt="李楓梵 Lee, Feng-Fang" fill className="object-cover" priority />
         </motion.div>
 
-        {/* 姓名與官方持證雙語職稱 */}
-        <motion.h1 
-          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-          className="text-2xl md:text-3xl font-serif font-black tracking-tight text-[#223843] mb-3"
-        >
-          李楓梵 <span className="text-xl font-bold font-sans text-[#2C3522]/80 ml-1">Lee, Feng-Fang E.I.</span>
-        </motion.h1>
-
+        {/* 核心整合結構：中英名字與職稱地點 */}
         <motion.div 
-          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
-          className="flex flex-col gap-1 text-sm font-sans font-bold text-[#8C3B3B] tracking-wide mb-10 text-center"
+          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+          className="w-full flex flex-col items-center"
         >
-          <span>法國官方持證導覽解說員</span>
-          <span className="text-xs font-serif font-medium text-[#5C6B47] italic">Guide-Conférencière</span>
+          {/* 名字區：字體有感放大（text-3xl / md:text-4xl），中英文底部基準線完美對齊 */}
+          <h1 className="flex flex-wrap items-baseline justify-center gap-x-2 text-3xl md:text-4xl font-serif font-black tracking-tight text-[#223843] mb-5">
+            <span>李楓梵</span>
+            <span className="text-xl md:text-2xl font-sans font-bold text-[#223843] tracking-tight flex items-baseline">
+              Lee, Feng-Fang
+              {/* E.I. 保持微小精緻感（text-[11px]），略微調深至 50% 不搶主名 */}
+              <span className="text-[11px] font-sans font-normal text-[#2C3522]/50 ml-2 select-none tracking-normal" title="Entrepreneur Individuel">
+                E.I.
+              </span>
+            </span>
+          </h1>
+
+          {/* 官方持證雙語職稱：字體全面放大，顏色更加清晰飽和 */}
+          <div className="flex flex-col items-center text-center gap-2">
+            <span className="text-16px md:text-lg font-sans font-extrabold text-[#8C3B3B] tracking-wider leading-none">
+              法國官方持證導覽解說員
+            </span>
+            <span className="text-xs md:text-sm font-serif font-bold text-[#2C3522] italic tracking-[0.12em] leading-none mt-1">
+              Guide-Conférencière
+            </span>
+            <span className="text-xs md:text-sm font-serif font-bold text-[#2C3522] italic tracking-[0.12em] leading-none mt-1">
+              Certified Tour Guide in France
+            </span>
+          </div>
+
+          {/* 🌟 核心修正：字體同步放大（text-xs / md:text-sm），純化顏色，並透過 mb-12 完美拉開與下方第一個按鈕的奢華間距 */}
+          <div className="flex items-center justify-center gap-2 mt-6 py-1 mb-12">
+            <FaMapMarkerAlt className="text-xs md:text-sm text-[#8C3B3B] shrink-0" />
+            <span className="text-xs md:text-sm font-sans font-black tracking-[0.2em] text-[#223843] uppercase pl-1 flex items-center">
+              Lyon <span className="text-[#2C3522]/30 font-light mx-2 text-xs select-none">╳</span> 
+              Alpes <span className="text-[#2C3522]/30 font-light mx-2 text-xs select-none">╳</span> 
+              Provence
+            </span>
+          </div>
         </motion.div>
+
+      
+      
 
         {/* 📱 「黃金字體層級」水晶玻璃傳送門按鈕清單 */}
         <div className="w-full space-y-4 px-1 flex-1">
