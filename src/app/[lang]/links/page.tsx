@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { useParams } from 'next/navigation'
 import { FaLine, FaWhatsapp, FaWeixin, FaInstagram, FaEnvelope, FaGlobe, FaCopy, FaCheck, FaHome, FaMapMarkerAlt } from 'react-icons/fa'
+
 export default function LinktreePage() {
   const params = useParams()
   const lang = ((params?.lang as string) || 'zh_tw').toLowerCase().replace('-', '_')
@@ -20,7 +21,7 @@ export default function LinktreePage() {
   const emailAddress = "contact@funartrip.com"
   const wechatId = "funartrip"           
   const lineUrl = "https://line.me/ti/p/9WZq8VqBPR" 
-  const whatsappNumber = "+33 7 18 52 04 91" 
+  const whatsappUrl = "https://wa.me/qr/JBAE3XLMKDO7B1" // 🌟 已更新為 WhatsApp 官方 QR 專屬網址
 
   // 一鍵「純複製」信箱函數
   const handleCopyEmail = (e: React.MouseEvent) => {
@@ -54,7 +55,7 @@ export default function LinktreePage() {
     },
     {
       label: 'WhatsApp 即時諮詢',
-      url: `https://wa.me/${whatsappNumber}`,
+      url: whatsappUrl,
       icon: <FaWhatsapp className="text-2xl text-[#25D366]" />
     }
   ]
@@ -62,7 +63,7 @@ export default function LinktreePage() {
   return (
     <main className="relative min-h-screen text-[#2C3522] font-sans overflow-x-hidden flex flex-col items-center justify-start px-4 py-12 selection:bg-[#EAA624]/20">
       
-      {/* 🔮 黑魔法網頁防線：強行隱藏全站通用 Navbar 與 全站 Footer */}
+      {/* 🔮 隱藏全站通用 Navbar 與 Footer */}
       <style>{`
         nav.fixed, footer { display: none !important; }
       `}</style>
@@ -116,21 +117,20 @@ export default function LinktreePage() {
           initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
           className="w-full flex flex-col items-center"
         >
-          {/* 名字區：字體有感放大（text-3xl / md:text-4xl），中英文底部基準線完美對齊 */}
+          {/* 名字區 */}
           <h1 className="flex flex-wrap items-baseline justify-center gap-x-2 text-3xl md:text-4xl font-serif font-black tracking-tight text-[#223843] mb-5">
             <span>李楓梵</span>
             <span className="text-xl md:text-2xl font-sans font-bold text-[#223843] tracking-tight flex items-baseline">
               Lee, Feng-Fang
-              {/* E.I. 保持微小精緻感（text-[11px]），略微調深至 50% 不搶主名 */}
               <span className="text-[11px] font-sans font-normal text-[#2C3522]/50 ml-2 select-none tracking-normal" title="Entrepreneur Individuel">
                 E.I.
               </span>
             </span>
           </h1>
 
-          {/* 官方持證雙語職稱：字體全面放大，顏色更加清晰飽和 */}
+          {/* 官方持證三語職稱 */}
           <div className="flex flex-col items-center text-center gap-2">
-            <span className="text-16px md:text-lg font-sans font-extrabold text-[#8C3B3B] tracking-wider leading-none">
+            <span className="text-[16px] md:text-lg font-sans font-extrabold text-[#8C3B3B] tracking-wider leading-none">
               法國官方持證導覽解說員
             </span>
             <span className="text-xs md:text-sm font-serif font-bold text-[#2C3522] italic tracking-[0.12em] leading-none mt-1">
@@ -141,7 +141,7 @@ export default function LinktreePage() {
             </span>
           </div>
 
-          {/* 🌟 核心修正：字體同步放大（text-xs / md:text-sm），純化顏色，並透過 mb-12 完美拉開與下方第一個按鈕的奢華間距 */}
+          {/* 主要工作地點 */}
           <div className="flex items-center justify-center gap-2 mt-6 py-1 mb-12">
             <FaMapMarkerAlt className="text-xs md:text-sm text-[#8C3B3B] shrink-0" />
             <span className="text-xs md:text-sm font-sans font-black tracking-[0.2em] text-[#223843] uppercase pl-1 flex items-center">
@@ -151,9 +151,6 @@ export default function LinktreePage() {
             </span>
           </div>
         </motion.div>
-
-      
-      
 
         {/* 📱 「黃金字體層級」水晶玻璃傳送門按鈕清單 */}
         <div className="w-full space-y-4 px-1 flex-1">
@@ -205,7 +202,7 @@ export default function LinktreePage() {
             </div>
           </motion.button>
 
-          {/* 3. Instagram ╳ 影像生活水晶大按鈕 (秋楓紅圖標) */}
+          {/* 3. Instagram ╳ 影像生活水晶大按鈕 */}
           <motion.a
             href="https://www.instagram.com/funartrip/" target="_blank" rel="noopener noreferrer"
             initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
@@ -219,7 +216,7 @@ export default function LinktreePage() {
             <span className="text-sm opacity-40 font-mono text-[#223843]">❯</span>
           </motion.a>
 
-          {/* 4. 智慧型聯絡信箱水晶大按鈕（🌟 完美修正：左括號精準強制換行） */}
+          {/* 4. 智慧型聯絡信箱水晶大按鈕 */}
           <motion.button
             onClick={handleCopyEmail}
             initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 }}
@@ -231,16 +228,7 @@ export default function LinktreePage() {
               <div className="flex flex-col text-left">
                 <span className="text-[#223843]">複製電子信箱 ╳ Copy Email</span>
                 <span className="text-sm text-[#2C3522] font-semibold mt-1 leading-normal">
-                  {emailCopied ? (
-                    "✓ 信箱已成功複製！ ╳ Copied successfully!"
-                  ) : (
-                    // 🌟 核心修正：利用 JSX Fragment 強迫在括號位置乾淨換行
-                    <>
-                      {emailAddress}
-                    
-                    
-                    </>
-                  )}
+                  {emailCopied ? "✓ 信箱已成功複製！ ╳ Copied successfully!" : emailAddress}
                 </span>
               </div>
             </div>
@@ -259,7 +247,7 @@ export default function LinktreePage() {
             </div>
           </motion.button>
 
-          {/* 5. 網頁直接寫信直達按鈕（🌟 完美修正：微調縮小字級、加強深色對比度、強制不換行） */}
+          {/* 5. 網頁直接寫信直達按鈕 */}
           <motion.a
             href="/en/contact" 
             target="_blank" 
@@ -272,7 +260,6 @@ export default function LinktreePage() {
               <FaEnvelope className="text-2xl text-[#8C3B3B]" /> 
               <div className="flex flex-col text-left overflow-hidden">
                 <span className="text-[#223843]">網頁直接聯絡 ╳ Contact Me Online</span>
-                {/* 🌟 核心修正：改為 text-xs（縮小字級）、text-[#2C3522]（顏色加深）、whitespace-nowrap（絕不折行） */}
                 <span className="text-xs text-[#2C3522] font-semibold mt-1 whitespace-nowrap tracking-tight">
                   填寫預約表格直接發信 ╳ Go to reservation form
                 </span>
@@ -283,7 +270,7 @@ export default function LinktreePage() {
 
         </div>
 
-        {/* 🌿 6. 全新改進：高訂版水晶地錨頁尾（讓網頁滑到底部時充滿高雅的設計儀式感） */}
+        {/* 🌿 6. 高訂版水晶地錨頁尾 */}
         <div className="w-full max-w-md mt-16 pt-8 border-t border-[#2C3522]/10 flex flex-col items-center gap-3.5 text-center">
           <div className="text-[10px] font-bold tracking-[0.4em] uppercase text-[#8C9A76]">
             Art ╳ Culture ╳ Tour ╳ Life
