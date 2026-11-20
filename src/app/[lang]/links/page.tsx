@@ -20,7 +20,7 @@ export default function LinktreePage() {
   const emailAddress = "contact@funartrip.com"
   const wechatId = "funartrip"           
   const lineUrl = "https://line.me/ti/p/9WZq8VqBPR" 
-  const whatsappNumber = "33718520491" 
+  const whatsappNumber = "+33718520491" 
 
   // 一鍵「純複製」信箱函數
   const handleCopyEmail = (e: React.MouseEvent) => {
